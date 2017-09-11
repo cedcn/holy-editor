@@ -1,32 +1,73 @@
 import $ from 'jquery'
-import Menu from './core/menu/Menu'
+import csjs, { getCss } from 'csjs'
+import { find } from 'lodash'
+import insertCss from 'insert-css'
+import css from './style/index.scss'
+import Title from './toolbar/title'
 
-import './themes/blue'
-import './themes/default'
+const styles = csjs`${css}`
 
-const defaultOptions = {
-  toolbars: ['title', 'bold'],
+insertCss(getCss(styles))
+
+const defaults = {
+  toolbar: ['title', 'bold'],
   theme: 'default'
 }
 
+const store = {
+  toolbar: [],
+  theme: []
+}
+
 class HolyEditor {
-  static register = extension => {
-    const { type, name } = extension
+  static register = (type, extension) => {
+    store[type].push(extension)
+  }
+
+  static unRegister = (type, extension) => {
+    store[type].push(extension)
   }
 
   constructor (selector = '#editor', options) {
     this.selector = selector
+    this.o = Object.assign({}, defaults, options)
 
-    this.init()
+    this._init()
   }
 
-  init () {
-    const bold = new Menu('icon')
+  manage = {
+    theme: {
+      set: () => {},
+      get: () => {}
+    },
+    toolbar: {
+      add: () => {},
+      get: () => {}
+    }
+  }
 
-    const v = bold.render()
-    const viewer = `<div>${v}</div>`
+  _initExtension () {
+    this.constructor.register('toolbar', new Title({ styles }))
 
-    $('#editor').html(viewer)
+    this.constructor.register('theme', {
+      name: 'default',
+      css: ''
+    })
+  }
+
+  _init () {
+    this._initExtension()
+    let viewer = []
+    this.o.toolbar.forEach(name => {
+      const tool = find(store.toolbar, { name })
+      if (typeof tool === 'undefined') {
+        console.log(`没有找到${name}`)
+        return
+      }
+      const html = tool.render()
+      viewer.push(html)
+      $('#editor').html(viewer.join())
+    })
   }
 
   append () {
