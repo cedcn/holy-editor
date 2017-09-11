@@ -1,27 +1,26 @@
-import Base from '../base';
-import templete from './menu.pug';
+import Base from '../base'
+import templete from './menu.pug'
 
 class Menu extends Base {
-  constructor(icon) {
-    super();
-    this.icon = icon;
-    this.init();
+  constructor (icon) {
+    super()
+    this.icon = icon
+    this.init()
   }
 
-  init() {
-    this.render();
+  init () {
+    this.render()
   }
 
-  render() {
+  render () {
     const locals = {
       icon: this.icon
     }
 
-    const viewer = templete(locals);
+    const viewer = templete(locals)
 
-    return viewer;
+    return viewer
   }
 }
 
-
-export default Menu;
+export default Menu

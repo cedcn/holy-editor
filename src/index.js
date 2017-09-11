@@ -1,9 +1,8 @@
-import $ from 'jquery';
-import templete from './templetes/index.pug';
-import Menu from './core/menu/Menu';
+import $ from 'jquery'
+import Menu from './core/menu/Menu'
 
-import './themes/blue';
-import './themes/default';
+import './themes/blue'
+import './themes/default'
 
 const defaultOptions = {
   toolbars: ['title', 'bold'],
@@ -12,35 +11,35 @@ const defaultOptions = {
 
 class HolyEditor {
   static register = extension => {
-    const { type, name } = extension;
+    const { type, name } = extension
   }
 
-  constructor(selector = '#editor', options) {
-    this.selector = selector;
+  constructor (selector = '#editor', options) {
+    this.selector = selector
 
-    this.init();
+    this.init()
   }
 
-  init() {
-    const bold = new Menu('icon');
+  init () {
+    const bold = new Menu('icon')
 
-    const v = bold.render();
-    const viewer = `<div>${v}</div>`;
+    const v = bold.render()
+    const viewer = `<div>${v}</div>`
 
-    $('#editor').html(viewer);
+    $('#editor').html(viewer)
   }
 
-  append() {
-
-  }
-
-  render() {
+  append () {
 
   }
 
-  clear() {
+  render () {
+
+  }
+
+  clear () {
 
   }
 }
 
-export default HolyEditor;
+export default HolyEditor

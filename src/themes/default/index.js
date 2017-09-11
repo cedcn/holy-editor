@@ -1,3 +1,3 @@
-import S from './index.scss';
+import S from './index.scss'
 
-export default S;
+export default S
