@@ -1,9 +1,16 @@
 import $ from 'jquery'
 import csjs, { getCss } from 'csjs'
-import { find } from 'lodash'
 import insertCss from 'insert-css'
+
 import css from './style/index.scss'
-import Title from './toolbar/title'
+import Toolbars from './toolbars'
+import EditArea from './edit_area'
+
+import Title from './extension/toolbar/title'
+import Bold from './extension/toolbar/bold'
+
+import { getRange } from './utils/area'
+import { setSelection, initSelection, isContainsSelection } from './utils/tool'
 
 const styles = csjs`${css}`
 
@@ -24,15 +31,11 @@ class HolyEditor {
     store[type].push(extension)
   }
 
-  static unRegister = (type, extension) => {
-    store[type].push(extension)
-  }
-
   constructor (selector = '#editor', options) {
     this.selector = selector
     this.o = Object.assign({}, defaults, options)
 
-    this._init()
+    this.init()
   }
 
   manage = {
@@ -46,8 +49,9 @@ class HolyEditor {
     }
   }
 
-  _initExtension () {
+  initExtension () {
     this.constructor.register('toolbar', new Title({ styles }))
+    this.constructor.register('toolbar', new Bold({ styles }))
 
     this.constructor.register('theme', {
       name: 'default',
@@ -55,18 +59,43 @@ class HolyEditor {
     })
   }
 
-  _init () {
-    this._initExtension()
-    let viewer = []
-    this.o.toolbar.forEach(name => {
-      const tool = find(store.toolbar, { name })
-      if (typeof tool === 'undefined') {
-        console.log(`没有找到${name}`)
-        return
+  initSelection () {
+
+  }
+
+  init () {
+    this.initExtension()
+
+    const toolbars = new Toolbars({
+      styles,
+      store,
+      options: this.o
+    })
+
+    const area = new EditArea({
+      styles
+    })
+
+    const $editor = $('#editor')
+    $editor.html(`<div>${toolbars.render()}${area.render()}</div>`)
+    const $editArea = $(styles['edit-area'].selector)
+
+    initSelection($editArea)
+
+    $(styles.menu.selector).on('click', e => {
+      const old = getRange()
+
+      if (isContainsSelection($editArea)) {
+        setSelection(old.startContainer, old.startOffset, old.endContainer, old.endOffset)
+        document.execCommand('bold')
+      } else {
+        initSelection($editArea)
       }
-      const html = tool.render()
-      viewer.push(html)
-      $('#editor').html(viewer.join())
+    })
+
+    $(document).on('selectionchange', () => {
+      const selection = window.getSelection()
+      console.log(selection)
     })
   }
 

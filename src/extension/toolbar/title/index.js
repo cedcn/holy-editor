@@ -1,29 +1,22 @@
-import Menu from '../../controls/menu'
+import Menu from '../../../controls/menu'
 
 class Title {
   name = 'title'
 
   constructor ({ styles }) {
     this.styles = styles
-    this._init()
+    this.init()
   }
 
-  _init () {
+  init () {
     this.btn = new Menu({
       icon: 'size',
-      styles: this.styles,
-      click: e => {
-        console.log(12)
-      }
+      styles: this.styles
     })
   }
 
   render () {
     return this.btn.render()
-  }
-
-  execute () {
-    this.btn.execute()
   }
 }
 
