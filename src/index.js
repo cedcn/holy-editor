@@ -44,7 +44,7 @@ class HolyEditor {
 
   constructor (selector = '#editor', options) {
     this.options = Object.assign({}, defaults, options)
-    this.$editor = $(selector).eq(0)
+    this.$editor = $(selector).first()
 
     this.initDom()
     this.initScript()
@@ -72,18 +72,16 @@ class HolyEditor {
     this.$area = this.$editor.find(styles.area.selector)
 
     // Perform scripts
-    toolbars.run({
+    const args = {
       options: this.options,
-      widget: widget,
+      widget,
+      styles,
+      store,
       $editor: this.$editor,
       $area: this.$area
-    })
-    area.run({
-      options: this.options,
-      widget: widget,
-      $editor: this.$editor,
-      $area: this.$area
-    })
+    }
+    toolbars.run(args)
+    area.run(args)
 
     const $menu = this.$editor.find(styles.menu.selector)
     initSelection(this.$area)
