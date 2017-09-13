@@ -4,15 +4,15 @@ import insertCss from 'insert-css'
 import { createApp, element } from 'deku'
 
 import css from './style/index.scss'
-import Toolbars from './toolbars'
-import Area from './area'
+import toolbars from './toolbars'
+import area from './area'
 
 // controls
-import * as controls from './controls'
+import * as widget from './widget'
 
 // toolbar
-import Title from './extension/toolbar/title'
-import Bold from './extension/toolbar/bold'
+import title from './extension/toolbar/title'
+import bold from './extension/toolbar/bold'
 
 import {
   getRange,
@@ -38,25 +38,57 @@ const store = {
 const $document = $(document)
 
 class HolyEditor {
-  static register = (type, Extension) => {
-    store[type].push(<Extension styles={styles} controls={controls} />)
+  static register = (type, extension) => {
+    store[type].push(extension)
   }
 
   constructor (selector = '#editor', options) {
-    this.o = Object.assign({}, defaults, options)
-    this.$editor = $(selector)
-    this.init()
+    this.options = Object.assign({}, defaults, options)
+    this.$editor = $(selector).eq(0)
+
+    this.initDom()
+    this.initScript()
   }
 
-  init = () => {
-    this.initExtension()
-    this.initDom()
-    this.recordRange()
+  initDom = () => {
+    const dom = (
+      <div>
+        <toolbars.Tpl
+          styles={styles}
+          options={this.options}
+          store={store}
+          widget={widget}
+        />
+        <area.Tpl styles={styles} />
+      </div>
+    )
 
+    const render = createApp(this.$editor.get(0))
+    render(dom)
+  }
+
+  initScript = () => {
+    this.recordRange()
     this.$area = this.$editor.find(styles.area.selector)
+
+    // Perform scripts
+    toolbars.run({
+      options: this.options,
+      widget: widget,
+      $editor: this.$editor,
+      $area: this.$area
+    })
+    area.run({
+      options: this.options,
+      widget: widget,
+      $editor: this.$editor,
+      $area: this.$area
+    })
+
+    const $menu = this.$editor.find(styles.menu.selector)
     initSelection(this.$area)
 
-    $(styles.menu.selector).on('click', e => {
+    $menu.on('click', e => {
       const old = getRange()
 
       if (isContainsSelection(this.$area)) {
@@ -68,24 +100,6 @@ class HolyEditor {
     })
   }
 
-  initExtension = () => {
-    this.constructor.register('toolbar', Title)
-    this.constructor.register('toolbar', Bold)
-  }
-
-  initDom = () => {
-    const doms = (
-      <div>
-        <Toolbars styles={styles} options={this.o} store={store} />
-        <Area styles={styles} />
-      </div>
-    )
-
-    let render = createApp(this.$editor.get(0))
-
-    render(doms)
-  }
-
   recordRange = () => {
     // Record range position when move out area
 
@@ -94,8 +108,8 @@ class HolyEditor {
       const oldRange = getRange()
       if (isContainsSelection(this.$area)) {
         position = oldRange
+        console.log('position', position)
       }
-      console.log('position', position)
     })
   }
 
@@ -111,5 +125,8 @@ class HolyEditor {
 
   }
 }
+
+HolyEditor.register('toolbar', title)
+HolyEditor.register('toolbar', bold)
 
 export default HolyEditor

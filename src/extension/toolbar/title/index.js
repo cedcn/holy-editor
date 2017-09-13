@@ -1,15 +1,12 @@
-import { element } from 'deku'
+import Title from './templete'
 
-const Title = {
-  title: 'title',
-  render ({ props }) {
-    const { styles, controls } = props
+const sciprt = ({ widget }) => {
 
-    return (
-      <div>
-        <controls.Menu icon="bold" styles={styles} />
-      </div>
-    )
-  }
 }
-export default Title
+
+const title = {
+  Tpl: Title,
+  run: sciprt
+}
+
+export default title

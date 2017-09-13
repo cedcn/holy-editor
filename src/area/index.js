@@ -1,12 +1,12 @@
-import { element } from 'deku'
+import Area from './templete'
 
-const Area = {
-  render ({ props }) {
-    const { styles } = props
-    return (
-      <div class={styles.area} contenteditable="true"></div>
-    )
-  }
+const sciprt = () => {
+
 }
 
-export default Area
+const area = {
+  Tpl: Area,
+  run: sciprt
+}
+
+export default area

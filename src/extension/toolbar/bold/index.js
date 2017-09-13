@@ -1,16 +1,12 @@
-import { element } from 'deku'
+import Bold from './templete'
 
-const Bold = {
-  title: 'bold',
-  render ({ props }) {
-    const { styles, controls } = props
+const sciprt = ({ widget }) => {
 
-    return (
-      <div>
-        <controls.Menu icon="bold" styles={styles} />
-      </div>
-    )
-  }
 }
 
-export default Bold
+const bold = {
+  Tpl: Bold,
+  run: sciprt
+}
+
+export default bold
