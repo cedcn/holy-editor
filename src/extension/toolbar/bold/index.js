@@ -1,15 +1,14 @@
-import Menu from '../../../controls/menu'
-
 class Bold {
   name = 'bold'
 
-  constructor ({ styles }) {
+  constructor ({ styles, controls }) {
     this.styles = styles
+    this.controls = controls
     this.init()
   }
 
   init () {
-    this.btn = new Menu({
+    this.btn = new this.controls.Menu({
       icon: 'bold',
       styles: this.styles
     })

@@ -1,15 +1,14 @@
-import Menu from '../../../controls/menu'
-
 class Title {
   name = 'title'
 
-  constructor ({ styles }) {
+  constructor ({ styles, controls }) {
     this.styles = styles
+    this.controls = controls
     this.init()
   }
 
   init () {
-    this.btn = new Menu({
+    this.btn = new this.controls.Menu({
       icon: 'size',
       styles: this.styles
     })

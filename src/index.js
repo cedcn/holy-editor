@@ -6,6 +6,10 @@ import css from './style/index.scss'
 import Toolbars from './toolbars'
 import Area from './area'
 
+// controls
+import * as controls from './controls'
+
+// toolbar
 import Title from './extension/toolbar/title'
 import Bold from './extension/toolbar/bold'
 
@@ -33,7 +37,8 @@ const store = {
 const $document = $(document)
 
 class HolyEditor {
-  static register = (type, extension) => {
+  static register = (type, Extension) => {
+    const extension = new Extension({ styles, controls })
     store[type].push(extension)
   }
 
@@ -79,13 +84,8 @@ class HolyEditor {
   }
 
   initExtension = () => {
-    this.constructor.register('toolbar', new Title({ styles }))
-    this.constructor.register('toolbar', new Bold({ styles }))
-
-    this.constructor.register('theme', {
-      name: 'default',
-      css: ''
-    })
+    this.constructor.register('toolbar', Title)
+    this.constructor.register('toolbar', Bold)
   }
 
   initDom = () => {
