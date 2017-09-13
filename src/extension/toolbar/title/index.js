@@ -1,22 +1,15 @@
-class Title {
-  name = 'title'
+import { element } from 'deku'
 
-  constructor ({ styles, controls }) {
-    this.styles = styles
-    this.controls = controls
-    this.init()
-  }
+const Title = {
+  title: 'title',
+  render ({ props }) {
+    const { styles, controls } = props
 
-  init () {
-    this.btn = new this.controls.Menu({
-      icon: 'size',
-      styles: this.styles
-    })
-  }
-
-  render () {
-    return this.btn.render()
+    return (
+      <div>
+        <controls.Menu icon="bold" styles={styles} />
+      </div>
+    )
   }
 }
-
 export default Title

@@ -1,25 +1,15 @@
-import templete from './templates/menu.pug'
+import { element } from 'deku'
 
-class Menu {
-  constructor ({ icon, styles }) {
-    this.icon = icon
-    this.styles = styles
-  }
+const Menu = {
+  render ({ props }) {
+    const { icon, styles } = props
+    const name = `icon-${icon}`
 
-  init () {
-    this.render()
-  }
-
-  render () {
-    const locals = {
-      icon: this.icon,
-      styles: this.styles
-    }
-
-    const viewer = templete(locals)
-
-    return viewer
+    return (
+      <a class={styles.menu} href="javascript:;">
+        <i class={`${styles.iconfont} ${styles[name]}`} />
+      </a>
+    )
   }
 }
-
 export default Menu

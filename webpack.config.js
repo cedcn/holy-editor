@@ -55,7 +55,7 @@ const config = {
   },
   resolve: {
     extensions: ['.js', '.json'],
-    alias: []
+    alias: {}
   },
   cache: false,
   watch: true,

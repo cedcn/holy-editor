@@ -1,21 +1,15 @@
-class Bold {
-  name = 'bold'
+import { element } from 'deku'
 
-  constructor ({ styles, controls }) {
-    this.styles = styles
-    this.controls = controls
-    this.init()
-  }
+const Bold = {
+  title: 'bold',
+  render ({ props }) {
+    const { styles, controls } = props
 
-  init () {
-    this.btn = new this.controls.Menu({
-      icon: 'bold',
-      styles: this.styles
-    })
-  }
-
-  render () {
-    return this.btn.render()
+    return (
+      <div>
+        <controls.Menu icon="bold" styles={styles} />
+      </div>
+    )
   }
 }
 

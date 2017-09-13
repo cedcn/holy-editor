@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import csjs, { getCss } from 'csjs'
 import insertCss from 'insert-css'
+import { createApp, element } from 'deku'
 
 import css from './style/index.scss'
 import Toolbars from './toolbars'
@@ -38,25 +39,13 @@ const $document = $(document)
 
 class HolyEditor {
   static register = (type, Extension) => {
-    const extension = new Extension({ styles, controls })
-    store[type].push(extension)
+    store[type].push(<Extension styles={styles} controls={controls} />)
   }
 
   constructor (selector = '#editor', options) {
     this.o = Object.assign({}, defaults, options)
     this.$editor = $(selector)
     this.init()
-  }
-
-  manage = {
-    theme: {
-      set: () => {},
-      get: () => {}
-    },
-    toolbar: {
-      add: () => {},
-      get: () => {}
-    }
   }
 
   init = () => {
@@ -77,10 +66,6 @@ class HolyEditor {
         initSelection(this.$area)
       }
     })
-
-    $document.on('selectionchange', () => {
-
-    })
   }
 
   initExtension = () => {
@@ -89,17 +74,16 @@ class HolyEditor {
   }
 
   initDom = () => {
-    const toolbars = new Toolbars({
-      styles,
-      store,
-      options: this.o
-    })
+    const doms = (
+      <div>
+        <Toolbars styles={styles} options={this.o} store={store} />
+        <Area styles={styles} />
+      </div>
+    )
 
-    const area = new Area({
-      styles
-    })
+    let render = createApp(this.$editor.get(0))
 
-    this.$editor.html(`<div>${toolbars.render()}${area.render()}</div>`)
+    render(doms)
   }
 
   recordRange = () => {

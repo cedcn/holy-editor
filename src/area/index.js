@@ -1,19 +1,11 @@
-class Area {
-  constructor ({ styles }) {
-    this.styles = styles
-  }
+import { element } from 'deku'
 
-  init () {
-
-  }
-
-  render () {
-    const viewer = `<div id="${this.styles.area}" class="${this.styles.area}" contenteditable="true"></div>`
-
-    return viewer
-  }
-
-  execute () {
+const Area = {
+  render ({ props }) {
+    const { styles } = props
+    return (
+      <div class={styles.area} contenteditable="true"></div>
+    )
   }
 }
 

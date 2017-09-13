@@ -3,6 +3,9 @@
     ["env", { "modules": false }]
   ],
   "plugins": [
+    ["transform-react-jsx", {
+      "pragma": "element"
+    }],
     ["transform-object-rest-spread", { "useBuiltIns": true }],
     ["transform-decorators-legacy"],
     ["transform-class-properties"]
