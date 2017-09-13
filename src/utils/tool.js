@@ -20,6 +20,11 @@ export const getAreaStatus = $area => {
   }
 }
 
+export const getRange = () => {
+  const selection = window.getSelection()
+  return selection.getRangeAt(0)
+}
+
 export const isContainsSelection = $area => {
   const selection = window.getSelection()
   const node = selection.anchorNode
@@ -49,6 +54,5 @@ export const getLastNode = node => {
 export const initSelection = $area => {
   const node = $area.get(0)
   const lastNode = getLastNode(node)
-  console.log(lastNode)
   setSelection(lastNode, lastNode.length, lastNode, lastNode.length)
 }

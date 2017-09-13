@@ -4,13 +4,17 @@ import insertCss from 'insert-css'
 
 import css from './style/index.scss'
 import Toolbars from './toolbars'
-import EditArea from './edit_area'
+import Area from './area'
 
 import Title from './extension/toolbar/title'
 import Bold from './extension/toolbar/bold'
 
-import { getRange } from './utils/area'
-import { setSelection, initSelection, isContainsSelection } from './utils/tool'
+import {
+  getRange,
+  setSelection,
+  initSelection,
+  isContainsSelection
+} from './utils/tool'
 
 const styles = csjs`${css}`
 
@@ -26,15 +30,16 @@ const store = {
   theme: []
 }
 
+const $document = $(document)
+
 class HolyEditor {
   static register = (type, extension) => {
     store[type].push(extension)
   }
 
   constructor (selector = '#editor', options) {
-    this.selector = selector
     this.o = Object.assign({}, defaults, options)
-
+    this.$editor = $(selector)
     this.init()
   }
 
@@ -49,7 +54,31 @@ class HolyEditor {
     }
   }
 
-  initExtension () {
+  init = () => {
+    this.initExtension()
+    this.initDom()
+    this.recordRange()
+
+    this.$area = this.$editor.find(styles.area.selector)
+    initSelection(this.$area)
+
+    $(styles.menu.selector).on('click', e => {
+      const old = getRange()
+
+      if (isContainsSelection(this.$area)) {
+        setSelection(old.startContainer, old.startOffset, old.endContainer, old.endOffset)
+        document.execCommand('bold')
+      } else {
+        initSelection(this.$area)
+      }
+    })
+
+    $document.on('selectionchange', () => {
+
+    })
+  }
+
+  initExtension = () => {
     this.constructor.register('toolbar', new Title({ styles }))
     this.constructor.register('toolbar', new Bold({ styles }))
 
@@ -59,43 +88,30 @@ class HolyEditor {
     })
   }
 
-  initSelection () {
-
-  }
-
-  init () {
-    this.initExtension()
-
+  initDom = () => {
     const toolbars = new Toolbars({
       styles,
       store,
       options: this.o
     })
 
-    const area = new EditArea({
+    const area = new Area({
       styles
     })
 
-    const $editor = $('#editor')
-    $editor.html(`<div>${toolbars.render()}${area.render()}</div>`)
-    const $editArea = $(styles['edit-area'].selector)
+    this.$editor.html(`<div>${toolbars.render()}${area.render()}</div>`)
+  }
 
-    initSelection($editArea)
+  recordRange = () => {
+    // Record range position when move out area
 
-    $(styles.menu.selector).on('click', e => {
-      const old = getRange()
-
-      if (isContainsSelection($editArea)) {
-        setSelection(old.startContainer, old.startOffset, old.endContainer, old.endOffset)
-        document.execCommand('bold')
-      } else {
-        initSelection($editArea)
+    let position
+    $document.on('selectionchange', () => {
+      const oldRange = getRange()
+      if (isContainsSelection(this.$area)) {
+        position = oldRange
       }
-    })
-
-    $(document).on('selectionchange', () => {
-      const selection = window.getSelection()
-      console.log(selection)
+      console.log('position', position)
     })
   }
 
