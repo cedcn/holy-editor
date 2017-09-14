@@ -1,23 +1,20 @@
 import $ from 'jquery'
 import Title from './templete'
 
+const name = 'title'
 const sciprt = ({ el, widget, styles }) => {
-  const selector = el.$toolbars.find(styles['modal-layer'].selector)
-  const modal = new widget.modal.constructor(selector)
+  const selector = el.$toolbars.find(styles[`tool--${name}`].selector).find('#menu-point')
+  const selector2 = el.$toolbars.find(styles[`tool--${name}`].selector).find('#modal-point')
+  const modal = new widget.Modal(selector2)
 
-  const mSelector = el.$toolbars.find(styles[`toolbar--${Title.title}`].selector).find(styles.menu.selector)
-
-  $(mSelector).on('click', () => {
-    modal.open()
+  const s = new widget.Menu(selector, {
+    icon: 'title',
+    click: () => modal.open()
   })
-  // const menu = new widget.menu.constructor(mSelector, {
-  //   click: () => {
-  //     modal.open()
-  //   }
-  // })
 }
 
 const title = {
+  name,
   Tpl: Title,
   run: sciprt
 }

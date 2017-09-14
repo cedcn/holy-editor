@@ -1,15 +1,12 @@
 import { element } from 'deku'
 
 const Bold = {
-  title: 'bold',
   render ({ props }) {
-    const { styles, widget } = props
+    const { styles } = props
     return (
-      <div class={`${styles.toolbar} ${styles[`toolbar--${Bold.title}`]}`}>
-        <widget.menu.Tpl
-          icon={Bold.title}
-          styles={styles}
-        />
+      <div class={`${styles.tool} ${styles['tool--bold']}`}>
+        <div id="menu-point" data-type="widget" />
+        <div id="modal-point" data-type="widget" />
       </div>
     )
   }

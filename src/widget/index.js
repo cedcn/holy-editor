@@ -1,7 +1,7 @@
-import menu from './menu'
-import modal from './modal'
+import Menu from './menu'
+import Modal from './modal'
 
 export {
-  menu,
-  modal
+  Menu,
+  Modal
 }

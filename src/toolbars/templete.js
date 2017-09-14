@@ -8,8 +8,9 @@ const Toolbars = {
   render: ({ props }) => {
     const { options, widget } = props
     const viewer = options.toolbars.map(name => {
-      const extension = find(store.tools, item => item.Tpl.title === name)
-      invariant(typeof extension !== 'undefined', `Don't discover${name} extension`)
+      const extension = find(store.tools, item => item.name === name)
+
+      invariant(typeof extension !== 'undefined', `Don't discover ${name} extension templete`)
 
       return (
         <extension.Tpl styles={styles} widget={widget} />

@@ -6,8 +6,9 @@ import styles from '../styles'
 
 const sciprt = ({ options, widget, el }) => {
   options.toolbars.forEach(name => {
-    const extension = find(store.tools, item => item.Tpl.title === name)
-    invariant(typeof extension !== 'undefined', `Don't discover${name} extension`)
+    const extension = find(store.tools, item => item.name === name)
+
+    invariant(typeof extension !== 'undefined', `Don't discover ${name} extension sciprt`)
     extension.run({ widget, styles, el })
   })
 }

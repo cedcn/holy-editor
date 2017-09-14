@@ -1,20 +1,27 @@
 import $ from 'jquery'
-import Menu from './templete'
+import { createApp, element } from 'deku'
+
 import styles from '../../styles'
 
 const defaults = {
   click: () => {}
 }
-class Widget {
-  constructor (selector, options) {
+
+class Menu {
+  constructor (points, options) {
+    const $points = $(points)
     this.options = Object.assign({}, defaults, options)
-    $(selector).on('click', this.options.click)
+    const name = `icon-${this.options.icon}`
+
+    const dom = (
+      <a class={styles.menu} href="javascript:;" onClick={this.options.click}>
+        <i class={`${styles.iconfont} ${styles[name]}`} />
+      </a>
+    )
+    createApp($points.get(0))(dom)
+
+    // $(points).on('click', this.options.click)
   }
 }
 
-const menu = {
-  Tpl: Menu,
-  constructor: Widget
-}
-
-export default menu
+export default Menu

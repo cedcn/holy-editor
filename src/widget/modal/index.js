@@ -1,22 +1,30 @@
 import $ from 'jquery'
-import Modal from './templete'
+import { createApp, element } from 'deku'
+
 import styles from '../../styles'
 
 const $body = $('html body')
 
-console.log(styles)
+const defaults = {
+  click: () => {}
+}
 
-class Widget {
-  constructor (selector) {
-    const $selector = $(selector).first()
+class Modal {
+  constructor (points, options) {
+    const $points = $(points)
+    this.options = Object.assign({}, defaults, options)
 
-    // add wrap and close button
-    $selector.addClass(styles['modal-content'].className)
-    $selector.wrap(`<section class="${styles['modal-container']}"></section>`)
-    $selector.append(`<div class="${styles['modal-close']}"/>`)
+    const dom = (
+      <section class={styles['modal-container']}>
+        <div class={styles['modal-content']}>
+          <div class={styles['modal-close']} />
+        </div>
+        <div class={styles['modal-mask']} />
+      </section>
+    )
+    createApp($points.get(0))(dom)
 
-    const $container = $selector.parent(styles['modal-container'].selector)
-    $container.append(`<div class="${styles['modal-mask']}" />`)
+    const $container = $points.find(styles['modal-container'].selector)
 
     const $closeBtn = $container.find(styles['modal-close'].selector)
     const $mask = $container.find(styles['modal-mask'].selector)
@@ -65,9 +73,4 @@ class Widget {
   }
 }
 
-const modal = {
-  Tpl: Modal,
-  constructor: Widget
-}
-
-export default modal
+export default Modal

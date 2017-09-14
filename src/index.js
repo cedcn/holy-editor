@@ -54,6 +54,7 @@ class HolyEditor {
     const render = createApp(this.$editor.get(0))
     render(dom)
     const $root = this.$editor.children().first()
+
     this.el = {
       $root,
       $area: $root.find(styles.area.selector),
