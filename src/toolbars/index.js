@@ -1,12 +1,14 @@
 import Toolbars from './templete'
 import invariant from 'invariant'
 import find from 'lodash/find'
+import store from '../store'
+import styles from '../styles'
 
-const sciprt = ({ styles, options, store, widget, $editor }) => {
+const sciprt = ({ options, widget, el }) => {
   options.toolbar.forEach(name => {
     const extension = find(store.toolbar, item => item.Tpl.title === name)
     invariant(typeof extension !== 'undefined', `Don't discover${name} extension`)
-    extension.run({ widget, styles, $editor })
+    extension.run({ widget, styles, el })
   })
 }
 

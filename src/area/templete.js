@@ -1,8 +1,8 @@
 import { element } from 'deku'
+import styles from '../styles'
 
 const Area = {
   render ({ props }) {
-    const { styles } = props
     return (
       <div class={styles.area} contenteditable="true"></div>
     )

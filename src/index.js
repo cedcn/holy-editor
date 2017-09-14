@@ -1,12 +1,11 @@
 import $ from 'jquery'
-import csjs, { getCss } from 'csjs'
-import insertCss from 'insert-css'
 import { createApp, element } from 'deku'
 
-import css from './style/index.scss'
 import toolbars from './toolbars'
 import area from './area'
 
+import store from './store'
+import styles from './styles'
 // controls
 import * as widget from './widget'
 
@@ -21,18 +20,9 @@ import {
   isContainsSelection
 } from './utils/tool'
 
-const styles = csjs`${css}`
-
-insertCss(getCss(styles))
-
 const defaults = {
   toolbar: ['title', 'bold'],
   theme: 'default'
-}
-
-const store = {
-  toolbar: [],
-  theme: []
 }
 
 const $document = $(document)
@@ -54,46 +44,45 @@ class HolyEditor {
     const dom = (
       <div>
         <toolbars.Tpl
-          styles={styles}
           options={this.options}
-          store={store}
           widget={widget}
         />
-        <area.Tpl styles={styles} />
+        <area.Tpl />
       </div>
     )
 
     const render = createApp(this.$editor.get(0))
     render(dom)
+    const $root = this.$editor.children().first()
+    this.el = {
+      $root,
+      $area: $root.find(styles.area.selector),
+      $toolbars: $root.find(styles.toolbars.selector)
+    }
   }
 
   initScript = () => {
     this.recordRange()
-    this.$area = this.$editor.find(styles.area.selector)
-
-    // Perform scripts
     const args = {
+      el: this.el,
       options: this.options,
-      widget,
-      styles,
-      store,
-      $editor: this.$editor,
-      $area: this.$area
+      widget
     }
+
     toolbars.run(args)
     area.run(args)
 
-    const $menu = this.$editor.find(styles.menu.selector)
-    initSelection(this.$area)
+    const $menu = this.el.$root.find(styles.menu.selector)
+    initSelection(this.el.$area)
 
     $menu.on('click', e => {
       const old = getRange()
 
-      if (isContainsSelection(this.$area)) {
+      if (isContainsSelection(this.el.$area)) {
         setSelection(old.startContainer, old.startOffset, old.endContainer, old.endOffset)
         document.execCommand('bold')
       } else {
-        initSelection(this.$area)
+        initSelection(this.el.$area)
       }
     })
   }
@@ -104,7 +93,7 @@ class HolyEditor {
     let position
     $document.on('selectionchange', () => {
       const oldRange = getRange()
-      if (isContainsSelection(this.$area)) {
+      if (isContainsSelection(this.el.$area)) {
         position = oldRange
         console.log('position', position)
       }
