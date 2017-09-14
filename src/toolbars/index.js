@@ -5,8 +5,8 @@ import store from '../store'
 import styles from '../styles'
 
 const sciprt = ({ options, widget, el }) => {
-  options.toolbar.forEach(name => {
-    const extension = find(store.toolbar, item => item.Tpl.title === name)
+  options.toolbars.forEach(name => {
+    const extension = find(store.tools, item => item.Tpl.title === name)
     invariant(typeof extension !== 'undefined', `Don't discover${name} extension`)
     extension.run({ widget, styles, el })
   })

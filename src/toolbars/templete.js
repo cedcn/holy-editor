@@ -7,8 +7,8 @@ import styles from '../styles'
 const Toolbars = {
   render: ({ props }) => {
     const { options, widget } = props
-    const viewer = options.toolbar.map(name => {
-      const extension = find(store.toolbar, item => item.Tpl.title === name)
+    const viewer = options.toolbars.map(name => {
+      const extension = find(store.tools, item => item.Tpl.title === name)
       invariant(typeof extension !== 'undefined', `Don't discover${name} extension`)
 
       return (

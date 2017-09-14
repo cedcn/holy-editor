@@ -10,18 +10,18 @@ import styles from './styles'
 import * as widget from './widget'
 
 // toolbar
-import title from './extension/toolbar/title'
-import bold from './extension/toolbar/bold'
+import title from './extension/tools/title'
+import bold from './extension/tools/bold'
 
 import {
   getRange,
   setSelection,
   initSelection,
   isContainsSelection
-} from './utils/tool'
+} from './utils/common'
 
 const defaults = {
-  toolbar: ['title', 'bold'],
+  toolbars: ['title', 'bold'],
   theme: 'default'
 }
 
@@ -113,7 +113,7 @@ class HolyEditor {
   }
 }
 
-HolyEditor.register('toolbar', title)
-HolyEditor.register('toolbar', bold)
+HolyEditor.register('tools', title)
+HolyEditor.register('tools', bold)
 
 export default HolyEditor

@@ -1,5 +1,5 @@
 const store = {
-  toolbar: [],
+  tools: [],
   theme: []
 }
 
