@@ -2,8 +2,7 @@ import Bold from './templete'
 
 const sciprt = ({ el, widget, styles }) => {
   const selector = el.$toolbars.find(styles[`toolbar--${Bold.title}`].selector)
-  const s = new widget.menu.constructor(selector, { styles })
-  console.log(s)
+  const s = new widget.menu.constructor(selector)
 }
 
 const bold = {

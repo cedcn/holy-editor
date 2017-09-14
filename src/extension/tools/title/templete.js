@@ -4,10 +4,10 @@ const Title = {
   title: 'title',
   render ({ props }) {
     const { styles, widget } = props
-
     return (
       <div class={`${styles.toolbar} ${styles[`toolbar--${Title.title}`]}`}>
         <widget.menu.Tpl icon={Title.title} styles={styles} />
+        <widget.modal.Tpl />
       </div>
     )
   }

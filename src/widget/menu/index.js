@@ -1,13 +1,14 @@
 import $ from 'jquery'
 import Menu from './templete'
+import styles from '../../styles'
 
+const defaults = {
+  click: () => {}
+}
 class Widget {
-  constructor (selector, { styles }) {
-    this.styles = styles
-
-    $(selector).on('click', () => {
-      console.log(123)
-    })
+  constructor (selector, options) {
+    this.options = Object.assign({}, defaults, options)
+    $(selector).on('click', this.options.click)
   }
 }
 

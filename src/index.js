@@ -95,7 +95,7 @@ class HolyEditor {
       const oldRange = getRange()
       if (isContainsSelection(this.el.$area)) {
         position = oldRange
-        console.log('position', position)
+        // console.log('position', position)
       }
     })
   }

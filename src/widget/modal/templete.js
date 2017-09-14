@@ -1,12 +1,10 @@
 import { element } from 'deku'
+import styles from '../../styles'
 
 const Modal = {
   render ({ props }) {
-    const { styles, children } = props
-
     return (
-      <div class={styles.modal}>
-        {children}
+      <div id={styles['modal-layer']} class={styles['modal-layer']}>
       </div>
     )
   }

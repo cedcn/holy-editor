@@ -1,4 +1,5 @@
 @import 'iconfont.scss';
+@import 'modal.scss';
 
 .menu {
   display: inline-block;
@@ -45,6 +46,6 @@
   }
 }
 
-.modal {
-
+.modal-layer {
+  display: block;
 }
