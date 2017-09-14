@@ -44,8 +44,36 @@
   &--bold {
     display: inline-block;
   }
+
+  &--modules {
+    display: inline-block;
+  }
 }
 
 .modal-layer {
   display: block;
+}
+
+.drop-down-container {
+  display: inline-block;
+  position: relative;
+
+  &.is-active {
+    .drop-down-panel {
+      display: inline-block;
+    }
+  }
+}
+
+.drop-down-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translateY(3px);
+  display: none;
+  width: 100px;
+  height: 50px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-radius: 5px;
 }

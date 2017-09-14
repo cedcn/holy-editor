@@ -1,22 +1,19 @@
-import Bold from './templete'
+import Modules from './templete'
 
-const name = 'bold'
+const name = 'modules'
 const sciprt = ({ el, widget, styles }) => {
   const $selector = el.$toolbars.find(styles[`tool--${name}`].selector)
   const menuPoint = $selector.find('#menu-point').get(0)
-  const modalPoint = $selector.find('#modal-point').get(0)
 
-  const modal = new widget.Modal(modalPoint)
   const s = new widget.Menu(menuPoint, {
-    icon: 'bold',
-    click: () => modal.open()
+    icon: 'modules'
   })
 }
 
-const bold = {
+const modules = {
   name,
-  Tpl: Bold,
+  Tpl: Modules,
   run: sciprt
 }
 
-export default bold
+export default modules

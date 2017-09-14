@@ -12,6 +12,7 @@ import * as widget from './widget'
 // toolbar
 import title from './extension/tools/title'
 import bold from './extension/tools/bold'
+import modules from './extension/tools/modules'
 
 import {
   getRange,
@@ -21,7 +22,7 @@ import {
 } from './utils/common'
 
 const defaults = {
-  toolbars: ['title', 'bold'],
+  toolbars: ['title', 'bold', 'modules'],
   theme: 'default'
 }
 
@@ -116,5 +117,6 @@ class HolyEditor {
 
 HolyEditor.register('tools', title)
 HolyEditor.register('tools', bold)
+HolyEditor.register('tools', modules)
 
 export default HolyEditor

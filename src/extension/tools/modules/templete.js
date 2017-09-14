@@ -1,10 +1,10 @@
 import { element } from 'deku'
 
-const Bold = {
+const Modules = {
   render ({ props }) {
     const { styles } = props
     return (
-      <div class={`${styles.tool} ${styles['tool--bold']}`}>
+      <div class={`${styles.tool} ${styles['tool--modules']}`}>
         <div id="menu-point" />
         <div id="modal-point" />
       </div>
@@ -12,4 +12,4 @@ const Bold = {
   }
 }
 
-export default Bold
+export default Modules

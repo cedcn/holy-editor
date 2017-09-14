@@ -1,3 +1,6 @@
+import $ from 'jquery'
+import remove from 'lodash/remove'
+
 export const getAreaStatus = $area => {
   const selection = window.getSelection()
   const text = selection.toString()
@@ -18,6 +21,25 @@ export const getAreaStatus = $area => {
       return 'blur'
     }
   }
+}
+
+// for clickAtOrigin detect
+const waitListen = []
+
+$(document).on('click', e => {
+  waitListen.forEach(x => {
+    const dom = x[0].get(0)
+    if (dom === undefined) return
+    if (!$.contains(dom, e.target)) x[1]()
+  })
+})
+
+export const clickAtOrigin = ($wrapper, cb) => {
+  waitListen.push([$wrapper, cb])
+}
+
+export const clickRemoveOrigin = $wrapper => {
+  remove(waitListen, item => item[0].get(0) === $wrapper.get(0))
 }
 
 export const getRange = () => {

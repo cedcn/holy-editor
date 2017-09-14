@@ -3,13 +3,11 @@ import Title from './templete'
 
 const name = 'title'
 const sciprt = ({ el, widget, styles }) => {
-  const selector = el.$toolbars.find(styles[`tool--${name}`].selector).find('#menu-point')
-  const selector2 = el.$toolbars.find(styles[`tool--${name}`].selector).find('#modal-point')
-  const modal = new widget.Modal(selector2)
+  const $selector = el.$toolbars.find(styles[`tool--${name}`].selector)
+  const menuPoint = $selector.find('#menu-point').get(0)
 
-  const s = new widget.Menu(selector, {
-    icon: 'title',
-    click: () => modal.open()
+  const s = new widget.DropDownMenu(menuPoint, {
+    icon: 'title'
   })
 }
 
