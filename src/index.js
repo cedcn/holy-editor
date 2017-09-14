@@ -13,6 +13,9 @@ import * as widget from './widget'
 // toolbar
 import title from './extension/tools/title'
 import bold from './extension/tools/bold'
+import italic from './extension/tools/italic'
+import underline from './extension/tools/underline'
+import strikeThrough from './extension/tools/strike_through'
 import modules from './extension/tools/modules'
 
 import {
@@ -20,7 +23,7 @@ import {
 } from './utils/common'
 
 const defaults = {
-  toolbars: ['title', 'bold', 'modules'],
+  toolbars: ['title', 'bold', 'italic', 'underline', 'strike-through', 'modules'],
   theme: 'default'
 }
 
@@ -85,6 +88,9 @@ class HolyEditor {
 
 HolyEditor.register('tools', title)
 HolyEditor.register('tools', bold)
+HolyEditor.register('tools', italic)
+HolyEditor.register('tools', underline)
+HolyEditor.register('tools', strikeThrough)
 HolyEditor.register('tools', modules)
 
 export default HolyEditor

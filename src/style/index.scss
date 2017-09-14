@@ -52,6 +52,18 @@
   &--modules {
     display: inline-block;
   }
+
+  &--italic {
+    display: inline-block;
+  }
+
+  &--underline {
+    display: inline-block;
+  }
+
+  &--strike-through {
+    display: inline-block;
+  }
 }
 
 .modal-layer {
