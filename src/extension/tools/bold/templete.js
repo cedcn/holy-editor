@@ -6,7 +6,6 @@ const Bold = {
     return (
       <div class={`${styles.tool} ${styles['tool--bold']}`}>
         <div id="menu-point" />
-        <div id="modal-point" />
       </div>
     )
   }

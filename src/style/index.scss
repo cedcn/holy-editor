@@ -3,11 +3,15 @@
 
 .menu {
   display: inline-block;
-  color: black;
+  color: #ddd;
   text-decoration: none;
 
-  &.is-active {
-    color: red;
+  &.is-available {
+    color: #000;
+
+    &.is-active {
+      color: red;
+    }
   }
 }
 

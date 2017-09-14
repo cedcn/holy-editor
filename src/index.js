@@ -1,4 +1,5 @@
 import $ from 'jquery'
+
 import { createApp, element } from 'deku'
 
 import toolbars from './toolbars'
@@ -15,9 +16,6 @@ import bold from './extension/tools/bold'
 import modules from './extension/tools/modules'
 
 import {
-  getRange,
-  setSelection,
-  initSelection,
   isContainsSelection
 } from './utils/common'
 
@@ -37,11 +35,6 @@ class HolyEditor {
     this.options = Object.assign({}, defaults, options)
     this.$editor = $(selector).first()
 
-    this.initDom()
-    this.initScript()
-  }
-
-  initDom = () => {
     const dom = (
       <div>
         <toolbars.Tpl
@@ -61,10 +54,7 @@ class HolyEditor {
       $area: $root.find(styles.area.selector),
       $toolbars: $root.find(styles.toolbars.selector)
     }
-  }
 
-  initScript = () => {
-    this.recordRange()
     const args = {
       el: this.el,
       options: this.options,
@@ -74,31 +64,9 @@ class HolyEditor {
     toolbars.run(args)
     area.run(args)
 
-    const $menu = this.el.$root.find(styles.menu.selector)
-    initSelection(this.el.$area)
-
-    $menu.on('click', e => {
-      const old = getRange()
-
-      if (isContainsSelection(this.el.$area)) {
-        setSelection(old.startContainer, old.startOffset, old.endContainer, old.endOffset)
-        document.execCommand('bold')
-      } else {
-        initSelection(this.el.$area)
-      }
-    })
-  }
-
-  recordRange = () => {
-    // Record range position when move out area
-
-    let position
+    // listen selectionchange
     $document.on('selectionchange', () => {
-      const oldRange = getRange()
-      if (isContainsSelection(this.el.$area)) {
-        position = oldRange
-        // console.log('position', position)
-      }
+
     })
   }
 

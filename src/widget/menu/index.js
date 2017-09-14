@@ -14,7 +14,7 @@ class Menu {
     const name = `icon-${this.options.icon}`
 
     const dom = (
-      <a class={styles.menu} href="javascript:;" onClick={this.options.click}>
+      <a class={styles.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
         <i class={`${styles.iconfont} ${styles[name]}`} />
       </a>
     )

@@ -53,6 +53,26 @@ export const isContainsSelection = $area => {
   return $area.get(0).contains(node)
 }
 
+export const hasSelection = () => {
+
+}
+
+export const isEmptySelection = () => {
+  const range = getRange()
+  if (range && range.startContainer) {
+    if (range.startContainer === range.endContainer) {
+      if (range.startOffset === range.endOffset) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
+export const createEmptyRange = () => {
+
+}
+
 export const setSelection = (startNode, startOffset, endNode, endOffset) => {
   const range = document.createRange()
   range.setStart(startNode, startOffset)
