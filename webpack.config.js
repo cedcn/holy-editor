@@ -34,12 +34,12 @@ const config = {
         test: /\.(scss|css)$/,
         use: [
           'to-string-loader',
-          'css-loader?sourceMap',
+          'css-loader',
           {
-            loader: 'postcss-loader?sourceMap'
+            loader: 'postcss-loader'
           },
           {
-            loader: 'sass-loader?sourceMap'
+            loader: 'sass-loader'
           }
         ]
       },

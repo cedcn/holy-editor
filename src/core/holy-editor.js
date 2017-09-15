@@ -16,12 +16,12 @@ import widget from '../widget'
 
 const defaults = {
   toolbars: [
+    'title',
     'bold',
     'fore-color',
     'italic',
     'modules',
     'strike-through',
-    'title',
     'underline'
   ],
   theme: 'tacitly',
@@ -42,16 +42,23 @@ class HolyEditor {
     const theme = find(store.themes, ['name', this.options.theme])
     invariant(typeof theme !== 'undefined', `Don't discover this theme that name is '${this.options.theme}'!`)
 
-    const __S_ = csjs`${theme.styles}`
-    insertCss(getCss(__S_))
+    let styles = `/* author: cedcn ${new Date()}?${Math.random()} */`
 
     const tools = this.options.toolbars.map(name => {
       const extension = find(store.tools, item => item.name === name)
       invariant(typeof extension !== 'undefined', `Don't discover this tool that name is '${name}' !`)
 
+      if (typeof extension.style !== 'undefined') {
+        styles += extension.style
+      }
       this.options.tools[toCamelCase(extension.name)] = {}
       return extension
     })
+
+    styles += theme.style
+    const __S_ = csjs`${styles}`
+
+    insertCss(getCss(__S_))
 
     const dom = (
       <div>

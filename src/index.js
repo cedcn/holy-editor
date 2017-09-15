@@ -12,7 +12,6 @@ import modules from './extension/tools/modules'
 // theme
 import tacitly from './extension/themes/tacitly'
 
-//
 HolyEditor.register('tools', title)
 HolyEditor.register('tools', bold)
 HolyEditor.register('tools', italic)
@@ -21,7 +20,6 @@ HolyEditor.register('tools', strikeThrough)
 HolyEditor.register('tools', foreColor)
 HolyEditor.register('tools', modules)
 
-//
 HolyEditor.register('themes', tacitly)
 
 export default HolyEditor

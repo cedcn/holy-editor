@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import style from './bold.scss'
 
 import {
   isContainCurrentSelection
@@ -40,7 +41,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
 const bold = {
   name: 'bold',
-  run: sciprt
+  run: sciprt,
+  style
 }
 
 export default bold

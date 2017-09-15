@@ -1,8 +1,8 @@
-import styles from './index.scss'
+import style from './index.scss'
 
 const tacitly = {
   name: 'tacitly',
-  styles
+  style
 }
 
 export default tacitly

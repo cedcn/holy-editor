@@ -7,21 +7,22 @@ const defaults = {
 }
 
 class Menu {
-  constructor (points, options) {
-    const $points = $(points)
+  constructor (point, options) {
+    const $point = $(point)
     this.options = Object.assign({}, defaults, options)
-    const name = `icon-${this.options.icon}`
-    const { __S_ } = this.constructor
+    this.__S_ = this.constructor.__S_
+
+    const iconName = `icon-${this.options.icon}`
 
     const dom = (
-      <a class={__S_.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
-        <i class={`${__S_.iconfont} ${__S_[name]}`} />
+      <a class={this.__S_.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
+        <i class={`${this.__S_.iconfont} ${this.__S_[iconName]}`} />
         {this.options.menuChildren}
       </a>
     )
-    createApp($points.get(0))(dom)
+    createApp($point.get(0))(dom)
 
-    // $(points).on('click', this.options.click)
+    // $(point).on('click', this.options.click)
   }
 }
 

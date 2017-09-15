@@ -39,7 +39,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
 const underline = {
   name: 'underline',
-  run: sciprt
+  run: sciprt,
+  style: ''
 }
 
 export default underline

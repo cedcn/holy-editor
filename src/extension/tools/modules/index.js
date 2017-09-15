@@ -8,7 +8,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
 const modules = {
   name: 'modules',
-  run: sciprt
+  run: sciprt,
+  style: ''
 }
 
 export default modules

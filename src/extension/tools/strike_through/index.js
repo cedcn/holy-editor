@@ -41,7 +41,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
 const strikeThrough = {
   name: 'strike-through',
-  run: sciprt
+  run: sciprt,
+  style: ''
 }
 
 export default strikeThrough

@@ -39,7 +39,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
 const italic = {
   name: 'italic',
-  run: sciprt
+  run: sciprt,
+  style: ''
 }
 
 export default italic
