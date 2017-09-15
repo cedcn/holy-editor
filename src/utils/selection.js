@@ -23,3 +23,36 @@ export const isContainsSelection = (selection, $area) => {
   const node = selection.anchorNode
   return $area.get(0).contains(node)
 }
+
+
+export const isContainCurrentSelection = $area => {
+  const selection = window.getSelection()
+  return isContainsSelection(selection, $area)
+}
+
+
+export const setSelection = (startNode, startOffset, endNode, endOffset) => {
+  const range = document.createRange()
+  range.setStart(startNode, startOffset)
+  range.setEnd(endNode, endOffset)
+
+  const selection = window.getSelection()
+  selection.removeAllRanges()
+  selection.addRange(range)
+}
+
+export const getLastNode = node => {
+  const nodeList = node.childNodes
+  const length = nodeList.length
+
+  if (length <= 0) {
+    return node
+  }
+  return getLastNode(nodeList[length - 1])
+}
+
+export const initSelection = $area => {
+  const node = $area.get(0)
+  const lastNode = getLastNode(node)
+  setSelection(lastNode, lastNode.length, lastNode, lastNode.length)
+}

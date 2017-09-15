@@ -5,8 +5,8 @@ import csjs, { getCss } from 'csjs'
 import insertCss from 'insert-css'
 import invariant from 'invariant'
 
-import toolbars from '../toolbars'
-import area from '../area'
+import toolbars from './toolbars'
+import area from './area'
 
 import store from './store'
 
@@ -47,7 +47,6 @@ class HolyEditor {
       <div>
         <toolbars.Tpl
           options={this.options}
-          widget={widget(__S_)}
           __S_={__S_}
         />
         <area.Tpl __S_={__S_} />

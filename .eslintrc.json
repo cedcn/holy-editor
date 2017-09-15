@@ -5,5 +5,9 @@
     "node": true,
     "es6": true,
     "browser": true
+  },
+  "rules": {
+    "no-new": 0,
+    "no-multiple-empty-lines": 0
   }
 }

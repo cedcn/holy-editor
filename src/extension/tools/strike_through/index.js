@@ -1,15 +1,17 @@
 import $ from 'jquery'
 import Italic from './templete'
+
 import {
-  isContainsSelection
-} from 'utils/common'
+  isContainCurrentSelection
+} from 'utils/selection'
+
 
 const name = 'strike-through'
 const sciprt = ({ el, widget, __S_ }) => {
   const $selector = el.$toolbars.find(__S_[`tool--${name}`].selector)
   const menuPoint = $selector.find('#menu-point').get(0)
 
-  const s = new widget.Menu(menuPoint, {
+  new widget.Menu(menuPoint, {
     icon: 'strike-through',
     onMouseDown: e => {
       e.preventDefault()
@@ -23,10 +25,11 @@ const sciprt = ({ el, widget, __S_ }) => {
     }
   })
 
+
   $(document).on('selectionchange', () => {
     const $menu = $(menuPoint).find(__S_['menu'].selector)
 
-    if (isContainsSelection(el.$area)) {
+    if (isContainCurrentSelection(el.$area)) {
       $menu.addClass(__S_['is-available'].className)
     } else {
       $menu.removeClass(__S_['is-available'].className)

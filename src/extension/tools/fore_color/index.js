@@ -9,8 +9,8 @@ import huebeeCss from 'huebee/huebee.css'
 import ForeColor from './templete'
 
 import {
-  isContainsSelection
-} from 'utils/common'
+  isContainCurrentSelection
+} from 'utils/selection'
 
 const huebeeStyles = noScope`${huebeeCss}`
 
@@ -62,7 +62,7 @@ const sciprt = ({ el, widget, __S_ }) => {
   $(document).on('selectionchange', () => {
     const $menu = $(menuPoint).find(__S_['menu'].selector)
 
-    if (isContainsSelection(el.$area)) {
+    if (isContainCurrentSelection(el.$area)) {
       $menu.addClass(__S_['is-available'].className)
     } else {
       $menu.removeClass(__S_['is-available'].className)

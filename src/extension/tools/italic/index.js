@@ -1,8 +1,8 @@
 import $ from 'jquery'
 import Italic from './templete'
 import {
-  isContainsSelection
-} from 'utils/common'
+  isContainCurrentSelection
+} from 'utils/selection'
 
 const name = 'italic'
 const sciprt = ({ el, widget, __S_ }) => {
@@ -26,7 +26,7 @@ const sciprt = ({ el, widget, __S_ }) => {
   $(document).on('selectionchange', () => {
     const $menu = $(menuPoint).find(__S_['menu'].selector)
 
-    if (isContainsSelection(el.$area)) {
+    if (isContainCurrentSelection(el.$area)) {
       $menu.addClass(__S_['is-available'].className)
     } else {
       $menu.removeClass(__S_['is-available'].className)

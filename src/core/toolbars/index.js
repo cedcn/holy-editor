@@ -1,7 +1,7 @@
 import Toolbars from './templete'
 import invariant from 'invariant'
 import find from 'lodash/find'
-import store from '../core/store'
+import store from '../store'
 
 const sciprt = ({ options, widget, el, __S_ }) => {
   options.toolbars.forEach(name => {
