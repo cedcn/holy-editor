@@ -2,7 +2,7 @@ import $ from 'jquery'
 import Underline from './templete'
 import {
   isContainsSelection
-} from '../../../utils/common'
+} from 'utils/common'
 
 const name = 'underline'
 const sciprt = ({ el, widget, __S_ }) => {

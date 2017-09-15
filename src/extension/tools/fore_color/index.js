@@ -10,7 +10,7 @@ import ForeColor from './templete'
 
 import {
   isContainsSelection
-} from '../../../utils/common'
+} from 'utils/common'
 
 const huebeeStyles = noScope`${huebeeCss}`
 

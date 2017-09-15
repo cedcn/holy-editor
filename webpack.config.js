@@ -55,7 +55,9 @@ const config = {
   },
   resolve: {
     extensions: ['.js', '.json'],
-    alias: {}
+    alias: {
+      'utils': path.resolve(__dirname, 'src/utils/')
+    }
   },
   cache: false,
   watch: true,

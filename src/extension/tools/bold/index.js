@@ -2,7 +2,7 @@ import $ from 'jquery'
 import Bold from './templete'
 import {
   isContainsSelection
-} from '../../../utils/common'
+} from 'utils/common'
 
 const name = 'bold'
 const sciprt = ({ el, widget, __S_ }) => {

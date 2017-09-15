@@ -2,7 +2,7 @@ import $ from 'jquery'
 import Italic from './templete'
 import {
   isContainsSelection
-} from '../../../utils/common'
+} from 'utils/common'
 
 const name = 'italic'
 const sciprt = ({ el, widget, __S_ }) => {

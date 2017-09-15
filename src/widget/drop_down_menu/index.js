@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import { createApp, element } from 'deku'
 
-import { clickAtOrigin } from '../../utils/common'
+import { clickAtOrigin } from 'utils/common'
 
 const defaults = {
   onMouseDown: () => {},
