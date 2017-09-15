@@ -10,20 +10,22 @@ import area from './area'
 
 import store from './store'
 
+import { toCamelCase } from 'utils/common'
 // controls
 import widget from '../widget'
 
 const defaults = {
   toolbars: [
-    'title',
     'bold',
-    'italic',
-    'underline',
-    'strike-through',
     'fore-color',
-    'modules'
+    'italic',
+    'modules',
+    'strike-through',
+    'title',
+    'underline'
   ],
-  theme: 'tacitly'
+  theme: 'tacitly',
+  tools: []
 }
 
 const $document = $(document)
@@ -38,16 +40,24 @@ class HolyEditor {
     this.$editor = $(selector).first()
 
     const theme = find(store.themes, ['name', this.options.theme])
-    invariant(typeof theme !== 'undefined', `Don't discover '${this.options.theme}' theme!`)
+    invariant(typeof theme !== 'undefined', `Don't discover this theme that name is '${this.options.theme}'!`)
 
     const __S_ = csjs`${theme.styles}`
     insertCss(getCss(__S_))
 
+    const tools = this.options.toolbars.map(name => {
+      const extension = find(store.tools, item => item.name === name)
+      invariant(typeof extension !== 'undefined', `Don't discover this tool that name is '${name}' !`)
+
+      this.options.tools[toCamelCase(extension.name)] = {}
+      return extension
+    })
+
     const dom = (
       <div>
         <toolbars.Tpl
-          options={this.options}
           __S_={__S_}
+          tools={tools}
         />
         <area.Tpl __S_={__S_} />
       </div>
@@ -70,8 +80,8 @@ class HolyEditor {
       __S_
     }
 
-    toolbars.run(args)
-    area.run(args)
+    toolbars.run({...args, tools})
+    area.run({...args})
 
     // listen selectionchange
     $document.on('selectionchange', () => {

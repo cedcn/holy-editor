@@ -1,18 +1,11 @@
-import invariant from 'invariant'
 import { element } from 'deku'
-import find from 'lodash/find'
-import store from '../store'
 
 const Toolbars = {
   render: ({ props }) => {
-    const { options, __S_ } = props
-    const viewer = options.toolbars.map(name => {
-      const extension = find(store.tools, item => item.name === name)
-
-      invariant(typeof extension !== 'undefined', `Don't discover ${name} extension templete`)
-
+    const { tools, __S_ } = props
+    const viewer = tools.map(item => {
       return (
-        <extension.Tpl __S_={__S_} />
+        <div id={__S_[`tool--${item.name}`]} class={`${__S_.tool} ${__S_[`tool--${item.name}`]}`} />
       )
     })
 

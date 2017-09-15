@@ -1,14 +1,12 @@
 import Toolbars from './templete'
-import invariant from 'invariant'
-import find from 'lodash/find'
-import store from '../store'
+import { toCamelCase } from 'utils/common'
 
-const sciprt = ({ options, widget, el, __S_ }) => {
-  options.toolbars.forEach(name => {
-    const extension = find(store.tools, item => item.name === name)
+const sciprt = ({ tools, options, widget, el, __S_ }) => {
+  console.log(options)
 
-    invariant(typeof extension !== 'undefined', `Don't discover ${name} tools sciprt!`)
-    extension.run({ widget, __S_, el })
+  tools.forEach(item => {
+    const $selector = el.$toolbars.find(`#${__S_[`tool--${item.name}`].className}`)
+    item.run(options.tools[toCamelCase(item.name)])({ widget, __S_, el, $selector })
   })
 }
 

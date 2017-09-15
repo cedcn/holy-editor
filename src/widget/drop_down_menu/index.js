@@ -10,17 +10,18 @@ const defaults = {
 }
 
 class DropDownMenu {
-  constructor (points, options) {
-    const $points = $(points)
+  constructor (point, options) {
+    const $point = $(point)
     this.options = Object.assign({}, defaults, options)
-    const name = `icon-${this.options.icon}`
+    const iconName = `icon-${this.options.icon}`
+
     const { __S_ } = this.constructor
 
     const dom = (
       <div>
         <div>
           <a class={__S_.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
-            <i class={`${__S_.iconfont} ${__S_[name]}`} />
+            <i class={`${__S_.iconfont} ${__S_[iconName]}`} />
             {this.options.menuChildren}
           </a>
           <div class={__S_['drop-down-container']}>
@@ -35,12 +36,12 @@ class DropDownMenu {
             </div>
           </div>
         </div>
-
       </div>
     )
-    createApp($points.get(0))(dom)
 
-    const $container = $points.find(__S_['drop-down-container'].selector)
+    createApp($point.get(0))(dom)
+
+    const $container = $point.find(__S_['drop-down-container'].selector)
     this.$container = $container
   }
 

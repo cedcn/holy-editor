@@ -1,20 +1,17 @@
 import $ from 'jquery'
-import Italic from './templete'
 import {
   isContainCurrentSelection
 } from 'utils/selection'
 
-const name = 'italic'
-const sciprt = ({ el, widget, __S_ }) => {
-  const $selector = el.$toolbars.find(__S_[`tool--${name}`].selector)
-  const menuPoint = $selector.find('#menu-point').get(0)
+const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const $menuPoint = $selector.append('<div class="menu-point"></div>')
 
-  const s = new widget.Menu(menuPoint, {
+  new widget.Menu($menuPoint.get(0), {
     icon: 'italic',
     onMouseDown: e => {
       e.preventDefault()
 
-      const $menu = $(menuPoint).find(__S_['menu'].selector)
+      const $menu = $menuPoint.find(__S_['menu'].selector)
       if (!$menu.hasClass(__S_['is-available'].className)) return
 
       document.execCommand('italic')
@@ -24,7 +21,7 @@ const sciprt = ({ el, widget, __S_ }) => {
   })
 
   $(document).on('selectionchange', () => {
-    const $menu = $(menuPoint).find(__S_['menu'].selector)
+    const $menu = $menuPoint.find(__S_['menu'].selector)
 
     if (isContainCurrentSelection(el.$area)) {
       $menu.addClass(__S_['is-available'].className)
@@ -41,8 +38,7 @@ const sciprt = ({ el, widget, __S_ }) => {
 }
 
 const italic = {
-  name,
-  Tpl: Italic,
+  name: 'italic',
   run: sciprt
 }
 

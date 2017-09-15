@@ -1,19 +1,14 @@
-import $ from 'jquery'
-import Title from './templete'
 
-const name = 'title'
-const sciprt = ({ el, widget, __S_ }) => {
-  const $selector = el.$toolbars.find(__S_[`tool--${name}`].selector)
-  const menuPoint = $selector.find('#menu-point').get(0)
+const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const $menuPoint = $selector.append('<div class="menu-point"></div>')
 
-  new widget.DropDownMenu(menuPoint, {
+  new widget.DropDownMenu($menuPoint.get(0), {
     icon: 'title'
   })
 }
 
 const title = {
-  name,
-  Tpl: Title,
+  name: 'title',
   run: sciprt
 }
 

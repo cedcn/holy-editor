@@ -1,18 +1,13 @@
-import Modules from './templete'
+const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const $menuPoint = $selector.append('<div class="menu-point"></div>')
 
-const name = 'modules'
-const sciprt = ({ el, widget, __S_ }) => {
-  const $selector = el.$toolbars.find(__S_[`tool--${name}`].selector)
-  const menuPoint = $selector.find('#menu-point').get(0)
-
-  const s = new widget.Menu(menuPoint, {
+  new widget.Menu($menuPoint.get(0), {
     icon: 'modules'
   })
 }
 
 const modules = {
-  name,
-  Tpl: Modules,
+  name: 'modules',
   run: sciprt
 }
 

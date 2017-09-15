@@ -19,3 +19,8 @@ export const clickAtOrigin = ($wrapper, cb) => {
 export const clickRemoveOrigin = $wrapper => {
   remove(waitListen, item => item[0].get(0) === $wrapper.get(0))
 }
+
+
+export const toCamelCase = str => {
+  return str.replace(/[-_](.)/g, (_, c) => c.toUpperCase())
+}
