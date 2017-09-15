@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 412370 */
-  src: url('//at.alicdn.com/t/font_412370_e8pl0uczz9nqaor.eot');
-  src: url('//at.alicdn.com/t/font_412370_e8pl0uczz9nqaor.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_412370_e8pl0uczz9nqaor.woff') format('woff'),
-  url('//at.alicdn.com/t/font_412370_e8pl0uczz9nqaor.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_412370_e8pl0uczz9nqaor.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_412370_6qv4t9lcd755qaor.eot');
+  src: url('//at.alicdn.com/t/font_412370_6qv4t9lcd755qaor.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_412370_6qv4t9lcd755qaor.woff') format('woff'),
+  url('//at.alicdn.com/t/font_412370_6qv4t9lcd755qaor.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_412370_6qv4t9lcd755qaor.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -30,3 +30,7 @@
 .icon-underline:before { content: "\e661"; }
 
 .icon-strike-through:before { content: "\e723"; }
+
+.icon-fore-color:before { content: "\e620"; }
+
+.icon-back-color:before { content: "\e74f"; }

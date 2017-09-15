@@ -4,7 +4,8 @@ import { createApp, element } from 'deku'
 import styles from '../../styles'
 
 const defaults = {
-  click: () => {}
+  onMouseDown: () => {},
+  menuChildren: null
 }
 
 class Menu {
@@ -16,6 +17,7 @@ class Menu {
     const dom = (
       <a class={styles.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
         <i class={`${styles.iconfont} ${styles[name]}`} />
+        {this.options.menuChildren}
       </a>
     )
     createApp($points.get(0))(dom)

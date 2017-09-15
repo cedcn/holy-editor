@@ -5,7 +5,9 @@ import { clickAtOrigin } from '../../utils/common'
 import styles from '../../styles'
 
 const defaults = {
-  click: () => {}
+  onMouseDown: () => {},
+  menuChildren: null,
+  panelChildren: null
 }
 
 class DropDownMenu {
@@ -17,14 +19,19 @@ class DropDownMenu {
     const dom = (
       <div>
         <div>
-          <a class={styles.menu} href="javascript:;" onClick={this.options.click}>
+          <a class={styles.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
             <i class={`${styles.iconfont} ${styles[name]}`} />
+            {this.options.menuChildren}
           </a>
           <div class={styles['drop-down-container']}>
-            <a class={styles.menu} href="javascript:;" onClick={this.togglePanel}>
+            <a class={styles.menu} href="javascript:;" onMouseDown={e => {
+              e.preventDefault()
+              this.togglePanel(e)
+            }}>
               <i class={`${styles.iconfont} ${styles['icon-triangle']}`} />
             </a>
-            <div class={styles['drop-down-panel']}>
+            <div class={styles['drop-down-panel']} onMouseDown={e => e.preventDefault()}>
+              {this.options.panelChildren}
             </div>
           </div>
         </div>

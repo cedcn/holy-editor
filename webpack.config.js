@@ -31,7 +31,7 @@ const config = {
         loader: 'json-loader'
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: [
           'to-string-loader',
           'css-loader?sourceMap',
