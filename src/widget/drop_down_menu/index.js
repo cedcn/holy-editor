@@ -2,12 +2,11 @@ import $ from 'jquery'
 import { createApp, element } from 'deku'
 
 import { clickAtOrigin } from '../../utils/common'
-import styles from '../../styles'
 
 const defaults = {
   onMouseDown: () => {},
-  menuChildren: null,
-  panelChildren: null
+  menuChildren: '',
+  panelChildren: ''
 }
 
 class DropDownMenu {
@@ -15,22 +14,23 @@ class DropDownMenu {
     const $points = $(points)
     this.options = Object.assign({}, defaults, options)
     const name = `icon-${this.options.icon}`
+    const { __S_ } = this.constructor
 
     const dom = (
       <div>
         <div>
-          <a class={styles.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
-            <i class={`${styles.iconfont} ${styles[name]}`} />
+          <a class={__S_.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
+            <i class={`${__S_.iconfont} ${__S_[name]}`} />
             {this.options.menuChildren}
           </a>
-          <div class={styles['drop-down-container']}>
-            <a class={styles.menu} href="javascript:;" onMouseDown={e => {
+          <div class={__S_['drop-down-container']}>
+            <a class={__S_.menu} href="javascript:;" onMouseDown={e => {
               e.preventDefault()
               this.togglePanel(e)
             }}>
-              <i class={`${styles.iconfont} ${styles['icon-triangle']}`} />
+              <i class={`${__S_.iconfont} ${__S_['icon-triangle']}`} />
             </a>
-            <div class={styles['drop-down-panel']} onMouseDown={e => e.preventDefault()}>
+            <div class={__S_['drop-down-panel']} onMouseDown={e => e.preventDefault()}>
               {this.options.panelChildren}
             </div>
           </div>
@@ -40,13 +40,14 @@ class DropDownMenu {
     )
     createApp($points.get(0))(dom)
 
-    const $container = $points.find(styles['drop-down-container'].selector)
+    const $container = $points.find(__S_['drop-down-container'].selector)
     this.$container = $container
   }
 
   togglePanel = e => {
-    this.$container.toggleClass(styles['is-active'].className)
-    clickAtOrigin(this.$container, () => this.$container.removeClass(styles['is-active'].className))
+    const { __S_ } = this.constructor
+    this.$container.toggleClass(__S_['is-active'].className)
+    clickAtOrigin(this.$container, () => this.$container.removeClass(__S_['is-active'].className))
   }
 }
 

@@ -5,8 +5,8 @@ import {
 } from '../../../utils/common'
 
 const name = 'bold'
-const sciprt = ({ el, widget, styles }) => {
-  const $selector = el.$toolbars.find(styles[`tool--${name}`].selector)
+const sciprt = ({ el, widget, __S_ }) => {
+  const $selector = el.$toolbars.find(__S_[`tool--${name}`].selector)
   const menuPoint = $selector.find('#menu-point').get(0)
 
   const s = new widget.Menu(menuPoint, {
@@ -14,8 +14,8 @@ const sciprt = ({ el, widget, styles }) => {
     onMouseDown: e => {
       e.preventDefault()
 
-      const $menu = $(menuPoint).find(styles['menu'].selector)
-      if (!$menu.hasClass(styles['is-available'].className)) return
+      const $menu = $(menuPoint).find(__S_['menu'].selector)
+      if (!$menu.hasClass(__S_['is-available'].className)) return
 
       document.execCommand('bold')
 
@@ -24,18 +24,18 @@ const sciprt = ({ el, widget, styles }) => {
   })
 
   $(document).on('selectionchange', () => {
-    const $menu = $(menuPoint).find(styles['menu'].selector)
+    const $menu = $(menuPoint).find(__S_['menu'].selector)
 
     if (isContainsSelection(el.$area)) {
-      $menu.addClass(styles['is-available'].className)
+      $menu.addClass(__S_['is-available'].className)
     } else {
-      $menu.removeClass(styles['is-available'].className)
+      $menu.removeClass(__S_['is-available'].className)
     }
 
     if (document.queryCommandState('bold')) {
-      $menu.addClass(styles['is-active'].className)
+      $menu.addClass(__S_['is-active'].className)
     } else {
-      $menu.removeClass(styles['is-active'].className)
+      $menu.removeClass(__S_['is-active'].className)
     }
   })
 }

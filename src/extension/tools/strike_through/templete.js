@@ -2,9 +2,9 @@ import { element } from 'deku'
 
 const StrikeThrough = {
   render ({ props }) {
-    const { styles } = props
+    const { __S_ } = props
     return (
-      <div class={`${styles.tool} ${styles['tool--strike-through']}`}>
+      <div class={`${__S_.tool} ${__S_['tool--strike-through']}`}>
         <div id="menu-point" />
       </div>
     )

@@ -2,9 +2,9 @@ import { element } from 'deku'
 
 const Bold = {
   render ({ props }) {
-    const { styles } = props
+    const { __S_ } = props
     return (
-      <div class={`${styles.tool} ${styles['tool--italic']}`}>
+      <div class={`${__S_.tool} ${__S_['tool--italic']}`}>
         <div id="menu-point" />
       </div>
     )

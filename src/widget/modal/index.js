@@ -1,8 +1,6 @@
 import $ from 'jquery'
 import { createApp, element } from 'deku'
 
-import styles from '../../styles'
-
 const $body = $('html body')
 
 const defaults = {
@@ -13,21 +11,22 @@ class Modal {
   constructor (points, options) {
     const $points = $(points)
     this.options = Object.assign({}, defaults, options)
+    const { __S_ } = this.constructor
 
     const dom = (
-      <section class={styles['modal-container']}>
-        <div class={styles['modal-content']}>
-          <div class={styles['modal-close']} />
+      <section class={__S_['modal-container']}>
+        <div class={__S_['modal-content']}>
+          <div class={__S_['modal-close']} />
         </div>
-        <div class={styles['modal-mask']} />
+        <div class={__S_['modal-mask']} />
       </section>
     )
     createApp($points.get(0))(dom)
 
-    const $container = $points.find(styles['modal-container'].selector)
+    const $container = $points.find(__S_['modal-container'].selector)
 
-    const $closeBtn = $container.find(styles['modal-close'].selector)
-    const $mask = $container.find(styles['modal-mask'].selector)
+    const $closeBtn = $container.find(__S_['modal-close'].selector)
+    const $mask = $container.find(__S_['modal-mask'].selector)
 
     let isOpen = false
 
@@ -36,12 +35,12 @@ class Modal {
       isOpen = true
 
       $container.css('display', 'block')
-      $body.addClass(styles['open-modal'].className)
+      $body.addClass(__S_['open-modal'].className)
 
       $(document).on('keydown', this.escCloseModal)
 
       const openAnima = setTimeout(() => {
-        $container.addClass(styles['modal-show'].className)
+        $container.addClass(__S_['modal-show'].className)
         clearTimeout(openAnima)
       }, 10)
     }
@@ -49,8 +48,8 @@ class Modal {
     this.close = () => {
       if (!isOpen) return
       isOpen = false
-      $container.removeClass(styles['modal-show'].className)
-      $body.removeClass(styles['open-modal'].className)
+      $container.removeClass(__S_['modal-show'].className)
+      $body.removeClass(__S_['open-modal'].className)
       $(document).off('keydown', this.escCloseModal)
 
       const closeAnima = setTimeout(() => {

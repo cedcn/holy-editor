@@ -17,24 +17,24 @@ const huebeeStyles = noScope`${huebeeCss}`
 insertCss(getCss(huebeeStyles))
 
 const name = 'fore-color'
-const sciprt = ({ el, widget, styles }) => {
-  const $selector = el.$toolbars.find(styles[`tool--${name}`].selector)
+const sciprt = ({ el, widget, __S_ }) => {
+  const $selector = el.$toolbars.find(__S_[`tool--${name}`].selector)
   const menuPoint = $selector.find('#menu-point').get(0)
 
   const s = new widget.DropDownMenu(menuPoint, {
     icon: 'fore-color',
     menuChildren: (
-      <div class={styles['fore-color-box']} style={'background-color: #000'}></div>
+      <div class={__S_['fore-color-box']} style={'background-color: #000'}></div>
     ),
     panelChildren: (
       <div class="color-input" />
     ),
     onMouseDown: e => {
       e.preventDefault()
-      const $menu = $(menuPoint).find(styles['menu'].selector)
-      const colorValue = $(menuPoint).find(styles['fore-color-box'].selector).css('background-color')
+      const $menu = $(menuPoint).find(__S_['menu'].selector)
+      const colorValue = $(menuPoint).find(__S_['fore-color-box'].selector).css('background-color')
 
-      if (!$menu.hasClass(styles['is-available'].className)) return
+      if (!$menu.hasClass(__S_['is-available'].className)) return
 
       document.execCommand('foreColor', false, colorValue)
 
@@ -52,7 +52,7 @@ const sciprt = ({ el, widget, styles }) => {
   })
 
   hueb.on('change', (color, hue, sat, lum) => {
-    $(menuPoint).find(styles['fore-color-box'].selector).css({
+    $(menuPoint).find(__S_['fore-color-box'].selector).css({
       'background-color': color
     })
     document.execCommand('foreColor', false, color)
@@ -60,12 +60,12 @@ const sciprt = ({ el, widget, styles }) => {
   })
 
   $(document).on('selectionchange', () => {
-    const $menu = $(menuPoint).find(styles['menu'].selector)
+    const $menu = $(menuPoint).find(__S_['menu'].selector)
 
     if (isContainsSelection(el.$area)) {
-      $menu.addClass(styles['is-available'].className)
+      $menu.addClass(__S_['is-available'].className)
     } else {
-      $menu.removeClass(styles['is-available'].className)
+      $menu.removeClass(__S_['is-available'].className)
     }
   })
 }

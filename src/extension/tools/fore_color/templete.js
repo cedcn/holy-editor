@@ -2,9 +2,9 @@ import { element } from 'deku'
 
 const ForeColor = {
   render ({ props }) {
-    const { styles } = props
+    const { __S_ } = props
     return (
-      <div class={`${styles.tool} ${styles['tool--fore-color']}`}>
+      <div class={`${__S_.tool} ${__S_['tool--fore-color']}`}>
         <div id="menu-point" />
       </div>
     )

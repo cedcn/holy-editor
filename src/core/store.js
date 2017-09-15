@@ -1,6 +1,6 @@
 const store = {
   tools: [],
-  theme: []
+  themes: []
 }
 
 export default store

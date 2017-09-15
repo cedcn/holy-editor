@@ -1,11 +1,9 @@
 import $ from 'jquery'
 import { createApp, element } from 'deku'
 
-import styles from '../../styles'
-
 const defaults = {
   onMouseDown: () => {},
-  menuChildren: null
+  menuChildren: ''
 }
 
 class Menu {
@@ -13,10 +11,11 @@ class Menu {
     const $points = $(points)
     this.options = Object.assign({}, defaults, options)
     const name = `icon-${this.options.icon}`
+    const { __S_ } = this.constructor
 
     const dom = (
-      <a class={styles.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
-        <i class={`${styles.iconfont} ${styles[name]}`} />
+      <a class={__S_.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
+        <i class={`${__S_.iconfont} ${__S_[name]}`} />
         {this.options.menuChildren}
       </a>
     )
