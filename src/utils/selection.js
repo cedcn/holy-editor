@@ -1,3 +1,6 @@
+import $ from 'jquery'
+const $document = $(document)
+
 // Gain selection type
 export const getSelectionType = selection => {
   return selection.type
@@ -55,4 +58,14 @@ export const initSelection = $area => {
   const node = $area.get(0)
   const lastNode = getLastNode(node)
   setSelection(lastNode, lastNode.length, lastNode, lastNode.length)
+}
+
+export const listenArea = ($selector, $area, __S_) => {
+  $document.on('selectionchange', () => {
+    if (isContainCurrentSelection($area)) {
+      $selector.addClass(__S_['is-available'].className)
+    } else {
+      $selector.removeClass(__S_['is-available'].className)
+    }
+  })
 }

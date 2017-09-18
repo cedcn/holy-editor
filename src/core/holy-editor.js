@@ -91,6 +91,8 @@ class HolyEditor {
     area.run({...args})
 
     // listen selectionchange
+
+    $document.trigger('selectionchange')
     $document.on('selectionchange', () => {
 
     })

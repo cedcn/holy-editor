@@ -9,7 +9,7 @@ const defaults = {
 
 class Modal {
   constructor (point, options) {
-    const $point = $(point)
+    this.$point = $(point)
     this.options = Object.assign({}, defaults, options)
     this.__S_ = this.constructor.__S_
 
@@ -21,9 +21,9 @@ class Modal {
         <div class={this.__S_['modal-mask']} />
       </section>
     )
-    createApp($point.get(0))(dom)
+    createApp(this.$point.get(0))(dom)
 
-    const $container = $point.find(this.__S_['modal-container'].selector)
+    const $container = this.$point.find(this.__S_['modal-container'].selector)
 
     const $closeBtn = $container.find(this.__S_['modal-close'].selector)
     const $mask = $container.find(this.__S_['modal-mask'].selector)

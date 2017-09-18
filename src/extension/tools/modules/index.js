@@ -4,6 +4,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   new widget.Menu($menuPoint.get(0), {
     icon: 'modules'
   })
+
+  // listenArea($selector, el.$area, __S_)
 }
 
 const modules = {

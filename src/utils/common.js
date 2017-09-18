@@ -3,8 +3,9 @@ import remove from 'lodash/remove'
 
 // for clickAtOrigin detect
 const waitListen = []
+const $document = $(document)
 
-$(document).on('click', e => {
+$document.on('click', e => {
   waitListen.forEach(x => {
     const dom = x[0].get(0)
     if (dom === undefined) return

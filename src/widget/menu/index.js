@@ -8,21 +8,23 @@ const defaults = {
 
 class Menu {
   constructor (point, options) {
-    const $point = $(point)
+    this.$point = $(point)
     this.options = Object.assign({}, defaults, options)
     this.__S_ = this.constructor.__S_
 
     const iconName = `icon-${this.options.icon}`
 
     const dom = (
-      <a class={this.__S_.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
+      <a class={this.__S_['menu']} href="javascript:;">
         <i class={`${this.__S_.iconfont} ${this.__S_[iconName]}`} />
         {this.options.menuChildren}
       </a>
     )
-    createApp($point.get(0))(dom)
+    createApp(this.$point.get(0))(dom)
 
-    // $(point).on('click', this.options.click)
+    this.$menu = this.$point.find(this.__S_['menu'].selector)
+
+    this.$menu.on('mousedown', this.options.onMouseDown)
   }
 }
 

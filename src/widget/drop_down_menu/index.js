@@ -11,43 +11,64 @@ const defaults = {
 
 class DropDownMenu {
   constructor (point, options) {
-    const $point = $(point)
+    this.$point = $(point)
     this.options = Object.assign({}, defaults, options)
     this.__S_ = this.constructor.__S_
 
     const iconName = `icon-${this.options.icon}`
 
     const dom = (
-      <div>
-        <div>
-          <a class={this.__S_.menu} href="javascript:;" onMouseDown={this.options.onMouseDown}>
-            <i class={`${this.__S_.iconfont} ${this.__S_[iconName]}`} />
-            {this.options.menuChildren}
+      <div class={this.__S_['widget-drop-down-menu']}>
+        <a class={this.__S_['menu']} href="javascript:;">
+          <i class={`${this.__S_.iconfont} ${this.__S_[iconName]}`} />
+          {this.options.menuChildren}
+        </a>
+        <div class={this.__S_['drop-down-container']}>
+          <a class={this.__S_['drop-triangle']} href="javascript:;">
+            <i class={`${this.__S_.iconfont} ${this.__S_['icon-triangle']}`} />
           </a>
-          <div class={this.__S_['drop-down-container']}>
-            <a class={this.__S_.menu} href="javascript:;" onMouseDown={e => {
-              e.preventDefault()
-              this.togglePanel(e)
-            }}>
-              <i class={`${this.__S_.iconfont} ${this.__S_['icon-triangle']}`} />
-            </a>
-            <div class={this.__S_['drop-down-panel']} onMouseDown={e => e.preventDefault()}>
-              {this.options.panelChildren}
-            </div>
+          <div class={this.__S_['drop-down-panel']} onMouseDown={e => e.preventDefault()}>
+            {this.options.panelChildren}
           </div>
         </div>
       </div>
     )
 
-    createApp($point.get(0))(dom)
+    createApp(this.$point.get(0))(dom)
 
-    const $container = $point.find(this.__S_['drop-down-container'].selector)
-    this.$container = $container
+    this.$container = this.$point.find(this.__S_['drop-down-container'].selector)
+    this.$menu = this.$point.find(this.__S_['menu'].selector)
+
+    this.$menu.on('mousedown', this.options.onMouseDown)
+
+    this.$container.find(this.__S_['drop-triangle'].selector).on('mousedown', e => {
+      e.preventDefault()
+      if (!this.$container.hasClass(this.__S_['is-available'].className)) {
+        this.togglePanel(e)
+      }
+    })
+
+    clickAtOrigin(this.$container, () => this.$container.removeClass(this.__S_['is-active'].className))
   }
 
   togglePanel = e => {
     this.$container.toggleClass(this.__S_['is-active'].className)
-    clickAtOrigin(this.$container, () => this.$container.removeClass(this.__S_['is-active'].className))
+  }
+
+  openPanel = () => {
+    this.$container.addClass(this.__S_['is-active'].className)
+  }
+
+  closePanel = () => {
+    this.$container.removeClass(this.__S_['is-active'].className)
+  }
+
+  disable = () => {
+    this.$container.addClass(this.__S_['is-available'].className)
+  }
+
+  enable = () => {
+    this.$container.removeClass(this.__S_['is-available'].className)
   }
 }
 
