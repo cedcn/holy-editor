@@ -8,6 +8,8 @@ import underline from './extension/tools/underline'
 import strikeThrough from './extension/tools/strike_through'
 import foreColor from './extension/tools/fore_color'
 import modules from './extension/tools/modules'
+import orderList from './extension/tools/order_list'
+import unorderList from './extension/tools/unorder_list'
 
 // theme
 import tacitly from './extension/themes/tacitly'
@@ -19,6 +21,8 @@ HolyEditor.register('tools', underline)
 HolyEditor.register('tools', strikeThrough)
 HolyEditor.register('tools', foreColor)
 HolyEditor.register('tools', modules)
+HolyEditor.register('tools', orderList)
+HolyEditor.register('tools', unorderList)
 
 HolyEditor.register('themes', tacitly)
 

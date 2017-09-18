@@ -36,6 +36,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         return
       }
       document.execCommand('foreColor', false, colorValue)
+      $(document).trigger('selectionchange')
     }
   })
 

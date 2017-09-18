@@ -15,6 +15,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
       if (!isAvailable()) return
       document.execCommand('strikeThrough')
+      $(document).trigger('selectionchange')
     }
   })
 

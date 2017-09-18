@@ -22,7 +22,9 @@ const defaults = {
     'italic',
     'modules',
     'strike-through',
-    'underline'
+    'underline',
+    'order-list',
+    'unorder-list'
   ],
   theme: 'tacitly',
   tools: []
