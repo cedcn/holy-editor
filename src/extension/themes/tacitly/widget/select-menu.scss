@@ -1,0 +1,50 @@
+.widget-select-menu {
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+
+  &.select-container {
+    position: relative;
+
+    &.is-active {
+      .select-list {
+        display: inline-block;
+        visibility: visible;
+      }
+    }
+  }
+
+  .select-checked {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    text-decoration: none;
+    display: inline-block;
+
+    .iconfont {
+      font-size: 10px;
+    }
+  }
+
+  .select-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 30px;
+    min-height: 20px;
+    transform: translateY(3px);
+    visibility: hidden;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 5px;
+  }
+
+  .select-label {
+    display: inline-block;
+    padding: 10px;
+  }
+
+  .select-checked-label {
+    display: inline-block;
+  }
+}

@@ -25,7 +25,8 @@ const defaults = {
     'underline',
     'order-list',
     'unorder-list',
-    'image'
+    'image',
+    'code'
   ],
   theme: 'tacitly',
   tools: []

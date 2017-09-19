@@ -28,8 +28,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   $input.on('change', e => {
     readImageFile(e).then(result => {
-      document.execCommand('insertImage', null, result)
       modal.close()
+      document.execCommand('insertImage', null, result)
     })
   })
 
