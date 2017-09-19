@@ -1,18 +1,37 @@
 import $ from 'jquery'
+import { element } from 'deku'
 import {
   listenArea
 } from 'utils/selection'
 
 import {
-  addPoint
+  addPoint,
+  readImageFile
 } from 'utils/common'
+
+import style from './image.scss'
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const $menuPoint = addPoint($selector)
   const isAvailable = () => $selector.hasClass(__S_['is-available'].className)
 
   const $modalPoint = addPoint($selector)
-  const modal = new widget.Modal($modalPoint.get(0))
+  const panel = (
+    <div class={__S_['image-panel']}>
+      <input class={__S_['image-upload']} type="file" />
+    </div>
+  )
+
+  const modal = new widget.Modal($modalPoint.get(0), { panel })
+
+  const $input = $modalPoint.find(__S_['image-upload'].selector)
+
+  $input.on('change', e => {
+    readImageFile(e).then(result => {
+      document.execCommand('insertImage', null, result)
+      modal.close()
+    })
+  })
 
   new widget.Menu($menuPoint.get(0), {
     icon: 'image',
@@ -39,7 +58,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 const image = {
   name: 'image',
   run: sciprt,
-  style: ''
+  style
 }
 
 export default image

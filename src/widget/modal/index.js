@@ -16,11 +16,13 @@ class Modal {
     const dom = (
       <section class={this.__S_['modal-container']}>
         <div class={this.__S_['modal-content']}>
+          {this.options.panel}
           <div class={this.__S_['modal-close']} />
         </div>
         <div class={this.__S_['modal-mask']} />
       </section>
     )
+
     createApp(this.$point.get(0))(dom)
 
     const $container = this.$point.find(this.__S_['modal-container'].selector)
@@ -29,6 +31,10 @@ class Modal {
     const $mask = $container.find(this.__S_['modal-mask'].selector)
 
     let isOpen = false
+
+    $container.on('mousedown', e => {
+      e.preventDefault()
+    })
 
     this.open = () => {
       if (isOpen) return

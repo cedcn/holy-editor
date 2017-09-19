@@ -32,3 +32,27 @@ export const addPoint = $selector => {
   const $point = $selector.children().last()
   return $point
 }
+
+// image file to base64
+export const readImageFile = event => {
+  event.preventDefault()
+
+  let files
+  if (event.dataTransfer) {
+    files = event.dataTransfer.files
+  } else if (event.target) {
+    files = event.target.files
+  }
+
+  return new Promise((resolve, reject) => {
+    if (files.length <= 0) {
+      reject(new Error('文件为空'))
+    } else {
+      const reader = new FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        resolve(reader.result)
+      }
+    }
+  })
+}
