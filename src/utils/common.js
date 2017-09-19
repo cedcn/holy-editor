@@ -25,3 +25,10 @@ export const clickRemoveOrigin = $wrapper => {
 export const toCamelCase = str => {
   return str.replace(/[-_](.)/g, (_, c) => c.toUpperCase())
 }
+
+
+export const addPoint = $selector => {
+  $selector.append('<div />')
+  const $point = $selector.children().last()
+  return $point
+}

@@ -10,6 +10,7 @@ import foreColor from './extension/tools/fore_color'
 import modules from './extension/tools/modules'
 import orderList from './extension/tools/order_list'
 import unorderList from './extension/tools/unorder_list'
+import image from './extension/tools/image'
 
 // theme
 import tacitly from './extension/themes/tacitly'
@@ -23,6 +24,7 @@ HolyEditor.register('tools', foreColor)
 HolyEditor.register('tools', modules)
 HolyEditor.register('tools', orderList)
 HolyEditor.register('tools', unorderList)
+HolyEditor.register('tools', image)
 
 HolyEditor.register('themes', tacitly)
 

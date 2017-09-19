@@ -24,7 +24,8 @@ const defaults = {
     'strike-through',
     'underline',
     'order-list',
-    'unorder-list'
+    'unorder-list',
+    'image'
   ],
   theme: 'tacitly',
   tools: []

@@ -14,6 +14,7 @@
   border: 1px solid #eee;
   outline: 0;
   padding: 10px;
+  overflow: auto;
 }
 
 .tool {
@@ -88,6 +89,10 @@
   }
 
   &--unorder-list {
+    display: inline-block;
+  }
+
+  &--image {
     display: inline-block;
   }
 }
