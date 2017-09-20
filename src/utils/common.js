@@ -33,6 +33,23 @@ export const addPoint = $selector => {
   return $point
 }
 
+export const inElemNode = (node, name) => {
+  let cnode = null
+
+  const func = (node, name) => {
+    if (node !== null) {
+      if (node.localName === name) {
+        cnode = node
+      } else {
+        const pnode = node.parentNode
+        func(pnode, name)
+      }
+    }
+  }
+  func(node, name)
+  return cnode
+}
+
 // image file to base64
 export const readImageFile = event => {
   event.preventDefault()

@@ -4,6 +4,14 @@ a {
   text-decoration: none;
 }
 
+
+pre {
+  margin: .5em 0,auto;
+  padding: .4em .6em;
+  border-radius: 5px;
+  background: #f8f8f8;
+}
+
 .toolbars {
   display: block;
   width: 100%;
@@ -27,10 +35,13 @@ a {
   background-color: #ffffff;
   border-radius: 4px;
 
+  a {
+    color: #ddd;
+  }
+
   .menu {
     position: relative;
     display: inline-block;
-    color: #ddd;
     text-decoration: none;
     width: 30px;
     text-align: center;

@@ -7,7 +7,7 @@ import { clickAtOrigin } from 'utils/common'
 const defaults = {
   onSelect: () => {},
   options: [],
-  checked: ''
+  checked: { label: '', value: '' }
 }
 
 class SelectMenu {
@@ -22,7 +22,7 @@ class SelectMenu {
       )
     })
 
-    let checked = find(this.options.options, item => item.value === this.options.checked)
+    let checked = find(this.options.options, this.options.checked)
 
     if (typeof checked === 'undefined') {
       checked = this.options.options[0]
@@ -57,7 +57,7 @@ class SelectMenu {
       const value = $(e.target).data('value')
       this.$container.find(this.__S_['select-checked-label'].selector).text(label)
       this.closePanel()
-      this.options.onSelect(value)
+      this.options.onSelect({ value, label })
     })
 
     clickAtOrigin(this.$container, () => this.$container.removeClass(this.__S_['is-active'].className))
@@ -65,6 +65,15 @@ class SelectMenu {
 
   togglePanel = () => {
     this.$container.toggleClass(this.__S_['is-active'].className)
+  }
+
+  setChecked = value => {
+    let checked = find(this.options.options, this.options.checked)
+
+    if (typeof checked === 'undefined') return
+
+    this.$container.find(this.__S_['select-checked-label'].selector).text(checked.label)
+    this.$container.find(this.__S_['select-checked-label'].selector).data('data', checked.value)
   }
 
   openPanel = () => {
