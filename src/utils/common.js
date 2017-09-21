@@ -21,34 +21,49 @@ export const clickRemoveOrigin = $wrapper => {
   remove(waitListen, item => item[0].get(0) === $wrapper.get(0))
 }
 
-
+// 变量名转骆驼峰格式
 export const toCamelCase = str => {
   return str.replace(/[-_](.)/g, (_, c) => c.toUpperCase())
 }
 
+/**
+  * 为selector 添加一个挂载点
+  *
+  * @param $selector
+  * @return $point
+  */
 
 export const addPoint = $selector => {
-  $selector.append('<div />')
+  $selector.append('<div mount-point />')
   const $point = $selector.children().last()
   return $point
 }
 
-export const inElemNode = (node, name) => {
+/**
+  * 是否包含在指定标签的元素节点内 返回该元素节点
+  *
+  * @param node node
+  * @param string tagName  标签名(大写)
+  * @return node
+  */
+
+export const inElemNode = (node, tagName) => {
   let cnode = null
 
-  const func = (node, name) => {
+  const func = (node, tagName) => {
     if (node !== null) {
-      if (node.localName === name) {
+      if (node.tagName === tagName) {
         cnode = node
       } else {
         const pnode = node.parentNode
-        func(pnode, name)
+        func(pnode, tagName)
       }
     }
   }
-  func(node, name)
+  func(node, tagName)
   return cnode
 }
+
 
 // image file to base64
 export const readImageFile = event => {

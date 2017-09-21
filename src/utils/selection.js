@@ -1,6 +1,17 @@
 import $ from 'jquery'
 const $document = $(document)
 
+
+export const getRange = () => {
+  const selection = window.getSelection()
+  if (selection.rangeCount > 0) {
+    const range = selection.getRangeAt(0)
+    return range
+  } else {
+    return null
+  }
+}
+
 // Gain selection type
 export const getSelectionType = selection => {
   return selection.type
@@ -28,7 +39,7 @@ export const isContainsSelection = (selection, $area) => {
 }
 
 
-export const isContainCurrentSelection = $area => {
+export const isSelectionInArea = $area => {
   const selection = window.getSelection()
   return isContainsSelection(selection, $area)
 }
@@ -44,6 +55,7 @@ export const setSelection = (startNode, startOffset, endNode, endOffset) => {
   selection.addRange(range)
 }
 
+
 export const getLastNode = node => {
   const nodeList = node.childNodes
   const length = nodeList.length
@@ -54,6 +66,7 @@ export const getLastNode = node => {
   return getLastNode(nodeList[length - 1])
 }
 
+
 export const initSelection = $area => {
   const node = $area.get(0)
   const lastNode = getLastNode(node)
@@ -62,7 +75,7 @@ export const initSelection = $area => {
 
 export const listenArea = ($selector, $area, __S_) => {
   $document.on('selectionchange', () => {
-    if (isContainCurrentSelection($area)) {
+    if (isSelectionInArea($area)) {
       $selector.addClass(__S_['is-available'].className)
     } else {
       $selector.removeClass(__S_['is-available'].className)

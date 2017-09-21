@@ -67,11 +67,7 @@ class SelectMenu {
     this.$container.toggleClass(this.__S_['is-active'].className)
   }
 
-  setChecked = value => {
-    let checked = find(this.options.options, this.options.checked)
-
-    if (typeof checked === 'undefined') return
-
+  setChecked = checked => {
     this.$container.find(this.__S_['select-checked-label'].selector).text(checked.label)
     this.$container.find(this.__S_['select-checked-label'].selector).data('data', checked.value)
   }

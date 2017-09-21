@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import {
-  isContainCurrentSelection
+  isSelectionInArea,
+  getRange
 } from 'utils/selection'
 
 import {
@@ -20,29 +21,33 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }, {
       label: 'ruby',
       value: 'ruby'
+    }, {
+      label: 'python',
+      value: 'python'
     }],
     onSelect: checked => {
-      const selection = window.getSelection()
-      const range = selection.getRangeAt(0)
+      const range = getRange()
+      const snode = inElemNode(range.startContainer, 'PRE')
+      const enode = inElemNode(range.endContainer, 'PRE')
 
       if (range.collapsed) {
-        const node = inElemNode(range.startContainer, 'pre')
-        if (node === null) {
-          document.execCommand('insertHTML', false, `<pre class="${checked.value} hljs"><br/></pre>`)
+        if (snode === null) {
+          document.execCommand('insertHTML', false, `<pre class="${checked.value} hljs" data-value="${checked.value}" data-label="${checked.label}"><br/></pre>`)
         } else {
-          node.setAttribute('class', `${checked.value} hljs`)
+          snode.setAttribute('class', `${checked.value} hljs`)
+          snode.dataset.value = checked.value
+          snode.dataset.label = checked.label
         }
       } else {
-        const snode = inElemNode(range.startContainer, 'pre')
-        const enode = inElemNode(range.endContainer, 'pre')
-
         if (snode === null && enode === null) {
           const text = range.toString()
-          document.execCommand('insertHTML', false, `<pre class="${checked.value} hljs">${text}</pre>`)
+          document.execCommand('insertHTML', false, `<pre class="${checked.value} hljs" data-value="${checked.value}" data-label="${checked.label}"}>${text}</pre>`)
         }
 
         if (snode !== null && enode !== null && snode === enode) {
           snode.setAttribute('class', `${checked.value} hljs`)
+          snode.dataset.value = checked.value
+          snode.dataset.label = checked.label
         }
       }
     }
@@ -50,11 +55,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   el.$area.on('keydown', e => {
     if (e.which === 13) {
-      const selection = window.getSelection()
-      const range = selection.getRangeAt(0)
+      const range = getRange()
 
       if (range.collapsed) {
-        const node = inElemNode(range.startContainer, 'pre')
+        const node = inElemNode(range.startContainer, 'PRE')
+
         if (node !== null) {
           e.preventDefault()
           const text = range.endContainer.textContent
@@ -100,19 +105,23 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   })
 
   $(document).on('selectionchange', () => {
-    if (isContainCurrentSelection(el.$area)) {
+    if (isSelectionInArea(el.$area)) {
       $selector.addClass(__S_['is-available'].className)
       menu.enable()
-      const selection = window.getSelection()
-      const range = selection.getRangeAt(0)
+      const range = getRange()
+      const snode = inElemNode(range.startContainer, 'PRE')
+      const enode = inElemNode(range.endContainer, 'PRE')
 
       if (!range.collapsed) {
-        const snode = inElemNode(range.startContainer, 'pre')
-        const enode = inElemNode(range.endContainer, 'pre')
-
         if ((snode !== null && enode === null) || (snode === null && enode !== null) || (snode !== null && enode !== null && snode !== enode)) {
           $selector.removeClass(__S_['is-available'].className)
           menu.disable()
+        }
+      } else {
+        if (snode !== null) {
+          menu.setChecked({ value: snode.dataset.value, label: snode.dataset.label })
+        } else {
+          menu.setChecked({ value: '', label: 'code' })
         }
       }
     } else {
