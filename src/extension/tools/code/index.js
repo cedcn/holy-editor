@@ -6,8 +6,12 @@ import {
 
 import {
   addPoint,
+  hasElemNode,
+  toEnable,
+  toDisable,
   inElemNode
 } from 'utils/common'
+
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const $point = addPoint($selector)
@@ -106,27 +110,27 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   $(document).on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
-      $selector.addClass(__S_['is-available'].className)
-      menu.enable()
+      toEnable($selector, __S_, () => menu.enable())
+
       const range = getRange()
-      const snode = inElemNode(range.startContainer, 'PRE')
-      const enode = inElemNode(range.endContainer, 'PRE')
 
       if (!range.collapsed) {
-        if ((snode !== null && enode === null) || (snode === null && enode !== null) || (snode !== null && enode !== null && snode !== enode)) {
-          $selector.removeClass(__S_['is-available'].className)
-          menu.disable()
+        if (hasElemNode(range.cloneContents(), 'PRE')) {
+          toDisable($selector, __S_, () => menu.disable())
         }
       } else {
+        const snode = inElemNode(range.startContainer, 'PRE')
+
         if (snode !== null) {
+          $selector.addClass(__S_['is-active'].className)
           menu.setChecked({ value: snode.dataset.value, label: snode.dataset.label })
         } else {
           menu.setChecked({ value: '', label: 'code' })
+          $selector.removeClass(__S_['is-active'].className)
         }
       }
     } else {
-      $selector.removeClass(__S_['is-available'].className)
-      menu.disable()
+      toDisable($selector, __S_, () => menu.disable())
     }
   })
 }

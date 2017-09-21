@@ -7,8 +7,15 @@ import Huebee from 'huebee'
 import huebeeCss from 'huebee/huebee.css'
 
 import {
-  listenArea
+  isSelectionInArea,
+  getRange
 } from 'utils/selection'
+
+import {
+  isInRange,
+  toEnable,
+  toDisable
+} from 'utils/common'
 
 import style from './fore-color.scss'
 
@@ -57,13 +64,22 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     dropDown.togglePanel()
   })
 
-  listenArea($selector, el.$area, __S_)
-
   $(document).on('selectionchange', () => {
-    if (isAvailable()) {
-      dropDown.enable()
+    if (isSelectionInArea(el.$area)) {
+      toEnable($selector, __S_, () => {
+        dropDown.enable()
+      })
+
+      const range = getRange()
+      if (isInRange(range, 'PRE')) {
+        toDisable($selector, __S_, () => {
+          dropDown.disable()
+        })
+      }
     } else {
-      dropDown.disable()
+      toDisable($selector, __S_, () => {
+        dropDown.disable()
+      })
     }
   })
 }

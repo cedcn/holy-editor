@@ -24,6 +24,10 @@
     .iconfont {
       font-size: 10px;
     }
+
+    &.is-disabled {
+      display: inline-block;
+    }
   }
 
   .select-list {

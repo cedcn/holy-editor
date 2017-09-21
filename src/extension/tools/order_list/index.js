@@ -1,30 +1,47 @@
 import $ from 'jquery'
 
 import {
-  listenArea
+  isSelectionInArea,
+  getRange
 } from 'utils/selection'
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
-  const $menuPoint = $selector.append('<div class="menu-point"></div>')
-  const isAvailable = () => $selector.hasClass(__S_['is-available'].className)
+import {
+  addPoint,
+  isInRange,
+  isAvailable,
+  toEnable,
+  toDisable
+} from 'utils/common'
 
-  new widget.Menu($menuPoint.get(0), {
+const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const $menuPoint = addPoint($selector)
+
+  const menu = new widget.Menu($menuPoint.get(0), {
     icon: 'order-list',
     onMouseDown: e => {
       e.preventDefault()
-      if (!isAvailable()) return
+      if (!isAvailable($selector, __S_)) return
       document.execCommand('insertOrderedList')
       $(document).trigger('selectionchange')
     }
   })
 
-  listenArea($selector, el.$area, __S_)
-
   $(document).on('selectionchange', () => {
-    if (document.queryCommandState('insertOrderedList')) {
-      $selector.addClass(__S_['is-active'].className)
+    if (isSelectionInArea(el.$area)) {
+      toEnable($selector, __S_, () => menu.enable())
+
+      const range = getRange()
+      if (isInRange(range, 'PRE')) {
+        toDisable($selector, __S_, () => menu.disable())
+      }
+
+      if (document.queryCommandState('insertOrderedList')) {
+        $selector.addClass(__S_['is-active'].className)
+      } else {
+        $selector.removeClass(__S_['is-active'].className)
+      }
     } else {
-      $selector.removeClass(__S_['is-active'].className)
+      toDisable($selector, __S_, () => menu.disable())
     }
   })
 }

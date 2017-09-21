@@ -4,7 +4,6 @@ a {
   text-decoration: none;
 }
 
-
 pre {
   margin: .5em 0,auto;
   padding: .4em .6em;
@@ -37,24 +36,6 @@ pre {
 
   a {
     color: #ddd;
-  }
-
-  .menu {
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-    width: 30px;
-    text-align: center;
-    padding: 5px;
-
-    .color-box {
-      position: absolute;
-      display: inline-block;
-      width: 60%;
-      left: 20%;
-      bottom: 6px;
-      height: 3px;
-    }
   }
 
   &.is-available {
@@ -115,6 +96,7 @@ pre {
   }
 }
 
+@import './widget/menu.scss';
 @import './widget/drop-down-menu.scss';
 @import './widget/select-menu.scss';
 @import './widget/modal.scss';

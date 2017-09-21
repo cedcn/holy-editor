@@ -46,7 +46,7 @@ class SelectMenu {
 
     this.$container.find(this.__S_['select-checked'].selector).on('mousedown', e => {
       e.preventDefault()
-      if (!this.$container.hasClass(this.__S_['is-available'].className)) {
+      if (!this.$container.hasClass(this.__S_['is-disabled'].className)) {
         this.togglePanel()
       }
     })
@@ -81,11 +81,11 @@ class SelectMenu {
   }
 
   disable = () => {
-    this.$container.addClass(this.__S_['is-available'].className)
+    this.$container.addClass(this.__S_['is-disabled'].className)
   }
 
   enable = () => {
-    this.$container.removeClass(this.__S_['is-available'].className)
+    this.$container.removeClass(this.__S_['is-disabled'].className)
   }
 }
 

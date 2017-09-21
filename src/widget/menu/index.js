@@ -24,7 +24,20 @@ class Menu {
 
     this.$menu = this.$point.find(this.__S_['menu'].selector)
 
-    this.$menu.on('mousedown', this.options.onMouseDown)
+    this.$menu.on('mousedown', e => {
+      e.preventDefault()
+      if (!this.$menu.hasClass(this.__S_['is-disabled'].className)) {
+        this.options.onMouseDown(e)
+      }
+    })
+  }
+
+  disable = () => {
+    this.$menu.addClass(this.__S_['is-disabled'].className)
+  }
+
+  enable = () => {
+    this.$menu.removeClass(this.__S_['is-disabled'].className)
   }
 }
 
