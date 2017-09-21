@@ -94,6 +94,10 @@ pre {
   &--code {
     display: inline-block;
   }
+
+  &--quote {
+    display: inline-block;
+  }
 }
 
 @import './widget/menu.scss';

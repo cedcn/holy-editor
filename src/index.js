@@ -12,6 +12,8 @@ import orderList from './extension/tools/order_list'
 import unorderList from './extension/tools/unorder_list'
 import image from './extension/tools/image'
 import code from './extension/tools/code'
+import quote from './extension/tools/quote'
+
 // theme
 import tacitly from './extension/themes/tacitly'
 
@@ -26,6 +28,7 @@ HolyEditor.register('tools', orderList)
 HolyEditor.register('tools', unorderList)
 HolyEditor.register('tools', image)
 HolyEditor.register('tools', code)
+HolyEditor.register('tools', quote)
 
 HolyEditor.register('themes', tacitly)
 

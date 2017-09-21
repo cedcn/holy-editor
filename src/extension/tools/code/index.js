@@ -9,7 +9,8 @@ import {
   hasElemNode,
   toEnable,
   toDisable,
-  inElemNode
+  inElemNode,
+  isInRange
 } from 'utils/common'
 
 
@@ -113,6 +114,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       toEnable($selector, __S_, () => menu.enable())
 
       const range = getRange()
+
+      if (isInRange(range, 'BLOCKQUOTE')) {
+        toDisable($selector, __S_, () => menu.disable())
+      }
 
       if (!range.collapsed) {
         if (hasElemNode(range.cloneContents(), 'PRE')) {
