@@ -123,6 +123,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         }
       } else {
         const snode = inElemNode(range.startContainer, 'PRE')
+        console.log(snode)
 
         if (snode !== null) {
           $selector.addClass(__S_['is-active'].className)

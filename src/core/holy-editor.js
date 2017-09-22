@@ -96,11 +96,13 @@ class HolyEditor {
     toolbars.run({...args, tools})
     area.run({...args})
 
-    // listen selectionchange
-
-    $document.trigger('selectionchange')
-    $document.on('selectionchange', () => {
-
+    // trigger selectionchange
+    this.el.$area.on('keydown', e => {
+      if (e.which === 8) {
+        setTimeout(() => {
+          $document.trigger('selectionchange')
+        }, 100)
+      }
     })
   }
 
