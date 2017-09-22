@@ -16,15 +16,17 @@ import {
   clickAtOrigin
 } from 'utils/common'
 
+import style from './emoji.scss'
 
-const emojiList = map(groupBy(emojilib, 'category'), (item, key) => {
-  const chars = map(item, category => category.char)
-  return { [key]: chars }
-})
+const emojiData = groupBy(emojilib, 'category')
 
-// console.log(emojiList)
+const defaults = {
+  categories: ['people', 'activity', 'symbols', 'objects', 'animals_and_nature', 'flags', 'food_and_drink']
+}
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
+
   const menu = new widget.Menu($selector, {
     icon: 'emoji',
     onMouseDown: e => {
@@ -33,8 +35,36 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
+  const emojiList = map(opts.categories, key => {
+    const categoryEmoji = map(emojiData[key], item => {
+      return <span class={__S_['emoji-char']}>{item.char}</span>
+    })
+    return (
+      <div class={__S_['emoji-item']}>
+        <div class={__S_['emoji-item-title']}>
+          {key}
+        </div>
+        <div class={__S_['emoji-item-content']}>
+          {categoryEmoji}
+        </div>
+      </div>
+    )
+  })
+
   const panel = new widget.Popover($selector, {
-    panel: <div>123123</div>
+    panel: (
+      <div class={__S_['emoji-panel']}>
+        <div class={__S_['emoji-list']}>{emojiList}</div>
+      </div>
+    )
+  })
+
+  const $emojiPanel = $selector.find(__S_['emoji-panel'].selector)
+
+  const $char = $emojiPanel.find(__S_['emoji-char'].selector)
+
+  $char.on('click', function () {
+    document.execCommand('insertHTML', false, $(this).text())
   })
 
   clickAtOrigin($selector, () => panel.closePanel())
@@ -62,7 +92,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 const emoji = {
   name: 'emoji',
   run: sciprt,
-  style: ''
+  style
 }
 
 export default emoji

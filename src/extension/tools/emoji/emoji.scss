@@ -1,0 +1,30 @@
+.emoji-panel {
+  max-width: 200px;
+  max-height: 300px;
+  overflow: auto;
+  padding: 12px;
+}
+
+.emoji-list {
+  width: 150px;
+  display: inline-block;
+}
+
+.emoji-item {
+  .emoji-item-title {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 8px;
+  }
+
+  .emoji-item-content {
+    display: flex;
+    flex-wrap: wrap;
+
+    .emoji-char {
+      padding: 3px;
+      width: 20%;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+}

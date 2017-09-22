@@ -11,7 +11,7 @@ class Popover {
     this.__S_ = this.constructor.__S_
 
     const dom = (
-      <div class={this.__S_['popover']} data-widget="popover">
+      <div class={this.__S_['popover']} data-widget="popover" onMouseDown={e => e.preventDefault()}>
         {this.options.panel}
       </div>
     )

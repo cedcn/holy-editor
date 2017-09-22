@@ -23,7 +23,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
       if (range.collapsed) {
         if (snode === null) {
-          console.log(range)
           document.execCommand('insertHTML', false, `<blockquote><div><br/></div></blockquote>`)
         }
       } else {
