@@ -1,4 +1,9 @@
 import $ from 'jquery'
+import emojilib from 'emojilib/emojis.json'
+import groupBy from 'lodash/groupBy'
+import map from 'lodash/map'
+import { element } from 'deku'
+
 import {
   isSelectionInArea,
   getRange
@@ -6,22 +11,33 @@ import {
 
 import {
   isInRange,
-  isAvailable,
   toEnable,
-  toDisable
+  toDisable,
+  clickAtOrigin
 } from 'utils/common'
+
+
+const emojiList = map(groupBy(emojilib, 'category'), (item, key) => {
+  const chars = map(item, category => category.char)
+  return { [key]: chars }
+})
+
+// console.log(emojiList)
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const menu = new widget.Menu($selector, {
-    icon: 'underline',
+    icon: 'emoji',
     onMouseDown: e => {
       e.preventDefault()
-
-      if (!isAvailable($selector, __S_)) return
-      document.execCommand('underline')
-      $(document).trigger('selectionchange')
+      panel.togglePanel()
     }
   })
+
+  const panel = new widget.Popover($selector, {
+    panel: <div>123123</div>
+  })
+
+  clickAtOrigin($selector, () => panel.closePanel())
 
   $(document).on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
@@ -32,7 +48,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         toDisable($selector, __S_, () => menu.disable())
       }
 
-      if (document.queryCommandState('underline')) {
+      if (document.queryCommandState('italic')) {
         $selector.addClass(__S_['is-active'].className)
       } else {
         $selector.removeClass(__S_['is-active'].className)
@@ -43,10 +59,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   })
 }
 
-const underline = {
-  name: 'underline',
+const emoji = {
+  name: 'emoji',
   run: sciprt,
   style: ''
 }
 
-export default underline
+export default emoji

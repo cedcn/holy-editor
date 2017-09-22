@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import remove from 'lodash/remove'
+import { createApp } from 'deku'
 
 // for clickAtOrigin detect
 const waitListen = []
@@ -26,6 +27,7 @@ export const toCamelCase = str => {
   return str.replace(/[-_](.)/g, (_, c) => c.toUpperCase())
 }
 
+
 /**
   * 为selector 添加一个挂载点
   *
@@ -34,9 +36,20 @@ export const toCamelCase = str => {
   */
 
 export const addPoint = $selector => {
-  $selector.append('<div mount-point />')
+  $selector.append('<div />')
   const $point = $selector.children().last()
   return $point
+}
+
+export const mount = ($selector, jsx) => {
+  const $point = addPoint($selector)
+  createApp($point.get(0))(jsx)
+
+  const $container = $point.children().first()
+  $container.unwrap()
+  $container.attr('mounted', 'true')
+
+  return $container
 }
 
 /**

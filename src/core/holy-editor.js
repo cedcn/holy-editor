@@ -27,7 +27,8 @@ const defaults = {
     'unorder-list',
     'image',
     'code',
-    'quote'
+    'quote',
+    'emoji'
   ],
   theme: 'tacitly',
   tools: []

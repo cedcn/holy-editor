@@ -1,7 +1,6 @@
-import $ from 'jquery'
-import { createApp, element } from 'deku'
+import { element } from 'deku'
 
-import { clickAtOrigin } from 'utils/common'
+import { clickAtOrigin, mount } from 'utils/common'
 
 const defaults = {
   onMouseDown: () => {},
@@ -10,15 +9,14 @@ const defaults = {
 }
 
 class DropDownMenu {
-  constructor (point, options) {
-    this.$point = $(point)
+  constructor ($selector, options) {
     this.options = Object.assign({}, defaults, options)
     this.__S_ = this.constructor.__S_
 
     const iconName = `icon-${this.options.icon}`
 
     const dom = (
-      <div class={this.__S_['widget-drop-down-menu']}>
+      <div class={this.__S_['drop-down-menu']} data-widget="drop-down-menu">
         <a class={this.__S_['menu']} href="javascript:;">
           <i class={`${this.__S_.iconfont} ${this.__S_[iconName]}`} />
           {this.options.menuChildren}
@@ -34,10 +32,9 @@ class DropDownMenu {
       </div>
     )
 
-    createApp(this.$point.get(0))(dom)
-
-    this.$container = this.$point.find(this.__S_['drop-down-container'].selector)
-    this.$menu = this.$point.find(this.__S_['menu'].selector)
+    this.$container = mount($selector, dom)
+    this.$menu = this.$container.find(this.__S_['menu'].selector)
+    this.$panel = this.$container.find(this.__S_['drop-down-container'].selector)
 
     this.$menu.on('mousedown', this.options.onMouseDown)
 
@@ -48,19 +45,19 @@ class DropDownMenu {
       }
     })
 
-    clickAtOrigin(this.$container, () => this.$container.removeClass(this.__S_['is-active'].className))
+    clickAtOrigin(this.$panel, () => this.$panel.removeClass(this.__S_['is-active'].className))
   }
 
   togglePanel = e => {
-    this.$container.toggleClass(this.__S_['is-active'].className)
+    this.$panel.toggleClass(this.__S_['is-active'].className)
   }
 
   openPanel = () => {
-    this.$container.addClass(this.__S_['is-active'].className)
+    this.$panel.addClass(this.__S_['is-active'].className)
   }
 
   closePanel = () => {
-    this.$container.removeClass(this.__S_['is-active'].className)
+    this.$panel.removeClass(this.__S_['is-active'].className)
   }
 
   disable = () => {

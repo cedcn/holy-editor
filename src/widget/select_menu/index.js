@@ -1,8 +1,8 @@
 import $ from 'jquery'
-import { createApp, element } from 'deku'
+import { element } from 'deku'
 import find from 'lodash/find'
 
-import { clickAtOrigin } from 'utils/common'
+import { clickAtOrigin, mount } from 'utils/common'
 
 const defaults = {
   onSelect: () => {},
@@ -11,8 +11,7 @@ const defaults = {
 }
 
 class SelectMenu {
-  constructor (point, options) {
-    this.$point = $(point)
+  constructor ($selector, options) {
     this.options = Object.assign({}, defaults, options)
     this.__S_ = this.constructor.__S_
 
@@ -29,7 +28,7 @@ class SelectMenu {
     }
 
     const dom = (
-      <div class={`${this.__S_['widget-select-menu']} ${this.__S_['select-container']}`}>
+      <div class={this.__S_['select-menu']} data-widget="select-menu">
         <a class={this.__S_['select-checked']} href="javascript:;">
           <span class={this.__S_['select-checked-label']}>{checked.label}</span>
           <i class={`${this.__S_.iconfont} ${this.__S_['icon-triangle']}`} />
@@ -40,9 +39,7 @@ class SelectMenu {
       </div>
     )
 
-    createApp(this.$point.get(0))(dom)
-
-    this.$container = this.$point.find(this.__S_['select-container'].selector)
+    this.$container = mount($selector, dom)
 
     this.$container.find(this.__S_['select-checked'].selector).on('mousedown', e => {
       e.preventDefault()

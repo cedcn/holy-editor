@@ -1,0 +1,17 @@
+.popover {
+  display: inline-block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 30px;
+  min-height: 20px;
+  transform: translateY(3px);
+  visibility: hidden;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-radius: 5px;
+
+  &.is-active {
+    visibility: visible;
+  }
+}

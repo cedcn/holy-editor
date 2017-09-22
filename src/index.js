@@ -13,6 +13,7 @@ import unorderList from './extension/tools/unorder_list'
 import image from './extension/tools/image'
 import code from './extension/tools/code'
 import quote from './extension/tools/quote'
+import emoji from './extension/tools/emoji'
 
 // theme
 import tacitly from './extension/themes/tacitly'
@@ -29,6 +30,7 @@ HolyEditor.register('tools', unorderList)
 HolyEditor.register('tools', image)
 HolyEditor.register('tools', code)
 HolyEditor.register('tools', quote)
+HolyEditor.register('tools', emoji)
 
 HolyEditor.register('themes', tacitly)
 

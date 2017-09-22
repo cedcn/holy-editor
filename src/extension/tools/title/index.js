@@ -1,8 +1,6 @@
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
-  const $menuPoint = $selector.append('<div class="menu-point"></div>')
-
-  new widget.DropDownMenu($menuPoint.get(0), {
+  new widget.DropDownMenu($selector, {
     icon: 'title'
   })
 }

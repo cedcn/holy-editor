@@ -28,6 +28,7 @@ pre {
 }
 
 .tool {
+  position: relative;
   display: inline-block;
   margin-right: 10px;
   height: 30px;
@@ -98,8 +99,14 @@ pre {
   &--quote {
     display: inline-block;
   }
+
+  &--emoji {
+    position: relative;
+    display: inline-block;
+  }
 }
 
+@import './widget/popover.scss';
 @import './widget/menu.scss';
 @import './widget/drop-down-menu.scss';
 @import './widget/select-menu.scss';

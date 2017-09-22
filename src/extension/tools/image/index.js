@@ -7,7 +7,6 @@ import {
 } from 'utils/selection'
 
 import {
-  addPoint,
   isInRange,
   readImageFile,
   toEnable,
@@ -17,18 +16,15 @@ import {
 import style from './image.scss'
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
-  const $menuPoint = addPoint($selector)
-  const $modalPoint = addPoint($selector)
-
   const panel = (
     <div class={__S_['image-panel']}>
       <input class={__S_['image-upload']} type="file" />
     </div>
   )
 
-  const modal = new widget.Modal($modalPoint.get(0), { panel })
+  const modal = new widget.Modal($selector, { panel })
 
-  const $input = $modalPoint.find(__S_['image-upload'].selector)
+  const $input = modal.$container.find(__S_['image-upload'].selector)
 
   $input.on('change', e => {
     readImageFile(e).then(result => {
@@ -37,7 +33,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     })
   })
 
-  const menu = new widget.Menu($menuPoint.get(0), {
+  const menu = new widget.Menu($selector, {
     icon: 'image',
     onMouseDown: e => {
       modal.open()

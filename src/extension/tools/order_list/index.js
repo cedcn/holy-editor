@@ -6,7 +6,6 @@ import {
 } from 'utils/selection'
 
 import {
-  addPoint,
   isInRange,
   isAvailable,
   toEnable,
@@ -14,9 +13,7 @@ import {
 } from 'utils/common'
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
-  const $menuPoint = addPoint($selector)
-
-  const menu = new widget.Menu($menuPoint.get(0), {
+  const menu = new widget.Menu($selector, {
     icon: 'order-list',
     onMouseDown: e => {
       e.preventDefault()

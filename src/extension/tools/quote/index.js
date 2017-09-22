@@ -5,7 +5,6 @@ import {
 } from 'utils/selection'
 
 import {
-  addPoint,
   hasElemNode,
   toEnable,
   toDisable,
@@ -15,9 +14,7 @@ import {
 
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
-  const $point = addPoint($selector)
-
-  const menu = new widget.Menu($point.get(0), {
+  const menu = new widget.Menu($selector, {
     icon: 'quote',
     onMouseDown: e => {
       const range = getRange()

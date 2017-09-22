@@ -1,16 +1,13 @@
-.widget-select-menu {
+.select-menu {
+  position: relative;
   display: inline-block;
   width: 100px;
   height: 30px;
 
-  &.select-container {
-    position: relative;
-
-    &.is-active {
-      .select-list {
-        display: inline-block;
-        visibility: visible;
-      }
+  &.is-active {
+    .select-list {
+      display: inline-block;
+      visibility: visible;
     }
   }
 

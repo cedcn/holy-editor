@@ -7,16 +7,13 @@ import {
 } from 'utils/selection'
 
 import {
-  addPoint,
   isInRange,
   toEnable,
   toDisable
 } from 'utils/common'
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
-  const $point = addPoint($selector)
-
-  const menu = new widget.Menu($point.get(0), {
+  const menu = new widget.Menu($selector, {
     icon: 'bold',
     onMouseDown: e => {
       document.execCommand('bold')

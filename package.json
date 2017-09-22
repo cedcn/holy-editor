@@ -44,6 +44,7 @@
   "dependencies": {
     "csjs": "^1.1.0",
     "deku": "^2.0.0-rc16",
+    "emojilib": "^2.2.9",
     "huebee": "^1.0.1",
     "insert-css": "^2.0.0",
     "invariant": "^2.2.2",
