@@ -104,6 +104,22 @@ pre {
     position: relative;
     display: inline-block;
   }
+
+  &--justify-center {
+    display: inline-block;
+  }
+
+  &--justify-full {
+    display: inline-block;
+  }
+
+  &--justify-left {
+    display: inline-block;
+  }
+
+  &--justify-right {
+    display: inline-block;
+  }
 }
 
 @import './widget/popover.scss';

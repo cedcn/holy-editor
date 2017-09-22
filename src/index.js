@@ -14,6 +14,10 @@ import image from './extension/tools/image'
 import code from './extension/tools/code'
 import quote from './extension/tools/quote'
 import emoji from './extension/tools/emoji'
+import justifyFull from './extension/tools/justify_full'
+import justifyCenter from './extension/tools/justify_center'
+import justifyLeft from './extension/tools/justify_left'
+import justifyRight from './extension/tools/justify_right'
 
 // theme
 import tacitly from './extension/themes/tacitly'
@@ -31,6 +35,11 @@ HolyEditor.register('tools', image)
 HolyEditor.register('tools', code)
 HolyEditor.register('tools', quote)
 HolyEditor.register('tools', emoji)
+
+HolyEditor.register('tools', justifyFull)
+HolyEditor.register('tools', justifyCenter)
+HolyEditor.register('tools', justifyLeft)
+HolyEditor.register('tools', justifyRight)
 
 HolyEditor.register('themes', tacitly)
 

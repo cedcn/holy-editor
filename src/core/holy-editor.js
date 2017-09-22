@@ -28,7 +28,11 @@ const defaults = {
     'image',
     'code',
     'quote',
-    'emoji'
+    'emoji',
+    'justify-full',
+    'justify-center',
+    'justify-left',
+    'justify-right'
   ],
   theme: 'tacitly',
   tools: []

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 412370 */
-  src: url('//at.alicdn.com/t/font_412370_2qyhjre7nz478pvi.eot');
-  src: url('//at.alicdn.com/t/font_412370_2qyhjre7nz478pvi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_412370_2qyhjre7nz478pvi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_412370_2qyhjre7nz478pvi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_412370_2qyhjre7nz478pvi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_412370_5lema8tm49kq33di.eot');
+  src: url('//at.alicdn.com/t/font_412370_5lema8tm49kq33di.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_412370_5lema8tm49kq33di.woff') format('woff'),
+  url('//at.alicdn.com/t/font_412370_5lema8tm49kq33di.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_412370_5lema8tm49kq33di.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -46,3 +46,11 @@
 .icon-quote:before { content: "\e613"}
 
 .icon-emoji:before { content: "\e602"}
+
+.icon-justify-full:before { content: "\e646"}
+
+.icon-justify-center:before { content: "\e68a"}
+
+.icon-justify-left:before { content: "\e687"}
+
+.icon-justify-right:before { content: "\e686"}
