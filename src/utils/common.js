@@ -106,7 +106,7 @@ export const hasElemNode = (node, tagName) => {
 }
 
 /**
-  * 指定的Range对象里 是否包含该元素节点
+  * 指定的Range片段里 是否包含该元素节点
   *
   * @param node node
   * @param string tagName  标签名(大写)
@@ -124,6 +124,29 @@ export const isInRange = (range, tagName) => {
     return hasElemNode(frag, tagName)
   }
 }
+
+
+/**
+  * 指定的Range片段是否全部处于 元素节点内
+  *
+  * @param node node
+  * @param string tagName  标签名(大写)
+  * @return node
+  */
+
+export const isFullInRange = (range, tagName) => {
+  const snode = inElemNode(range.startContainer, tagName)
+  const enode = inElemNode(range.endContainer, tagName)
+
+  const frag = range.cloneContents()
+  if (snode !== null && enode !== null && !hasElemNode(frag, tagName)) {
+    return true
+  }
+
+  return false
+}
+
+
 
 export const toEnable = ($selector, __S_, cb) => {
   $selector.addClass(__S_['is-available'].className)

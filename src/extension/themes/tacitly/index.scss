@@ -120,6 +120,10 @@ pre {
   &--justify-right {
     display: inline-block;
   }
+
+  &--link {
+    display: inline-block;
+  }
 }
 
 @import './widget/popover.scss';

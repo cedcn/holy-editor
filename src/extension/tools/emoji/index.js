@@ -30,7 +30,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const menu = new widget.Menu($selector, {
     icon: 'emoji',
     onMouseDown: e => {
-      e.preventDefault()
       panel.togglePanel()
     }
   })
@@ -76,12 +75,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       const range = getRange()
       if (isInRange(range, 'PRE')) {
         toDisable($selector, __S_, () => menu.disable())
-      }
-
-      if (document.queryCommandState('italic')) {
-        $selector.addClass(__S_['is-active'].className)
-      } else {
-        $selector.removeClass(__S_['is-active'].className)
       }
     } else {
       toDisable($selector, __S_, () => menu.disable())

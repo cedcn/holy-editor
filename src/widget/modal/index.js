@@ -5,7 +5,8 @@ import { element } from 'deku'
 const $body = $('html body')
 
 const defaults = {
-  click: () => {}
+  click: () => {},
+  panel: null
 }
 
 class Modal {
@@ -29,10 +30,6 @@ class Modal {
     const $mask = this.$container.find(this.__S_['modal-mask'].selector)
 
     let isOpen = false
-
-    this.$container.on('mousedown', e => {
-      e.preventDefault()
-    })
 
     this.open = () => {
       if (isOpen) return

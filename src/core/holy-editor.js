@@ -32,7 +32,8 @@ const defaults = {
     'justify-full',
     'justify-center',
     'justify-left',
-    'justify-right'
+    'justify-right',
+    'link'
   ],
   theme: 'tacitly',
   tools: []
@@ -100,6 +101,7 @@ class HolyEditor {
     toolbars.run({...args, tools})
     area.run({...args})
 
+    $document.trigger('selectionchange')
     // trigger selectionchange
     this.el.$area.on('keydown', e => {
       if (e.which === 8) {

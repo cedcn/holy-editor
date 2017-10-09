@@ -19,6 +19,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const panel = (
     <div class={__S_['image-panel']}>
       <input class={__S_['image-upload']} type="file" />
+      <input type="text" />
     </div>
   )
 
