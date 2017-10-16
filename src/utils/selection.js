@@ -8,15 +8,18 @@ export const getSelectionType = selection => {
   return selection.type
 }
 
-export const isSelectionNone = selection => {
+export const isSelectionNone = () => {
+  const selection = window.getSelection()
   return getSelectionType(selection) === 'None'
 }
 
-export const isSelectionCaret = selection => {
+export const isSelectionCaret = () => {
+  const selection = window.getSelection()
   return getSelectionType(selection) === 'Caret'
 }
 
-export const isSelectionRange = selection => {
+export const isSelectionRange = () => {
+  const selection = window.getSelection()
   return getSelectionType(selection) === 'Range'
 }
 
@@ -35,7 +38,6 @@ export const isSelectionInArea = $area => {
   * 创建一个range
   *
   */
-
 export const createRange = (startNode, startOffset, endNode, endOffset) => {
   const range = document.createRange()
   range.setStart(startNode, startOffset)
@@ -48,8 +50,7 @@ export const createRange = (startNode, startOffset, endNode, endOffset) => {
   * 将range添加到selection
   * @param range
   */
-
-export const setRange = range => {
+export const setSelection = range => {
   const selection = window.getSelection()
   selection.removeAllRanges()
   selection.addRange(range)
@@ -58,8 +59,7 @@ export const setRange = range => {
 }
 
 // 创建一个selection
-export const createSelection = flowRight([setRange, createRange])
-
+export const createSelection = flowRight([setSelection, createRange])
 
 // 获取当前range
 export const getRange = () => {
@@ -84,7 +84,6 @@ export const getLastNode = node => {
   return getLastNode(nodeList[length - 1])
 }
 
-
 /**
   * 该节点是否包含在指定"Tag"的"元素节点"内 返回该"元素节点"
   *
@@ -92,7 +91,6 @@ export const getLastNode = node => {
   * @param string tagName  标签名(大写)
   * @return node 返回该元素节点
   */
-
 export const nodeInTag = (node, tagName) => {
   let cnode = null
 
@@ -118,7 +116,6 @@ export const nodeInTag = (node, tagName) => {
   * @param string tagName  标签名(大写)
   * @return bool
   */
-
 export const hasTagInNode = (node, tagName) => {
   let bool = false
   const func = (node, tagName) => {
@@ -146,7 +143,6 @@ export const hasTagInNode = (node, tagName) => {
   * @param string tagName  标签名(大写)
   * @return node
   */
-
 export const hasTagInRange = (range, tagName) => {
   const snode = nodeInTag(range.startContainer, tagName)
   const enode = nodeInTag(range.endContainer, tagName)
@@ -159,7 +155,6 @@ export const hasTagInRange = (range, tagName) => {
   }
 }
 
-
 /**
   * 指定的"Range"是否全部处于"元素节点"内
   *
@@ -167,7 +162,6 @@ export const hasTagInRange = (range, tagName) => {
   * @param string tagName  标签名(大写)
   * @return node
   */
-
 export const isFullRangeInTag = (range, tagName) => {
   const snode = nodeInTag(range.startContainer, tagName)
   const enode = nodeInTag(range.endContainer, tagName)

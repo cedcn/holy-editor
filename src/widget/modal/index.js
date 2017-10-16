@@ -71,10 +71,14 @@ class Modal extends EvEmitter {
     }
 
     $mask.on('mousedown', e => {
+      e.preventDefault()
+      e.stopPropagation()
       if (e.which === 1) this.close()
     })
 
-    $closeBtn.on('click', () => {
+    $closeBtn.on('click', e => {
+      e.preventDefault()
+      e.stopPropagation()
       this.close()
     })
   }
