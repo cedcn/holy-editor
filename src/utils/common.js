@@ -52,108 +52,15 @@ export const mount = ($selector, jsx) => {
   return $container
 }
 
-/**
-  * 该节点是否包含在指定标签的元素节点内 返回该元素节点
-  *
-  * @param node node
-  * @param string tagName  标签名(大写)
-  * @return node
-  */
 
-export const inElemNode = (node, tagName) => {
-  let cnode = null
-
-  const func = (node, tagName) => {
-    if (node !== null) {
-      if (node.tagName === tagName) {
-        cnode = node
-      } else {
-        const pnode = node.parentNode
-        func(pnode, tagName)
-      }
-    }
-  }
-  func(node, tagName)
-  return cnode
-}
-
-/**
-  * 该节点下是否包含指定标签的元素节点
-  *
-  * @param [node|documentFargment] node
-  * @param string tagName  标签名(大写)
-  * @return bool
-  */
-
-export const hasElemNode = (node, tagName) => {
-  let bool = false
-  const func = (node, tagName) => {
-    const { children } = node
-
-    if (children.length > 0 & !bool) {
-      for (let a = 0; a < children.length; a++) {
-        if (children[a].tagName === tagName) {
-          bool = true
-          break
-        }
-        func(children[a], tagName)
-      }
-    }
-  }
-
-  func(node, tagName)
-  return bool
-}
-
-/**
-  * 指定的Range片段里 是否包含该元素节点
-  *
-  * @param node node
-  * @param string tagName  标签名(大写)
-  * @return node
-  */
-
-export const isInRange = (range, tagName) => {
-  const snode = inElemNode(range.startContainer, tagName)
-  const enode = inElemNode(range.endContainer, tagName)
-
-  if (snode !== null || enode !== null) {
-    return true
-  } else {
-    const frag = range.cloneContents()
-    return hasElemNode(frag, tagName)
-  }
-}
-
-
-/**
-  * 指定的Range片段是否全部处于 元素节点内
-  *
-  * @param node node
-  * @param string tagName  标签名(大写)
-  * @return node
-  */
-
-export const isFullInRange = (range, tagName) => {
-  const snode = inElemNode(range.startContainer, tagName)
-  const enode = inElemNode(range.endContainer, tagName)
-
-  const frag = range.cloneContents()
-  if (snode !== null && enode !== null && !hasElemNode(frag, tagName)) {
-    return true
-  }
-
-  return false
-}
-
-
-
+// to enable selector
 export const toEnable = ($selector, __S_, cb) => {
   $selector.addClass(__S_['is-available'].className)
 
   if (typeof cb === 'function') cb()
 }
 
+// to disable selector
 export const toDisable = ($selector, __S_, cb) => {
   $selector.removeClass(__S_['is-available'].className)
 

@@ -2,11 +2,11 @@ import $ from 'jquery'
 
 import {
   isSelectionInArea,
+  hasTagInRange,
   getRange
 } from 'utils/selection'
 
 import {
-  isInRange,
   toEnable,
   toDisable
 } from 'utils/common'
@@ -25,7 +25,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       toEnable($selector, __S_, () => menu.enable())
 
       const range = getRange()
-      if (isInRange(range, 'PRE')) {
+      if (hasTagInRange(range, 'PRE')) {
         toDisable($selector, __S_, () => menu.disable())
       }
 

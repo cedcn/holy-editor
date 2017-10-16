@@ -1,15 +1,15 @@
 import $ from 'jquery'
 import {
   isSelectionInArea,
+  hasTagInNode,
+  hasTagInRange,
+  nodeInTag,
   getRange
 } from 'utils/selection'
 
 import {
-  hasElemNode,
   toEnable,
-  toDisable,
-  inElemNode,
-  isInRange
+  toDisable
 } from 'utils/common'
 
 
@@ -18,8 +18,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     icon: 'quote',
     onMouseDown: e => {
       const range = getRange()
-      const snode = inElemNode(range.startContainer, 'BLOCKQUOTE')
-      const enode = inElemNode(range.endContainer, 'BLOCKQUOTE')
+      const snode = nodeInTag(range.startContainer, 'BLOCKQUOTE')
+      const enode = nodeInTag(range.endContainer, 'BLOCKQUOTE')
 
       if (range.collapsed) {
         if (snode === null) {
@@ -64,16 +64,16 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
       const range = getRange()
 
-      if (isInRange(range, 'PRE')) {
+      if (hasTagInRange(range, 'PRE')) {
         toDisable($selector, __S_, () => menu.disable())
       }
 
       if (!range.collapsed) {
-        if (hasElemNode(range.cloneContents(), 'BLOCKQUOTE')) {
+        if (hasTagInNode(range.cloneContents(), 'BLOCKQUOTE')) {
           toDisable($selector, __S_, () => menu.disable())
         }
       } else {
-        const snode = inElemNode(range.startContainer, 'BLOCKQUOTE')
+        const snode = nodeInTag(range.startContainer, 'BLOCKQUOTE')
 
         if (snode !== null) {
           $selector.addClass(__S_['is-active'].className)

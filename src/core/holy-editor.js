@@ -80,7 +80,6 @@ class HolyEditor {
         <area.Tpl __S_={__S_} />
       </div>
     )
-
     const render = createApp(this.$editor.get(0))
     render(dom)
     const $root = this.$editor.children().first()

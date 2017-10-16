@@ -6,11 +6,11 @@ import { element } from 'deku'
 
 import {
   isSelectionInArea,
-  getRange
+  getRange,
+  hasTagInRange
 } from 'utils/selection'
 
 import {
-  isInRange,
   toEnable,
   toDisable,
   clickAtOrigin
@@ -73,7 +73,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       toEnable($selector, __S_, () => menu.enable())
 
       const range = getRange()
-      if (isInRange(range, 'PRE')) {
+      if (hasTagInRange(range, 'PRE')) {
         toDisable($selector, __S_, () => menu.disable())
       }
     } else {

@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import { mount } from 'utils/common'
 import { element } from 'deku'
+import EvEmitter from 'ev-emitter'
 
 const $body = $('html body')
 
@@ -9,8 +10,9 @@ const defaults = {
   panel: null
 }
 
-class Modal {
+class Modal extends EvEmitter {
   constructor ($selector, options) {
+    super()
     this.options = Object.assign({}, defaults, options)
     this.__S_ = this.constructor.__S_
 
@@ -31,9 +33,10 @@ class Modal {
 
     let isOpen = false
 
-    this.open = () => {
+    this.open = cb => {
       if (isOpen) return
       isOpen = true
+      this.emitEvent('open:before')
 
       this.$container.css('display', 'block')
       $body.addClass(this.__S_['open-modal'].className)
@@ -44,19 +47,27 @@ class Modal {
         this.$container.addClass(this.__S_['modal-show'].className)
         clearTimeout(openAnima)
       }, 10)
+
+      this.emitEvent('open:after')
+      if (typeof cb === 'function') cb()
     }
 
-    this.close = () => {
+    this.close = cb => {
       if (!isOpen) return
       isOpen = false
+      this.emitEvent('close:before')
+
       this.$container.removeClass(this.__S_['modal-show'].className)
       $body.removeClass(this.__S_['open-modal'].className)
       $(document).off('keydown', this.escCloseModal)
 
       const closeAnima = setTimeout(() => {
         this.$container.css('display', 'none')
+        this.emitEvent('close:after')
         clearTimeout(closeAnima)
       }, 300)
+
+      if (typeof cb === 'function') cb()
     }
 
     $mask.on('mousedown', e => {

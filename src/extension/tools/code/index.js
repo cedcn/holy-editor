@@ -1,15 +1,15 @@
 import $ from 'jquery'
 import {
   isSelectionInArea,
+  hasTagInNode,
+  nodeInTag,
+  hasTagInRange,
   getRange
 } from 'utils/selection'
 
 import {
-  hasElemNode,
   toEnable,
-  toDisable,
-  inElemNode,
-  isInRange
+  toDisable
 } from 'utils/common'
 
 
@@ -30,8 +30,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }],
     onSelect: checked => {
       const range = getRange()
-      const snode = inElemNode(range.startContainer, 'PRE')
-      const enode = inElemNode(range.endContainer, 'PRE')
+      const snode = nodeInTag(range.startContainer, 'PRE')
+      const enode = nodeInTag(range.endContainer, 'PRE')
 
       if (range.collapsed) {
         if (snode === null) {
@@ -61,7 +61,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       const range = getRange()
 
       if (range.collapsed) {
-        const node = inElemNode(range.startContainer, 'PRE')
+        const node = nodeInTag(range.startContainer, 'PRE')
 
         if (node !== null) {
           e.preventDefault()
@@ -113,16 +113,16 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
       const range = getRange()
 
-      if (isInRange(range, 'BLOCKQUOTE')) {
+      if (hasTagInRange(range, 'BLOCKQUOTE')) {
         toDisable($selector, __S_, () => menu.disable())
       }
 
       if (!range.collapsed) {
-        if (hasElemNode(range.cloneContents(), 'PRE')) {
+        if (hasTagInNode(range.cloneContents(), 'PRE')) {
           toDisable($selector, __S_, () => menu.disable())
         }
       } else {
-        const snode = inElemNode(range.startContainer, 'PRE')
+        const snode = nodeInTag(range.startContainer, 'PRE')
 
         if (snode !== null) {
           $selector.addClass(__S_['is-active'].className)
