@@ -76,7 +76,7 @@ class Modal extends EvEmitter {
       if (e.which === 1) this.close()
     })
 
-    $closeBtn.on('click', e => {
+    $closeBtn.on('mousedown', e => {
       e.preventDefault()
       e.stopPropagation()
       this.close()

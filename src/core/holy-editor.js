@@ -34,7 +34,8 @@ const defaults = {
     'justify-center',
     'justify-left',
     'justify-right',
-    'link'
+    'link',
+    'iframe'
   ],
   theme: 'tacitly',
   tools: []

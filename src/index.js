@@ -21,6 +21,7 @@ import justifyLeft from './extension/tools/justify_left'
 import justifyRight from './extension/tools/justify_right'
 import link from './extension/tools/link'
 import html from './extension/tools/html'
+import iframe from './extension/tools/iframe'
 
 // theme
 import tacitly from './extension/themes/tacitly'
@@ -44,6 +45,7 @@ HolyEditor.register('tools', justifyLeft)
 HolyEditor.register('tools', justifyRight)
 HolyEditor.register('tools', link)
 HolyEditor.register('tools', html)
+HolyEditor.register('tools', iframe)
 
 HolyEditor.register('themes', tacitly)
 

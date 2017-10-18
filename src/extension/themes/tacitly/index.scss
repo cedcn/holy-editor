@@ -132,6 +132,10 @@ a {
   &--html {
     display: inline-block;
   }
+
+  &--iframe {
+    display: inline-block;
+  }
 }
 
 @import './widget/popover.scss';
