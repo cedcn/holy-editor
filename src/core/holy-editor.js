@@ -16,6 +16,7 @@ import widget from '../widget'
 
 const defaults = {
   toolbars: [
+    'html',
     'title',
     'bold',
     'fore-color',

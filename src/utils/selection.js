@@ -73,7 +73,6 @@ export const getRange = () => {
   }
 }
 
-
 export const getLastNode = node => {
   const nodeList = node.childNodes
   const length = nodeList.length
@@ -110,7 +109,7 @@ export const nodeInTag = (node, tagName) => {
 }
 
 /**
-  * 该"节点/节点片段"下是否包含指定"Tag"的"元素节点"
+  * 该"节点对象/文档片段"下是否包含指定"Tag"的"元素节点"
   *
   * @param [node|documentFargment] node
   * @param string tagName  标签名(大写)
@@ -121,7 +120,7 @@ export const hasTagInNode = (node, tagName) => {
   const func = (node, tagName) => {
     const { children } = node
 
-    if (children.length > 0 & !bool) {
+    if (children.length > 0 && !bool) {
       for (let a = 0; a < children.length; a++) {
         if (children[a].tagName === tagName) {
           bool = true

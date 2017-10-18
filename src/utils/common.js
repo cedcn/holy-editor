@@ -6,7 +6,7 @@ import { createApp } from 'deku'
 const waitListen = []
 const $document = $(document)
 
-$document.on('click', e => {
+$document.on('mousedown', e => {
   waitListen.forEach(x => {
     const dom = x[0].get(0)
     if (dom === undefined) return

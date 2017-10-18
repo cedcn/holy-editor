@@ -4,13 +4,6 @@ a {
   text-decoration: none;
 }
 
-pre {
-  margin: .5em 0,auto;
-  padding: .4em .6em;
-  border-radius: 5px;
-  background: #f8f8f8;
-}
-
 .toolbars {
   display: block;
   width: 100%;
@@ -25,6 +18,13 @@ pre {
   outline: 0;
   padding: 10px;
   overflow: auto;
+
+  pre {
+    margin: .5em 0,auto;
+    padding: .4em .6em;
+    border-radius: 5px;
+    background: #f8f8f8;
+  }
 }
 
 .tool {
@@ -122,6 +122,14 @@ pre {
   }
 
   &--link {
+    display: inline-block;
+  }
+
+  &--model {
+    display: inline-block;
+  }
+
+  &--html {
     display: inline-block;
   }
 }

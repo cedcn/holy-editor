@@ -35,8 +35,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         <div class={`${__S_['link-panel__target-wrap']} ${__S_['link-panel__filed']}`}>
           <h5>打开方式: </h5>
           <select class={__S_['link-panel__target']}>
-            <option value="_blank" >新窗口</option>
-            <option value="_self" >当前窗口</option>
+            <option value="_blank">新窗口</option>
+            <option value="_self">当前窗口</option>
           </select>
         </div>
         <div class={`${__S_['link-panel__submit-wrap']} ${__S_['link-panel__filed']}`}>

@@ -6,8 +6,8 @@ import EvEmitter from 'ev-emitter'
 const $body = $('html body')
 
 const defaults = {
-  click: () => {},
-  panel: null
+  panel: null,
+  onMount: () => {}
 }
 
 class Modal extends EvEmitter {
@@ -27,7 +27,9 @@ class Modal extends EvEmitter {
     )
 
     this.$container = mount($selector, dom)
+    this.options.onMount.call(this)
 
+    this.$container.css('display', 'none')
     const $closeBtn = this.$container.find(this.__S_['modal-close'].selector)
     const $mask = this.$container.find(this.__S_['modal-mask'].selector)
 
@@ -36,10 +38,9 @@ class Modal extends EvEmitter {
     this.open = cb => {
       if (isOpen) return
       isOpen = true
-      this.emitEvent('open:before')
-
       this.$container.css('display', 'block')
       $body.addClass(this.__S_['open-modal'].className)
+      this.emitEvent('open:before')
 
       $(document).on('keydown', this.escCloseModal)
 
@@ -56,7 +57,6 @@ class Modal extends EvEmitter {
       if (!isOpen) return
       isOpen = false
       this.emitEvent('close:before')
-
       this.$container.removeClass(this.__S_['modal-show'].className)
       $body.removeClass(this.__S_['open-modal'].className)
       $(document).off('keydown', this.escCloseModal)
