@@ -136,6 +136,10 @@ a {
   &--iframe {
     display: inline-block;
   }
+
+  &--convert {
+    display: inline-block;
+  }
 }
 
 @import './widget/popover.scss';

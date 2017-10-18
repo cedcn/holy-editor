@@ -1,0 +1,11 @@
+.convert-panel {
+  width: 300px;
+  padding: 20px;
+
+  &__submit {
+    display: inline-block;
+    color: #fff!important;
+    background-color: #000;
+    padding: 8px 15px;
+  }
+}

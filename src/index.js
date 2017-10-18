@@ -1,7 +1,6 @@
 import HolyEditor from './core/holy-editor'
 
 // toolbar
-
 import title from './extension/tools/title'
 import bold from './extension/tools/bold'
 import italic from './extension/tools/italic'
@@ -22,6 +21,7 @@ import justifyRight from './extension/tools/justify_right'
 import link from './extension/tools/link'
 import html from './extension/tools/html'
 import iframe from './extension/tools/iframe'
+import convert from './extension/tools/convert'
 
 // theme
 import tacitly from './extension/themes/tacitly'
@@ -46,6 +46,7 @@ HolyEditor.register('tools', justifyRight)
 HolyEditor.register('tools', link)
 HolyEditor.register('tools', html)
 HolyEditor.register('tools', iframe)
+HolyEditor.register('tools', convert)
 
 HolyEditor.register('themes', tacitly)
 

@@ -17,11 +17,11 @@ import widget from '../widget'
 const defaults = {
   toolbars: [
     'html',
+    'convert',
     'title',
     'bold',
     'fore-color',
     'italic',
-    'modules',
     'strike-through',
     'underline',
     'order-list',
@@ -35,7 +35,8 @@ const defaults = {
     'justify-left',
     'justify-right',
     'link',
-    'iframe'
+    'iframe',
+    'modules'
   ],
   theme: 'tacitly',
   tools: []
