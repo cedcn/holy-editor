@@ -2,7 +2,6 @@ import $ from 'jquery'
 import { getCss, noScope } from 'csjs'
 import insertCss from 'insert-css'
 
-import { element } from 'deku'
 import Huebee from 'huebee'
 import huebeeCss from 'huebee/huebee.css'
 

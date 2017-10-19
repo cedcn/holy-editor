@@ -1,5 +1,4 @@
 import $ from 'jquery'
-import { element } from 'deku'
 
 import {
   isSelectionInArea,

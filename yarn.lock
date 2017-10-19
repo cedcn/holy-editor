@@ -2041,6 +2041,10 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
+expose-loader@^0.7.3:
+  version "0.7.3"
+  resolved "http://registry.npm.taobao.org/expose-loader/download/expose-loader-0.7.3.tgz#35fbd3659789e4faa81f59de8b7e9fc39e466d51"
+
 express@^4.13.3:
   version "4.16.2"
   resolved "http://registry.npm.taobao.org/express/download/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"

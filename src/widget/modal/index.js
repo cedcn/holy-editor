@@ -1,6 +1,5 @@
 import $ from 'jquery'
 import { mount } from 'utils/common'
-import { element } from 'deku'
 import EvEmitter from 'ev-emitter'
 
 const $body = $('html body')

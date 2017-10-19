@@ -1,5 +1,4 @@
 import $ from 'jquery'
-import { element } from 'deku'
 
 import { toEnable, toDisable } from 'utils/common'
 import style from './modules.scss'

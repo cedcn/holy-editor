@@ -1,6 +1,4 @@
-import $ from 'jquery'
 import { mount } from 'utils/common'
-import { element } from 'deku'
 
 const defaults = {
   onMouseDown: () => {},

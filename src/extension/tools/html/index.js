@@ -1,5 +1,3 @@
-import $ from 'jquery'
-import { element } from 'deku'
 import CodeMirror from 'codemirror'
 import { getCss, noScope } from 'csjs'
 import insertCss from 'insert-css'

@@ -8,6 +8,10 @@
   },
   "rules": {
     "no-new": 0,
-    "no-multiple-empty-lines": 0
-  }
+    "no-multiple-empty-lines": 0,
+    "import/no-webpack-loader-syntax": 0
+  },
+  "globals": {
+     "deku": true
+   }
 }

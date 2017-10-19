@@ -1,18 +1,16 @@
 import $ from 'jquery'
-import { createApp, element } from 'deku'
 import find from 'lodash/find'
 import csjs, { getCss } from 'csjs'
 import insertCss from 'insert-css'
 import invariant from 'invariant'
-
 import toolbars from './toolbars'
 import area from './area'
 
 import store from './store'
-
 import { toCamelCase } from 'utils/common'
 // controls
 import widget from '../widget'
+
 
 const defaults = {
   toolbars: [
@@ -84,7 +82,7 @@ class HolyEditor {
         <area.Tpl __S_={__S_} />
       </div>
     )
-    const render = createApp(this.$editor.get(0))
+    const render = deku.createApp(this.$editor.get(0))
     render(dom)
     const $root = this.$editor.children().first()
 

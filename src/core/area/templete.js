@@ -1,5 +1,3 @@
-import { element } from 'deku'
-
 const Area = {
   render ({ props }) {
     return (

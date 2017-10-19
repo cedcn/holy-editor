@@ -1,6 +1,5 @@
 import $ from 'jquery'
 import remove from 'lodash/remove'
-import { createApp } from 'deku'
 
 // for clickAtOrigin detect
 const waitListen = []
@@ -43,7 +42,7 @@ export const addPoint = $selector => {
 
 export const mount = ($selector, jsx) => {
   const $point = addPoint($selector)
-  createApp($point.get(0))(jsx)
+  deku.createApp($point.get(0))(jsx)
 
   const $container = $point.children().first()
   $container.unwrap()

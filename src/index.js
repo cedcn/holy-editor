@@ -1,3 +1,5 @@
+import 'expose-loader?deku!deku'
+
 import HolyEditor from './core/holy-editor'
 
 // toolbar

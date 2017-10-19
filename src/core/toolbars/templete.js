@@ -1,5 +1,3 @@
-import { element } from 'deku'
-
 const Toolbars = {
   render: ({ props }) => {
     const { tools, __S_ } = props

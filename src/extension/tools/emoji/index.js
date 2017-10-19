@@ -2,7 +2,6 @@ import $ from 'jquery'
 import emojilib from 'emojilib/emojis.json'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
-import { element } from 'deku'
 
 import {
   isSelectionInArea,

@@ -1,4 +1,3 @@
-import { element } from 'deku'
 import pangu from 'pangu'
 import { toEnable, clickAtOrigin } from 'utils/common'
 

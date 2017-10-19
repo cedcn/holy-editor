@@ -1,5 +1,3 @@
-import { element } from 'deku'
-
 import { clickAtOrigin, mount } from 'utils/common'
 
 const defaults = {
