@@ -12,6 +12,7 @@ import {
   toDisable
 } from 'utils/common'
 
+import style from './code.scss'
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const menu = new widget.SelectMenu($selector, {
@@ -141,7 +142,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 const code = {
   name: 'code',
   run: sciprt,
-  style: ''
+  style
 }
 
 export default code

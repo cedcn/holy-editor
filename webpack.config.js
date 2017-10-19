@@ -31,6 +31,12 @@ const config = {
         loader: 'json-loader'
       },
       {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader'
+        }
+      },
+      {
         test: /\.(scss|css)$/,
         use: [
           'to-string-loader',

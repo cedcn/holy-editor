@@ -1,0 +1,46 @@
+.modules-panel {
+  display: flex;
+  width: 70vw;
+  height: 70vh;
+
+  &__right {
+    width: 85%;
+    text-align: center;
+  }
+
+  &__list {
+    width: 15%;
+    overflow-y: auto;
+    padding: 10px;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 80px;
+      background-color: #eee;
+      border: 1px solid #ddd;
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      &.is-active {
+        border-color: red;
+      }
+    }
+  }
+
+  &__display {
+    overflow-y: auto;
+    height: 85%;
+    text-align: left;
+    padding: 10px;
+  }
+
+  &__submit {
+    display: inline-block;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+  }
+}

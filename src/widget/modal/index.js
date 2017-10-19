@@ -29,7 +29,6 @@ class Modal extends EvEmitter {
     this.options.onMount.call(this)
 
     this.$container.css('display', 'none')
-    const $closeBtn = this.$container.find(this.__S_['modal-close'].selector)
     const $mask = this.$container.find(this.__S_['modal-mask'].selector)
 
     let isOpen = false
@@ -74,12 +73,6 @@ class Modal extends EvEmitter {
       e.stopPropagation()
       if (e.which === 1) this.close()
     })
-
-    // $closeBtn.on('mousedown', e => {
-    //   e.preventDefault()
-    //   e.stopPropagation()
-    //   this.close()
-    // })
   }
 
   escCloseModal = e => {

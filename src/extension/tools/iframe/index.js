@@ -4,7 +4,7 @@ import { element } from 'deku'
 import { toEnable, toDisable } from 'utils/common'
 import style from './iframe.scss'
 
-import { getRange, setSelection, isSelectionInArea } from 'utils/selection'
+import { getRange, setSelection, isSelectionInArea, hasTagInRange } from 'utils/selection'
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const panel = new widget.Modal($selector, {
@@ -53,6 +53,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   $(document).on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => menu.enable())
+      const range = getRange()
+
+      if (hasTagInRange(range, 'PRE') || hasTagInRange(range, 'BLOCKQUOTE')) {
+        toDisable($selector, __S_, () => menu.disable())
+      }
     } else {
       toDisable($selector, __S_, () => menu.disable())
     }

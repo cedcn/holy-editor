@@ -35,18 +35,19 @@ a {
   background-color: #ffffff;
   border-radius: 4px;
 
-  a {
+
+  .menu, .select-menu a {
     color: #ddd;
   }
 
   &.is-available {
 
-    a {
+    .menu, .select-menu a {
       color: #000;
     }
 
     &.is-active {
-      a {
+      .menu, .select-menu a {
         color: red;
       }
     }
