@@ -3,8 +3,10 @@
   display: inline-block;
   text-decoration: none;
   width: 30px;
+  height: 30px;
   text-align: center;
   padding: 5px;
+  transition: all 0.2s;
 
   .color-box {
     position: absolute;
@@ -16,6 +18,14 @@
   }
 
   &.is-disabled {
-    display: inline-block;
+    color: $gray;
+  }
+
+  &.is-active:not(.is-disabled) {
+    color: red;
+  }
+
+  &:not(.is-disabled):hover {
+    background-color: #eee;
   }
 }

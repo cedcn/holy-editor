@@ -7,7 +7,7 @@ import toolbars from './toolbars'
 import area from './area'
 
 import store from './store'
-import { toCamelCase } from 'utils/common'
+import { toCamelCase, chunkBy } from 'utils/common'
 // controls
 import widget from '../widget'
 
@@ -16,23 +16,32 @@ const defaults = {
   toolbars: [
     'html',
     'convert',
+    '|',
     'title',
+    '|',
     'font-size',
+    '|',
     'bold',
     'italic',
     'strike-through',
     'underline',
+    '|',
     'fore-color',
+    '|',
     'order-list',
     'unorder-list',
-    'image',
-    'code',
-    'quote',
-    'emoji',
+    '|',
     'justify-full',
     'justify-center',
     'justify-left',
     'justify-right',
+    '|',
+    'code',
+    '|',
+    'image',
+    'quote',
+    'emoji',
+    '|',
     'link',
     'iframe',
     'modules'
@@ -57,15 +66,18 @@ class HolyEditor {
 
     let styles = `/* author: cedcn ${new Date()}?${Math.random()} */`
 
-    const tools = this.options.toolbars.map(name => {
-      const extension = find(store.tools, item => item.name === name)
-      invariant(typeof extension !== 'undefined', `Don't discover this tool that name is '${name}' !`)
+    const toolsGroup = chunkBy(this.options.toolbars, '|')
+    const tools = toolsGroup.map(toolList => {
+      return toolList.map(name => {
+        const extension = find(store.tools, item => item.name === name)
+        invariant(typeof extension !== 'undefined', `Don't discover this tool that name is '${name}' !`)
 
-      if (typeof extension.style !== 'undefined') {
-        styles += extension.style
-      }
-      this.options.tools[toCamelCase(extension.name)] = {}
-      return extension
+        if (typeof extension.style !== 'undefined') {
+          styles += extension.style
+        }
+        this.options.tools[toCamelCase(extension.name)] = {}
+        return extension
+      })
     })
 
     styles += theme.style
@@ -74,7 +86,7 @@ class HolyEditor {
     insertCss(getCss(__S_))
 
     const dom = (
-      <div>
+      <div class={__S_['holy-editor']}>
         <toolbars.Tpl
           __S_={__S_}
           tools={tools}

@@ -26,6 +26,22 @@ export const toCamelCase = str => {
   return str.replace(/[-_](.)/g, (_, c) => c.toUpperCase())
 }
 
+//
+
+export const chunkBy = (arr, char) => {
+  let group = [[]]
+  let sub = 0
+  arr.forEach((item, index) => {
+    if (item === '|') {
+      group.push([])
+      sub++
+    } else {
+      group[sub].push(item)
+    }
+  })
+
+  return group
+}
 
 /**
   * 为selector 添加一个挂载点
