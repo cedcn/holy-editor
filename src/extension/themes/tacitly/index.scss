@@ -140,6 +140,10 @@ a {
   &--convert {
     display: inline-block;
   }
+
+  &--font-size {
+    display: inline-block;
+  }
 }
 
 @import './widget/popover.scss';

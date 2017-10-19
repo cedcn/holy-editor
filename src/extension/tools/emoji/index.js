@@ -64,6 +64,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   $char.on('click', function () {
     document.execCommand('insertHTML', false, $(this).text())
+    panel.closePanel()
   })
 
   clickAtOrigin($selector, () => panel.closePanel())

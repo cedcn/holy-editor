@@ -22,6 +22,7 @@ import link from './extension/tools/link'
 import html from './extension/tools/html'
 import iframe from './extension/tools/iframe'
 import convert from './extension/tools/convert'
+import fontSize from './extension/tools/font_size'
 
 // theme
 import tacitly from './extension/themes/tacitly'
@@ -47,6 +48,7 @@ HolyEditor.register('tools', link)
 HolyEditor.register('tools', html)
 HolyEditor.register('tools', iframe)
 HolyEditor.register('tools', convert)
+HolyEditor.register('tools', fontSize)
 
 HolyEditor.register('themes', tacitly)
 

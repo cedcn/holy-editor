@@ -19,6 +19,7 @@ const defaults = {
     'html',
     'convert',
     'title',
+    'font-size',
     'bold',
     'fore-color',
     'italic',

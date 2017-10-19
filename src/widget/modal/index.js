@@ -20,7 +20,6 @@ class Modal extends EvEmitter {
       <section class={this.__S_['modal-container']} data-widget="modal">
         <div class={this.__S_['modal-content']}>
           {this.options.panel}
-          <div class={this.__S_['modal-close']} />
         </div>
         <div class={this.__S_['modal-mask']} />
       </section>
@@ -76,11 +75,11 @@ class Modal extends EvEmitter {
       if (e.which === 1) this.close()
     })
 
-    $closeBtn.on('mousedown', e => {
-      e.preventDefault()
-      e.stopPropagation()
-      this.close()
-    })
+    // $closeBtn.on('mousedown', e => {
+    //   e.preventDefault()
+    //   e.stopPropagation()
+    //   this.close()
+    // })
   }
 
   escCloseModal = e => {

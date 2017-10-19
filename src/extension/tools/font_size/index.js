@@ -12,27 +12,21 @@ import {
   toDisable
 } from 'utils/common'
 
-import style from './title.scss'
+import style from './font_size.scss'
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const menu = new widget.SelectMenu($selector, {
     options: [{
-      label: 'P',
-      value: 'P'
+      label: '10',
+      value: '10'
     }, {
-      label: 'H1',
-      value: 'H1'
+      label: '12',
+      value: '12'
     }, {
-      label: 'H2',
-      value: 'H2'
+      label: '14',
+      value: '14'
     }, {
-      label: 'H3',
-      value: 'H3'
-    }, {
-      label: 'H4',
-      value: 'H4'
-    }, {
-      label: 'H5',
-      value: 'H5'
+      label: '16',
+      value: '16'
     }],
     onSelect: checked => {
       document.execCommand('formatBlock', false, checked.value)
@@ -60,10 +54,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   })
 }
 
-const title = {
-  name: 'title',
+const fontSize = {
+  name: 'font-size',
   run: sciprt,
   style
 }
 
-export default title
+export default fontSize
