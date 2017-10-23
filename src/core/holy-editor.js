@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import find from 'lodash/find'
 import csjs, { getCss } from 'csjs'
 import insertCss from 'insert-css'
@@ -8,6 +7,8 @@ import area from './area'
 
 import store from './store'
 import { toCamelCase, chunkBy } from 'utils/common'
+
+import tooltip from './tooltip'
 // controls
 import widget from '../widget'
 
@@ -59,7 +60,7 @@ class HolyEditor {
 
   constructor (selector = '#editor', options) {
     this.options = Object.assign({}, defaults, options)
-    this.$editor = $(selector).first()
+    const $editor = $(selector).first()
 
     const theme = find(store.themes, ['name', this.options.theme])
     invariant(typeof theme !== 'undefined', `Don't discover this theme that name is '${this.options.theme}'!`)
@@ -94,11 +95,12 @@ class HolyEditor {
         <area.Tpl __S_={__S_} />
       </div>
     )
-    const render = deku.createApp(this.$editor.get(0))
+    const render = deku.createApp($editor.get(0))
     render(dom)
-    const $root = this.$editor.children().first()
+    const $root = $editor.children().first()
 
     this.el = {
+      $document: $(document),
       $root,
       $area: $root.find(__S_.area.selector),
       $toolbars: $root.find(__S_.toolbars.selector)
@@ -113,8 +115,10 @@ class HolyEditor {
 
     toolbars.run({...args, tools})
     area.run({...args})
+    tooltip('tooltip', __S_)
 
     $document.trigger('selectionchange')
+
     // trigger selectionchange
     this.el.$area.on('keydown', e => {
       if (e.which === 8) {

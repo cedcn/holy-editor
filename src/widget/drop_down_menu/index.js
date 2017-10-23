@@ -15,7 +15,7 @@ class DropDownMenu {
 
     const dom = (
       <div class={this.__S_['drop-down-menu']} data-widget="drop-down-menu">
-        <a class={this.__S_['menu']} href="javascript:;">
+        <a class={this.__S_['drop-menu']} href="javascript:;">
           <i class={`${this.__S_.iconfont} ${this.__S_[iconName]}`} />
           {this.options.menuChildren}
         </a>
@@ -31,7 +31,7 @@ class DropDownMenu {
     )
 
     this.$container = mount($selector, dom)
-    this.$menu = this.$container.find(this.__S_['menu'].selector)
+    this.$menu = this.$container.find(this.__S_['drop-menu'].selector)
     this.$panel = this.$container.find(this.__S_['drop-down-container'].selector)
 
     this.$menu.on('mousedown', this.options.onMouseDown)

@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 import {
   isSelectionInArea,
   hasTagInRange,
@@ -10,12 +8,18 @@ import {
 import {
   readImageFile,
   toEnable,
-  toDisable
+  toDisable,
+  addTooltip
 } from 'utils/common'
 
 import style from './image.scss'
 
+const defaults = {
+  tooltip: '图片'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
   const panel = (
     <div class={__S_['image-panel']}>
       <div class={__S_['switch-tabs']}>
@@ -141,7 +145,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
-  $(document).on('selectionchange', () => {
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container, __S_, opts.tooltip)
+  }
+
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => menu.enable())
 

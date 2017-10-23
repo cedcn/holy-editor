@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import {
   isSelectionInArea,
   hasTagInNode,
@@ -9,12 +8,19 @@ import {
 
 import {
   toEnable,
-  toDisable
+  toDisable,
+  addTooltip
 } from 'utils/common'
 
 import style from './code.scss'
 
+const defaults = {
+  tooltip: '代码'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
+
   const menu = new widget.SelectMenu($selector, {
     options: [{
       label: 'code',
@@ -56,6 +62,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       }
     }
   })
+
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container.find(__S_['select-checked'].selector), __S_, opts.tooltip)
+  }
 
   el.$area.on('keydown', e => {
     if (e.which === 13) {
@@ -108,7 +118,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     })
   })
 
-  $(document).on('selectionchange', () => {
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => menu.enable())
 

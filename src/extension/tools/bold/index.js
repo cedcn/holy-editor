@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import style from './bold.scss'
 
 import {
@@ -9,19 +8,32 @@ import {
 
 import {
   toEnable,
-  toDisable
+  toActive,
+  toDeactive,
+  toDisable,
+  addTooltip
 } from 'utils/common'
 
+const defaults = {
+  tooltip: '粗体'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
+
   const menu = new widget.Menu($selector, {
     icon: 'bold',
     onMouseDown: e => {
       document.execCommand('bold')
-      $(document).trigger('selectionchange')
+      el.$document.trigger('selectionchange')
     }
   })
 
-  $(document).on('selectionchange', () => {
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container, __S_, opts.tooltip)
+  }
+
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => menu.enable())
 
@@ -31,9 +43,9 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       }
 
       if (document.queryCommandState('bold')) {
-        $selector.addClass(__S_['is-active'].className)
+        toActive($selector, __S_)
       } else {
-        $selector.removeClass(__S_['is-active'].className)
+        toDeactive($selector, __S_)
       }
     } else {
       toDisable($selector, __S_, () => menu.disable())

@@ -1,11 +1,14 @@
-import $ from 'jquery'
-
-import { toEnable, toDisable } from 'utils/common'
+import { toEnable, toDisable, addTooltip } from 'utils/common'
 import style from './iframe.scss'
 
 import { getRange, setSelection, isSelectionInArea, hasTagInRange } from 'utils/selection'
 
+const defaults = {
+  tooltip: 'Iframe'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
   const modal = new widget.Modal($selector, {
     panel: (
       <div class={__S_['iframe-panel']}>
@@ -34,6 +37,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       modal.open()
     }
   })
+
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container, __S_, opts.tooltip)
+  }
 
   const $submit = modal.$container.find(__S_['u-submit'].selector)
 
@@ -64,7 +71,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     modal.$container.find('input').val('')
   })
 
-  $(document).on('selectionchange', () => {
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => menu.enable())
       const range = getRange()

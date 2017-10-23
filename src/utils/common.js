@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import remove from 'lodash/remove'
 
 // for clickAtOrigin detect
@@ -27,7 +26,6 @@ export const toCamelCase = str => {
 }
 
 //
-
 export const chunkBy = (arr, char) => {
   let group = [[]]
   let sub = 0
@@ -43,14 +41,13 @@ export const chunkBy = (arr, char) => {
   return group
 }
 
-
 //
-
 export const computedFontSize = el => {
   const style = window.getComputedStyle(el, null).getPropertyValue('font-size')
   const fontSize = parseFloat(style)
   return fontSize
 }
+
 /**
   * 为selector 添加一个挂载点
   *
@@ -75,6 +72,11 @@ export const mount = ($selector, jsx) => {
   return $container
 }
 
+// Add tooltip
+export const addTooltip = ($el, __S_, text) => {
+  $el.addClass(__S_['tooltip'].className)
+  $el.data('tooltip', text)
+}
 
 // to enable selector
 export const toEnable = ($selector, __S_, cb) => {
@@ -82,17 +84,33 @@ export const toEnable = ($selector, __S_, cb) => {
 
   if (typeof cb === 'function') cb()
 }
-
 // to disable selector
 export const toDisable = ($selector, __S_, cb) => {
   $selector.removeClass(__S_['is-available'].className)
 
   if (typeof cb === 'function') cb()
 }
-
 export const isAvailable = ($selector, __S_) => {
   return $selector.hasClass(__S_['is-available'].className)
 }
+
+
+// to active selector
+export const toActive = ($selector, __S_, cb) => {
+  $selector.addClass(__S_['is-active'].className)
+
+  if (typeof cb === 'function') cb()
+}
+// to deactive selector
+export const toDeactive = ($selector, __S_, cb) => {
+  $selector.removeClass(__S_['is-active'].className)
+
+  if (typeof cb === 'function') cb()
+}
+export const isActive = ($selector, __S_) => {
+  return $selector.hasClass(__S_['is-active'].className)
+}
+
 
 // image file to base64
 export const readImageFile = event => {

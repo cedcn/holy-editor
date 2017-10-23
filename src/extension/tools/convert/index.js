@@ -1,15 +1,20 @@
-import { toEnable } from 'utils/common'
+import { toEnable, addTooltip } from 'utils/common'
 
 import finder from 'findandreplacedomtext'
 import style from './convert.scss'
 
+const defaults = {
+  tooltip: '文档处理'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
+
   const panel = new widget.Popover($selector, {
     panel: (
       <div class={__S_['convert-panel']}>
         <div class={__S_['convert-panel__box']}>
           <label><input name="mixed" type="checkbox" checked value="autoSpace"/>中英字符间加空格</label>
-          {/* <label><input name="Fruit" type="checkbox" value="" />清楚冗余的html代码</label> */}
         </div>
         <a class={`${__S_['u-submit']} ${__S_['convert-panel__submit']}`} href="javascript:;">确定</a>
       </div>
@@ -22,6 +27,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       panel.toggle()
     }
   })
+
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container, __S_, opts.tooltip)
+  }
 
   const $submit = panel.$container.find(__S_['convert-panel__submit'].selector)
 

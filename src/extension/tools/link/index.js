@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 import {
   isSelectionInArea,
   getRange,
@@ -14,12 +12,18 @@ import {
 
 import {
   toEnable,
-  toDisable
+  toDisable,
+  addTooltip
 } from 'utils/common'
 
 import style from './link.scss'
 
+const defaults = {
+  tooltip: '链接'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
   const panel = new widget.Modal($selector, {
     panel: (
       <div class={__S_['link-panel']}>
@@ -64,6 +68,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       $url.focus()
     }
   })
+
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container, __S_, opts.tooltip)
+  }
 
   panel.on('open:before', () => {
     const range = getRange()
@@ -114,7 +122,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   })
 
   let cacheNode = null
-  $(document).on('selectionchange', () => {
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => menu.enable())
 

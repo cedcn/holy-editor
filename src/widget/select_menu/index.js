@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import find from 'lodash/find'
 
 import { clickAtOrigin, mount } from 'utils/common'

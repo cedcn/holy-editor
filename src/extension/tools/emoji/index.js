@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import emojilib from 'emojilib/emojis.json'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
@@ -11,7 +10,8 @@ import {
 
 import {
   toEnable,
-  toDisable
+  toDisable,
+  addTooltip
 } from 'utils/common'
 
 import style from './emoji.scss'
@@ -24,7 +24,8 @@ const emojiData = groupBy(emojilib, 'category')
 */
 
 const defaults = {
-  categories: ['people', 'activity']
+  categories: ['people', 'activity'],
+  tooltip: '表情'
 }
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
@@ -61,6 +62,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container, __S_, opts.tooltip)
+  }
+
   const $emojiPanel = $selector.find(__S_['emoji-panel'].selector)
 
   const $char = $emojiPanel.find(__S_['emoji-char'].selector)
@@ -70,7 +75,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     panel.close()
   })
 
-  $(document).on('selectionchange', () => {
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => menu.enable())
 

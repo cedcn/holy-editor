@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import { mount } from 'utils/common'
 import EvEmitter from 'ev-emitter'
 

@@ -2,7 +2,7 @@ import CodeMirror from 'codemirror'
 import { getCss, noScope } from 'csjs'
 import insertCss from 'insert-css'
 
-import { toEnable } from 'utils/common'
+import { toEnable, addTooltip } from 'utils/common'
 import style from './html.scss'
 
 import codemirrorCss from 'codemirror/lib/codemirror.css'
@@ -14,7 +14,13 @@ import { getRange, setSelection } from 'utils/selection'
 const huebeeStyles = noScope`${codemirrorCss}`
 
 insertCss(getCss(huebeeStyles))
+
+const defaults = {
+  tooltip: '源代码'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
   let code = null
   const panel = new widget.Modal($selector, {
     panel: (
@@ -38,6 +44,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       panel.open()
     }
   })
+
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container, __S_, opts.tooltip)
+  }
 
   const vars = {
     cacheRange: null

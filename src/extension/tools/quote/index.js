@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import {
   isSelectionInArea,
   hasTagInNode,
@@ -9,11 +8,16 @@ import {
 
 import {
   toEnable,
-  toDisable
+  toDisable,
+  addTooltip
 } from 'utils/common'
 
+const defaults = {
+  tooltip: '引用'
+}
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
   const menu = new widget.Menu($selector, {
     icon: 'quote',
     onMouseDown: e => {
@@ -33,6 +37,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       }
     }
   })
+
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container, __S_, opts.tooltip)
+  }
 
   el.$area.on('mousedown', e => {
     const $pre = el.$area.find('blockquote')
@@ -58,7 +66,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     })
   })
 
-  $(document).on('selectionchange', () => {
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => menu.enable())
 

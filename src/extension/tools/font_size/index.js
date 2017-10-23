@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 import {
   isSelectionInArea,
   hasTagInRange,
@@ -9,11 +7,18 @@ import {
 import {
   toEnable,
   toDisable,
+  addTooltip,
   computedFontSize
 } from 'utils/common'
 
 import style from './font_size.scss'
+
+const defaults = {
+  tooltip: '文本尺寸'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
   const menu = new widget.SelectMenu($selector, {
     options: [{
       label: '10',
@@ -40,7 +45,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
-  $(document).on('selectionchange', () => {
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container.find(__S_['select-checked'].selector), __S_, opts.tooltip)
+  }
+
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => {
         menu.enable()
@@ -55,7 +64,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       const snode = range.startContainer
       const size = computedFontSize(snode.parentNode)
 
-      console.log(size)
       if (size === 10) {
         $selector.addClass(__S_['is-active'].className)
         menu.setChecked({ value: '1', label: '10' })

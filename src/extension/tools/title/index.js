@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 import {
   isSelectionInArea,
   hasTagInRange,
@@ -9,11 +7,18 @@ import {
 
 import {
   toEnable,
-  toDisable
+  toDisable,
+  addTooltip
 } from 'utils/common'
 
 import style from './title.scss'
+
+const defaults = {
+  tooltip: '标题'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
   const menu = new widget.SelectMenu($selector, {
     options: [{
       label: 'P',
@@ -39,7 +44,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
-  $(document).on('selectionchange', () => {
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container.find(__S_['select-checked'].selector), __S_, opts.tooltip)
+  }
+
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => {
         menu.enable()

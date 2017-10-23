@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import { getCss, noScope } from 'csjs'
 import insertCss from 'insert-css'
 
@@ -13,7 +12,8 @@ import {
 
 import {
   toEnable,
-  toDisable
+  toDisable,
+  addTooltip
 } from 'utils/common'
 
 import style from './fore-color.scss'
@@ -22,7 +22,12 @@ const huebeeStyles = noScope`${huebeeCss}`
 
 insertCss(getCss(huebeeStyles))
 
+const defaults = {
+  tooltip: '文本颜色'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
   const isAvailable = () => $selector.hasClass(__S_['is-available'].className)
 
   const dropDown = new widget.DropDownMenu($selector, {
@@ -45,6 +50,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
+  if (opts.tooltip.length > 0) {
+    addTooltip(dropDown.$menu, __S_, opts.tooltip)
+  }
+
   const $menu = dropDown.$container.find(__S_['color-input'].selector)
   var hueb = new Huebee($menu.get(0), {
     customColors: [ '#C25', '#E62', '#EA0', '#19F', '#333' ],
@@ -62,7 +71,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     dropDown.togglePanel()
   })
 
-  $(document).on('selectionchange', () => {
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => {
         dropDown.enable()

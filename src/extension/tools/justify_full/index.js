@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 import {
   isSelectionInArea,
   hasTagInRange,
@@ -8,10 +6,16 @@ import {
 
 import {
   toEnable,
-  toDisable
+  toDisable,
+  addTooltip
 } from 'utils/common'
 
+const defaults = {
+  tooltip: '两端对齐'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
   const menu = new widget.Menu($selector, {
     icon: 'justify-full',
     onMouseDown: e => {
@@ -20,7 +24,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
-  $(document).on('selectionchange', () => {
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container, __S_, opts.tooltip)
+  }
+
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => menu.enable())
 

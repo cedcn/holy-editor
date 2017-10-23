@@ -1,5 +1,4 @@
-import $ from 'jquery'
-import flowRight from 'lodash'
+import { flowRight } from 'lodash'
 
 const $document = $(document)
 

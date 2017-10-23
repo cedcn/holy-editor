@@ -1,13 +1,16 @@
-import $ from 'jquery'
-
-import { toEnable, toDisable } from 'utils/common'
+import { toEnable, toDisable, addTooltip } from 'utils/common'
 import style from './modules.scss'
 
 import { getRange, setSelection, isSelectionInArea } from 'utils/selection'
 import moduleHead from './module_head.html'
 import moduleFoot from './module_foot.html'
 
+const defaults = {
+  tooltip: '模块'
+}
+
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
+  const opts = Object.assign({}, defaults, options)
   let $item
   let $display
   const panel = new widget.Modal($selector, {
@@ -58,6 +61,10 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
+  if (opts.tooltip.length > 0) {
+    addTooltip(menu.$container, __S_, opts.tooltip)
+  }
+
   const vars = {
     cacheRange: null
   }
@@ -72,7 +79,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     setSelection(vars.cacheRange)
   })
 
-  $(document).on('selectionchange', () => {
+  el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
       toEnable($selector, __S_, () => menu.enable())
     } else {
