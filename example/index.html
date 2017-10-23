@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Holy editor demo</title>
+  <link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.css" rel="stylesheet">
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+
+    blockquote {
+      background-color: #eee;
+      margin: 0;
+      padding: 20px;
+      border-left: 3px solid red;
+    }
+
+    #editor {
+      padding: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="editor"></div>
+  <div contenteditable="true">name is accesskey</div>
+  <div>kiss is accesskey</div>
+  <div id="editor2"></div>
+  <script src="../static/holy-editor.js"></script>
+  <script type="text/javascript">
+    var editor = new HolyEditor();
+    var editor2 = new HolyEditor('#editor2');
+    console.log(editor);
+  </script>
+</body>
+</html>

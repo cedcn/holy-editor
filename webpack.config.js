@@ -8,7 +8,7 @@ const config = {
     'holy-editor': './src/index.js'
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'static'),
     filename: '[name].js',
     publicPath: '/static/',
     library: 'HolyEditor',
@@ -58,7 +58,7 @@ const config = {
     }
   },
   cache: false,
-  watch: true,
+  watch: false,
   plugins: [
     new ExtractTextPlugin('[name].css')
   ],
