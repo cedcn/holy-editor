@@ -37,6 +37,7 @@
     "postcss-loader": "^2.0.6",
     "pug-loader": "^2.3.0",
     "sass-loader": "^6.0.6",
+    "shipit-deploy": "^2.5.1",
     "to-string-loader": "^1.1.5",
     "url-loader": "^0.5.9",
     "webpack": "^3.5.6",
@@ -50,12 +51,12 @@
     "deku": "^2.0.0-rc16",
     "emojilib": "^2.2.9",
     "ev-emitter": "^1.1.1",
+    "findandreplacedomtext": "^0.4.5",
     "huebee": "^1.0.1",
     "insert-css": "^2.0.0",
     "invariant": "^2.2.2",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
-    "markdown-it": "^8.4.0",
-    "pangu": "^3.3.0"
+    "markdown-it": "^8.4.0"
   }
 }

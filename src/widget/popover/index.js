@@ -1,7 +1,8 @@
-import { mount } from 'utils/common'
+import { mount, clickAtOrigin } from 'utils/common'
 
 const defaults = {
-  panel: ''
+  panel: '',
+  onMount: () => {}
 }
 
 class Popover {
@@ -16,17 +17,24 @@ class Popover {
     )
 
     this.$container = mount($selector, dom)
+    this.options.onMount.call(this)
+
+    clickAtOrigin($selector, () => this.close())
   }
 
-  togglePanel = e => {
-    this.$container.toggleClass(this.__S_['is-active'].className)
+  toggle = e => {
+    if (this.$container.hasClass(this.__S_['is-active'].className)) {
+      this.close()
+    } else {
+      this.open()
+    }
   }
 
-  openPanel = () => {
+  open = () => {
     this.$container.addClass(this.__S_['is-active'].className)
   }
 
-  closePanel = () => {
+  close = () => {
     this.$container.removeClass(this.__S_['is-active'].className)
   }
 }

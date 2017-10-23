@@ -11,27 +11,24 @@ import {
 
 import {
   toEnable,
-  toDisable,
-  clickAtOrigin
+  toDisable
 } from 'utils/common'
 
 import style from './emoji.scss'
 
 const emojiData = groupBy(emojilib, 'category')
 
+/*
+  categories:
+    people activity symbols objects animals_and_nature flags food_and_drink
+*/
+
 const defaults = {
-  categories: ['people', 'activity', 'symbols', 'objects', 'animals_and_nature', 'flags', 'food_and_drink']
+  categories: ['people', 'activity']
 }
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const opts = Object.assign({}, defaults, options)
-
-  const menu = new widget.Menu($selector, {
-    icon: 'emoji',
-    onMouseDown: e => {
-      panel.togglePanel()
-    }
-  })
 
   const emojiList = map(opts.categories, key => {
     const categoryEmoji = map(emojiData[key], item => {
@@ -57,16 +54,21 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     )
   })
 
+  const menu = new widget.Menu($selector, {
+    icon: 'emoji',
+    onMouseDown: e => {
+      panel.toggle()
+    }
+  })
+
   const $emojiPanel = $selector.find(__S_['emoji-panel'].selector)
 
   const $char = $emojiPanel.find(__S_['emoji-char'].selector)
 
   $char.on('click', function () {
     document.execCommand('insertHTML', false, $(this).text())
-    panel.closePanel()
+    panel.close()
   })
-
-  clickAtOrigin($selector, () => panel.closePanel())
 
   $(document).on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {

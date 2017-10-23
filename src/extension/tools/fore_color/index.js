@@ -3,7 +3,7 @@ import { getCss, noScope } from 'csjs'
 import insertCss from 'insert-css'
 
 import Huebee from 'huebee'
-import huebeeCss from 'huebee/huebee.css'
+import huebeeCss from './huebee.scss'
 
 import {
   isSelectionInArea,
@@ -31,7 +31,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       <div class={__S_['color-box']} style={'background-color: #000'}></div>
     ),
     panelChildren: (
-      <div class="color-input" />
+      <div class={__S_['color-input']} />
     ),
     onMouseDown: e => {
       e.preventDefault()
@@ -45,7 +45,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
-  const $menu = dropDown.$container.find('.color-input')
+  const $menu = dropDown.$container.find(__S_['color-input'].selector)
   var hueb = new Huebee($menu.get(0), {
     customColors: [ '#C25', '#E62', '#EA0', '#19F', '#333' ],
     setText: false,

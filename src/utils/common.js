@@ -43,6 +43,14 @@ export const chunkBy = (arr, char) => {
   return group
 }
 
+
+//
+
+export const computedFontSize = el => {
+  const style = window.getComputedStyle(el, null).getPropertyValue('font-size')
+  const fontSize = parseFloat(style)
+  return fontSize
+}
 /**
   * 为selector 添加一个挂载点
   *

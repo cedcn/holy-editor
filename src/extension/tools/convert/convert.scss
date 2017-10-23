@@ -1,15 +1,16 @@
 .convert-panel {
-  width: 300px;
-  padding: 20px;
+  width: 200px;
+  padding: 16px;
 
   label {
-    display: block; 
+    display: block;
   }
 
   &__submit {
     display: inline-block;
-    color: #fff!important;
-    background-color: #000;
-    padding: 8px 15px;
+  }
+
+  &__box {
+    margin-bottom: 15px;
   }
 }

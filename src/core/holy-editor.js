@@ -11,7 +11,6 @@ import { toCamelCase, chunkBy } from 'utils/common'
 // controls
 import widget from '../widget'
 
-
 const defaults = {
   toolbars: [
     'html',
@@ -51,6 +50,7 @@ const defaults = {
 }
 
 const $document = $(document)
+document.execCommand('styleWithCSS', false, null)
 
 class HolyEditor {
   static register = (type, extension) => {

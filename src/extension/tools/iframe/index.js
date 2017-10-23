@@ -6,23 +6,23 @@ import style from './iframe.scss'
 import { getRange, setSelection, isSelectionInArea, hasTagInRange } from 'utils/selection'
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
-  const panel = new widget.Modal($selector, {
+  const modal = new widget.Modal($selector, {
     panel: (
       <div class={__S_['iframe-panel']}>
         <div class={`${__S_['iframe-panel__url-wrap']} ${__S_['iframe-panel__filed']}`}>
           <h5>iframe url</h5>
-          <input class={__S_['iframe-panel__url']} placeholder="Link Text" />
+          <input name="url" class={__S_['iframe-panel__url']} placeholder="http://..." />
         </div>
         <div class={`${__S_['iframe-panel__width-wrap']} ${__S_['iframe-panel__filed']}`}>
           <h5>宽度</h5>
-          <input class={__S_['iframe-panel__width']} placeholder="http://... " />
+          <input name="width" class={__S_['iframe-panel__width']} placeholder="px" />
         </div>
         <div class={`${__S_['iframe-panel__height-wrap']} ${__S_['iframe-panel__filed']}`}>
           <h5>高度</h5>
-          <input class={__S_['iframe-panel__height']} placeholder="http://... " />
+          <input name="height" class={__S_['iframe-panel__height']} placeholder="px" />
         </div>
         <div class={`${__S_['iframe-panel__submit-wrap']} ${__S_['iframe-panel__filed']}`}>
-          <a class={__S_['iframe-panel__submit']} href="javascript:;">确定</a>
+          <a class={__S_['u-submit']} href="javascript:;">确定</a>
         </div>
       </div>
     )
@@ -31,22 +31,37 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const menu = new widget.Menu($selector, {
     icon: 'iframe',
     onMouseDown: e => {
-      panel.open()
+      modal.open()
     }
   })
+
+  const $submit = modal.$container.find(__S_['u-submit'].selector)
 
   const vars = {
     cacheRange: null
   }
 
-  panel.on('open:before', () => {
+  modal.on('open:before', () => {
     const range = getRange()
     if (range === null) return
     vars.cacheRange = range
   })
 
-  panel.on('close:before', () => {
+  modal.on('close:before', () => {
     setSelection(vars.cacheRange)
+  })
+
+  $submit.on('click', () => {
+    const iframeUrl = modal.$container.find('input[name="url"]').val()
+    const iframeWidth = modal.$container.find('input[name="width"]').val()
+    const iframeHeight = modal.$container.find('input[name="height"]').val()
+
+    if (iframeUrl === '') return
+    modal.close()
+    document.execCommand('insertHTML', false, `<iframe src="${iframeUrl}" width="${iframeWidth}"  height="${iframeHeight}"/>`)
+
+    //
+    modal.$container.find('input').val('')
   })
 
   $(document).on('selectionchange', () => {
