@@ -1,6 +1,6 @@
 import Toolbars from './templete'
 import { toCamelCase } from 'utils/common'
-import { flatten } from 'lodash'
+import flatten from 'lodash/flatten'
 import util from '../util'
 
 const sciprt = ({ tools, options, widget, el, __S_ }) => {

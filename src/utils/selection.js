@@ -1,4 +1,5 @@
-import { flowRight, some } from 'lodash'
+import flowRight from 'lodash/flowRight'
+import some from 'lodash/some'
 
 const $document = $(document)
 

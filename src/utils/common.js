@@ -63,7 +63,7 @@ export const addPoint = $selector => {
 
 export const mount = ($selector, jsx) => {
   const $point = addPoint($selector)
-  deku.createApp($point.get(0))(jsx)
+  dekuApp.create($point.get(0))(jsx)
 
   const $container = $point.children().first()
   $container.unwrap()

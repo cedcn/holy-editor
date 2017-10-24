@@ -16,40 +16,58 @@ const config = {
     libraryTarget: 'umd'
   },
   module: {
-    rules: [{
-      test: /(\.js|\.jsx)$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader'
-    }, {
-      test: /\.(png|jpg|gif)$/,
-      loader: 'url-loader?limit=25000'
-    }, {
-      test: /\.json$/,
-      loader: 'json-loader'
-    }, {
-      test: /\.(html)$/,
-      use: {
-        loader: 'html-loader'
-      }
-    }, {
-      test: /\.(scss|css)$/,
-      use: [
-        'to-string-loader',
-        'css-loader',
-        {
-          loader: 'postcss-loader'
-        },
-        {
-          loader: 'sass-loader'
+    rules: [
+      {
+        test: require.resolve('deku/lib/element'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'dekuElement'
+        }]
+      },
+      {
+        test: require.resolve('deku/lib/app'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'dekuApp'
+        }]
+      },
+      {
+        test: /(\.js|\.jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: 'url-loader?limit=25000'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader'
         }
-      ]
-    }, {
-      test: /\.pug$/,
-      loader: 'pug-loader'
-    }, {
-      test: /\.(jpeg|png|gif|jpg|svg|eot|ttf|woff|woff2)$/i,
-      loader: 'file-loader'
-    }]
+      },
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          'to-string-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      },
+      {
+        test: /\.(jpeg|png|gif|jpg|svg|eot|ttf|woff|woff2)$/i,
+        loader: 'file-loader'
+      }
+    ]
   },
   resolve: {
     extensions: ['.js', '.json'],

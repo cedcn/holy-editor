@@ -4,7 +4,7 @@
   ],
   "plugins": [
     ["transform-react-jsx", {
-      "pragma": "deku.element"
+      "pragma": "dekuElement.create"
     }],
     ["transform-object-rest-spread", { "useBuiltIns": true }],
     ["transform-decorators-legacy"],

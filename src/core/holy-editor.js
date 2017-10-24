@@ -96,7 +96,7 @@ class HolyEditor {
         <area.Tpl __S_={__S_} />
       </div>
     )
-    const render = deku.createApp($editor.get(0))
+    const render = dekuApp.create($editor.get(0))
     render(dom)
     const $root = $editor.children().first()
 

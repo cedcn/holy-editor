@@ -13,6 +13,7 @@
   },
   "globals": {
      "deku": true,
+     "dekuApp": true,
      "$": true
    }
 }

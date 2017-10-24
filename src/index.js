@@ -1,4 +1,5 @@
-import 'expose-loader?deku!deku'
+import 'deku/lib/element'
+import 'deku/lib/app'
 
 import HolyEditor from './core/holy-editor'
 
