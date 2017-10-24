@@ -8,26 +8,19 @@ import {
 import style from './code.scss'
 
 const defaults = {
-  tooltip: '代码'
+  tooltip: '代码',
+  codes: ['bash', 'javascript', 'ruby', 'python', 'html', 'css', 'php', 'json', 'xml', 'sql', 'java', 'swift', 'go', 'rust']
 }
 
 const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
 
+  const codes = opts.codes.map(item => ({ label: item, value: item }))
   const menu = new widget.SelectMenu($selector, {
     options: [{
       label: 'code',
       value: ''
-    }, {
-      label: 'javascript',
-      value: 'javascript'
-    }, {
-      label: 'ruby',
-      value: 'ruby'
-    }, {
-      label: 'python',
-      value: 'python'
-    }],
+    }, ...codes],
     tooltip: opts.tooltip,
     onSelect: checked => {
       const range = getRange()

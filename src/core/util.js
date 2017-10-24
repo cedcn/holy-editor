@@ -18,9 +18,6 @@ const util = ({ el, __S_, $selector }) => {
     addSelectionChangeEvent (cb) {
       selectionChangeListion.push(cb)
     },
-    triggerSelectionChange () {
-      $document.trigger('selectionchange')
-    },
 
     // To enable selector
     toEnable (cb) {

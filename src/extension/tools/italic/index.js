@@ -14,7 +14,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
 
       if (!util.isAvailable($selector)) return
       document.execCommand('italic')
-      util.triggerSelectionChange()
+      el.$document.trigger('selectionchange')
     }
   })
 

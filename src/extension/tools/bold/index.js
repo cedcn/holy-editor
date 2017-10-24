@@ -14,7 +14,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
     tooltip: opts.tooltip,
     onMouseDown: e => {
       document.execCommand('bold')
-      util.triggerSelectionChange()
+      el.$document.trigger('selectionchange')
     }
   })
 

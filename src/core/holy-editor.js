@@ -101,6 +101,7 @@ class HolyEditor {
     const $root = $editor.children().first()
 
     this.el = {
+      $document,
       $root,
       $area: $root.find(__S_.area.selector),
       $toolbars: $root.find(__S_.toolbars.selector)

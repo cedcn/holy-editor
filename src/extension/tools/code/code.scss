@@ -2,8 +2,13 @@
   .select-menu {
     width: 100px;
 
-    .select-menu__checked {
+    &__checked {
       text-align: left;
+    }
+
+    &__list {
+      max-height: 300px;
+      overflow-y: auto;
     }
   }
 }

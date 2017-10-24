@@ -11,7 +11,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
     tooltip: opts.tooltip,
     onMouseDown: e => {
       document.execCommand('justifyLeft')
-      $(document).trigger('selectionchange')
+      el.$document.trigger('selectionchange')
     }
   })
 

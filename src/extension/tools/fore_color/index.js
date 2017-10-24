@@ -16,7 +16,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
     customColors: opts.customColors,
     onPick: color => {
       document.execCommand('foreColor', false, color)
-      util.triggerSelectionChange()
+      el.$document.trigger('selectionchange')
     }
   })
 

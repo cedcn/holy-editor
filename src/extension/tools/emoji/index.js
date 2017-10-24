@@ -14,8 +14,8 @@ const emojiData = groupBy(emojilib, 'category')
 */
 
 const defaults = {
-  categories: ['people', 'activity'],
-  tooltip: '表情'
+  tooltip: '表情',
+  categories: ['people', 'activity']
 }
 
 const sciprt = options => ({ el, widget, __S_, $selector, util }) => {

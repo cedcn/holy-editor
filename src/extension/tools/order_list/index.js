@@ -13,7 +13,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
       e.preventDefault()
       if (!util.isAvailable($selector)) return
       document.execCommand('insertOrderedList')
-      $(document).trigger('selectionchange')
+      el.$document.trigger('selectionchange')
     }
   })
 

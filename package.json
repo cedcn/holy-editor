@@ -7,6 +7,7 @@
     "start": "npm run dev",
     "dev": "webpack-dev-server --inline",
     "build": "webpack -p",
+    "deploy": "shipit staging deploy",
     "test": "mocha ./spec/**/*.js"
   },
   "author": "",

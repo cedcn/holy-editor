@@ -14,7 +14,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
 
       if (!util.isAvailable($selector, __S_)) return
       document.execCommand('underline')
-      $(document).trigger('selectionchange')
+      el.$document.trigger('selectionchange')
     }
   })
 
