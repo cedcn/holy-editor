@@ -44,21 +44,16 @@
 
   }
 
-  .tabs-filed {
-    display: flex;
-
+  .input-filed {
     label {
-      width: 30%;
+      display: block;
+      font-size: 12px;
+      margin-bottom: 3px;
+      vertical-align: top;
     }
 
     input {
-      width: 70%;
-      outline: 0;
-      padding: 3px;
-    }
-
-    &:not(:last-child) {
-      margin-bottom: 10px;
+      width: 100%;
     }
   }
 
@@ -70,13 +65,13 @@
 
     &.is-active {
       color: #fff;
-      background-color: #000;
+      background-color: #929292;
       display: block;
     }
   }
 
   .tabs-content {
-    padding: 10px;
+    padding: 20px 10px;
     display: none;
 
     &.is-active {

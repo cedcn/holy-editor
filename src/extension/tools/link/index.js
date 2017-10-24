@@ -26,23 +26,23 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const panel = new widget.Modal($selector, {
     panel: (
       <div class={__S_['link-panel']}>
-        <div class={`${__S_['link-panel__content-wrap']} ${__S_['link-panel__filed']}`}>
-          <h5>文本内容</h5>
+        <div class={`${__S_['link-panel__content-wrap']} ${__S_['input-filed']}`}>
+          <label>文本内容</label>
           <input class={__S_['link-panel__content']} placeholder="Link Text" />
         </div>
-        <div class={`${__S_['link-panel__url-wrap']} ${__S_['link-panel__filed']}`}>
-          <h5>链接地址(格式：http://...)</h5>
-          <input class={__S_['link-panel__url']} placeholder="http://... " />
+        <div class={`${__S_['link-panel__url-wrap']} ${__S_['input-filed']}`}>
+          <label>链接地址 (Format: http://...)</label>
+          <input class={__S_['link-panel__url']} placeholder="http://..." />
         </div>
-        <div class={`${__S_['link-panel__target-wrap']} ${__S_['link-panel__filed']}`}>
-          <h5>打开方式: </h5>
+        <div class={`${__S_['link-panel__target-wrap']} ${__S_['input-filed']}`}>
+          <label>打开方式: </label>
           <select class={__S_['link-panel__target']}>
             <option value="_blank">新窗口</option>
             <option value="_self">当前窗口</option>
           </select>
         </div>
-        <div class={`${__S_['link-panel__submit-wrap']} ${__S_['link-panel__filed']}`}>
-          <a class={__S_['link-panel__submit']} href="javascript:;">确定</a>
+        <div class={`${__S_['link-panel__submit-wrap']} ${__S_['input-filed']}`}>
+          <a class={__S_['u-submit']} href="javascript:;">确定</a>
         </div>
       </div>
     )
@@ -52,7 +52,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const $target = panel.$container.find(__S_['link-panel__target'].selector)
   const $content = panel.$container.find(__S_['link-panel__content'].selector)
   const $contentWrap = panel.$container.find(__S_['link-panel__content-wrap'].selector)
-  const $submit = panel.$container.find(__S_['link-panel__submit'].selector)
+  const $submit = panel.$container.find(__S_['u-submit'].selector)
 
   const vars = {
     cacheRange: null,

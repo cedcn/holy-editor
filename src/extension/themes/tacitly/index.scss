@@ -33,8 +33,13 @@ $border-color: #CFCFCF;
     box-sizing: border-box;
   }
 
-  label:not(:last-child) {
-    margin-bottom: 7px;
+  .input-filed:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  input {
+    outline: 0;
+    padding: 3px;
   }
 
   input[type="checkbox"] {

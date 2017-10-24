@@ -13,16 +13,16 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     panel: (
       <div class={__S_['iframe-panel']}>
         <div class={`${__S_['iframe-panel__url-wrap']} ${__S_['iframe-panel__filed']}`}>
-          <h5>iframe url</h5>
+          <h5>Iframe url  (Format: http://...)</h5>
           <input name="url" class={__S_['iframe-panel__url']} placeholder="http://..." />
         </div>
         <div class={`${__S_['iframe-panel__width-wrap']} ${__S_['iframe-panel__filed']}`}>
-          <h5>宽度</h5>
-          <input name="width" class={__S_['iframe-panel__width']} placeholder="px" />
+          <h5>宽度 (Unit: px)</h5>
+          <input name="width" class={__S_['iframe-panel__width']} placeholder="默认" />
         </div>
         <div class={`${__S_['iframe-panel__height-wrap']} ${__S_['iframe-panel__filed']}`}>
-          <h5>高度</h5>
-          <input name="height" class={__S_['iframe-panel__height']} placeholder="px" />
+          <h5>高度 (Unit: px)</h5>
+          <input name="height" class={__S_['iframe-panel__height']} placeholder="默认" />
         </div>
         <div class={`${__S_['iframe-panel__submit-wrap']} ${__S_['iframe-panel__filed']}`}>
           <a class={__S_['u-submit']} href="javascript:;">确定</a>

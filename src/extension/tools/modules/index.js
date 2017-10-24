@@ -27,7 +27,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         <div class={__S_['modules-panel__right']}>
           <div class={__S_['modules-panel__display']}>
           </div>
-          <a class={__S_['modules-panel__submit']} href="javascript:;">插入</a>
+          <a class={__S_['u-submit']} href="javascript:;">插入</a>
         </div>
       </div>
     ),
@@ -40,7 +40,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
-  const $submit = panel.$container.find(__S_['modules-panel__submit'].selector)
+  const $submit = panel.$container.find(__S_['u-submit'].selector)
 
   $submit.on('click', e => {
     e.preventDefault()

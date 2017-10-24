@@ -14,7 +14,9 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     panel: (
       <div class={__S_['convert-panel']}>
         <div class={__S_['convert-panel__box']}>
-          <label><input name="mixed" type="checkbox" checked value="autoSpace"/>中英字符间加空格</label>
+          <div class={__S_['input-filed']}>
+            <label><input name="mixed" type="checkbox" checked value="autoSpace"/>中英字符间加空格</label>
+          </div>
         </div>
         <a class={`${__S_['u-submit']} ${__S_['convert-panel__submit']}`} href="javascript:;">确定</a>
       </div>

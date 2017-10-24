@@ -14,11 +14,14 @@ import {
 import style from './image.scss'
 
 const defaults = {
-  tooltip: '图片'
+  tooltip: '图片',
+  service: 'base64', // 'base64' || 'remote'
+  uploadInit: () => {}
 }
 
 const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const opts = Object.assign({}, defaults, options)
+
   const panel = (
     <div class={__S_['image-panel']}>
       <div class={__S_['switch-tabs']}>
@@ -28,8 +31,8 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         </div>
         <div class={__S_['tabs-list']}>
           <div class={`${__S_['tabs-content']} ${__S_['is-active']}`} data-content="location">
-            <div class={__S_['tabs-filed']}>
-              <label>选择图片:</label>
+            <div class={__S_['input-filed']}>
+              <label>选择图片 (Service: {opts.service})</label>
               <div class={__S_['upload-button']}>
                 <div class={__S_['upload-button__icon']}>
                   <i class={`${__S_['iconfont']} ${__S_['icon-upload']}`} />
@@ -37,32 +40,32 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
               </div>
               <input class={__S_['upload-input']} type="file" />
             </div>
-            <div class={__S_['tabs-filed']}>
-              <label>宽度:</label>
-              <input name="width" type="text" />
+            <div class={__S_['input-filed']}>
+              <label>宽度 (Unit: px)</label>
+              <input name="width" type="text" placeholder="默认" />
             </div>
-            <div class={__S_['tabs-filed']}>
-              <label>高度:</label>
-              <input name="height" type="text" />
+            <div class={__S_['input-filed']}>
+              <label>高度 (Unit: px)</label>
+              <input name="height" type="text" placeholder="默认" />
             </div>
-            <div class={__S_['tabs-filed']}>
+            <div class={__S_['input-filed']}>
               <a class={__S_['u-submit']} href="javascript:;">插入</a>
             </div>
           </div>
           <div class={`${__S_['tabs-content']}`} data-content="remote">
-            <div class={__S_['tabs-filed']}>
-              <label>图片地址:</label>
-              <input name="url" type="text" />
+            <div class={__S_['input-filed']}>
+              <label>图片地址 (Format: http://...)</label>
+              <input name="url" type="text" placeholder="http://..." />
             </div>
-            <div class={__S_['tabs-filed']}>
-              <label>宽度:</label>
-              <input name="width" type="text" />
+            <div class={__S_['input-filed']}>
+              <label>宽度 (Unit: px)</label>
+              <input name="width" type="text" placeholder="默认" />
             </div>
-            <div class={__S_['tabs-filed']}>
-              <label>高度:</label>
-              <input name="height" type="text" />
+            <div class={__S_['input-filed']}>
+              <label>高度 (Unit: px)</label>
+              <input name="height" type="text" placeholder="默认" />
             </div>
-            <div class={__S_['tabs-filed']}>
+            <div class={__S_['input-filed']}>
               <a class={__S_['u-submit']} href="javascript:;">插入</a>
             </div>
           </div>
@@ -104,16 +107,25 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     $tabsContent.eq(index).addClass(__S_['is-active'].className)
   })
 
-  $uploadButton.on('click', () => {
-    $uploadInput.trigger('click')
-  })
+  if (opts.service === 'base64') {
+    $uploadButton.on('click', () => {
+      $uploadInput.trigger('click')
+    })
 
-  $uploadInput.on('change', e => {
-    readImageFile(e).then(result => {
+    $uploadInput.on('change', e => {
+      readImageFile(e).then(result => {
+        $uploadButton.data('url', result)
+        $uploadButton.css({ 'background-image': `url(${result})` })
+      })
+    })
+  } else if (opts.service === 'remote') {
+    const successCb = result => {
       $uploadButton.data('url', result)
       $uploadButton.css({ 'background-image': `url(${result})` })
-    })
-  })
+    }
+
+    opts.uploadInit({ el, __S_ }, successCb)
+  }
 
   $submit.on('click', function () {
     const $this = $(this)
@@ -131,7 +143,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     modal.close()
     document.execCommand('insertHTML', false, `<img src="${imageUrl}" width="${imageWidth}"  height="${imageHeight}"/>`)
 
-    //
+    // clear
     $uploadButton.css({ 'background-image': 'none' })
     $uploadButton.data('url', '')
     modal.$container.find('input').val('')
