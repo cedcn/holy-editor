@@ -1,21 +1,12 @@
 import style from './bold.scss'
 
-import {
-  isSelectionInArea,
-  hasTagInRange,
-  getRange
-} from 'utils/selection'
-
-import {
-  toEnable,
-  toDisable
-} from 'utils/common'
+import { hasTagsOrInRange } from 'utils/selection'
 
 const defaults = {
   tooltip: '粗体'
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
 
   const menu = new widget.Menu($selector, {
@@ -23,17 +14,20 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     tooltip: opts.tooltip,
     onMouseDown: e => {
       document.execCommand('bold')
-      el.$document.trigger('selectionchange')
+      util.triggerSelectionChange()
     }
   })
 
-  el.$document.on('selectionchange', () => {
-    if (isSelectionInArea(el.$area)) {
-      toEnable($selector, __S_, () => menu.enable())
+  util.addSelectionChangeEvent((isInArea, range) => {
+    if (isInArea) {
+      util.toEnable(() => menu.enable())
+    } else {
+      util.toDisable(() => menu.disable())
+    }
 
-      const range = getRange()
-      if (hasTagInRange(range, 'PRE')) {
-        toDisable($selector, __S_, () => menu.disable())
+    if (isInArea) {
+      if (hasTagsOrInRange(range, ['PRE'])) {
+        util.toDisable(() => menu.disable())
       }
 
       if (document.queryCommandState('bold')) {
@@ -41,8 +35,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       } else {
         menu.turnOff()
       }
-    } else {
-      toDisable($selector, __S_, () => menu.disable())
     }
   })
 }

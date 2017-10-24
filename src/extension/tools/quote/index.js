@@ -1,21 +1,15 @@
 import {
-  isSelectionInArea,
   hasTagInNode,
-  hasTagInRange,
+  hasTagsOrInRange,
   nodeInTag,
   getRange
 } from 'utils/selection'
-
-import {
-  toEnable,
-  toDisable
-} from 'utils/common'
 
 const defaults = {
   tooltip: '引用'
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
   const menu = new widget.Menu($selector, {
     icon: 'quote',
@@ -62,19 +56,21 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     })
   })
 
-  el.$document.on('selectionchange', () => {
-    if (isSelectionInArea(el.$area)) {
-      toEnable($selector, __S_, () => menu.enable())
+  util.addSelectionChangeEvent((isInArea, range) => {
+    if (isInArea) {
+      util.toEnable(() => menu.enable())
+    } else {
+      util.toDisable(() => menu.disable())
+    }
 
-      const range = getRange()
-
-      if (hasTagInRange(range, 'PRE')) {
-        toDisable($selector, __S_, () => menu.disable())
+    if (isInArea) {
+      if (hasTagsOrInRange(range, ['PRE'])) {
+        util.toDisable(() => menu.disable())
       }
 
       if (!range.collapsed) {
         if (hasTagInNode(range.cloneContents(), 'BLOCKQUOTE')) {
-          toDisable($selector, __S_, () => menu.disable())
+          util.toDisable(() => menu.disable())
         }
       } else {
         const snode = nodeInTag(range.startContainer, 'BLOCKQUOTE')
@@ -85,8 +81,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
           menu.turnOff()
         }
       }
-    } else {
-      toDisable($selector, __S_, () => menu.disable())
     }
   })
 }

@@ -1,13 +1,4 @@
-import {
-  isSelectionInArea,
-  hasTagInRange,
-  getRange
-} from 'utils/selection'
-
-import {
-  toEnable,
-  toDisable
-} from 'utils/common'
+import { hasTagsOrInRange } from 'utils/selection'
 
 import style from './fore-color.scss'
 
@@ -16,7 +7,7 @@ const defaults = {
   customColors: [ '#C25', '#E62', '#EA0', '#19F', '#333' ]
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
 
   const menu = new widget.ColorMenu($selector, {
@@ -25,26 +16,21 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     customColors: opts.customColors,
     onPick: color => {
       document.execCommand('foreColor', false, color)
-      $(document).trigger('selectionchange')
+      util.triggerSelectionChange()
     }
   })
 
-  el.$document.on('selectionchange', () => {
-    if (isSelectionInArea(el.$area)) {
-      toEnable($selector, __S_, () => {
-        menu.enable()
-      })
-
-      const range = getRange()
-      if (hasTagInRange(range, 'PRE')) {
-        toDisable($selector, __S_, () => {
-          menu.disable()
-        })
-      }
+  util.addSelectionChangeEvent((isInArea, range) => {
+    if (isInArea) {
+      util.toEnable(() => menu.enable())
     } else {
-      toDisable($selector, __S_, () => {
-        menu.disable()
-      })
+      util.toDisable(() => menu.disable())
+    }
+
+    if (isInArea) {
+      if (hasTagsOrInRange(range, ['PRE'])) {
+        util.toDisable(() => menu.disable())
+      }
     }
   })
 }

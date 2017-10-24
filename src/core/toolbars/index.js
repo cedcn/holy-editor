@@ -1,6 +1,7 @@
 import Toolbars from './templete'
 import { toCamelCase } from 'utils/common'
 import { flatten } from 'lodash'
+import util from '../util'
 
 const sciprt = ({ tools, options, widget, el, __S_ }) => {
   flatten(tools).forEach(item => {
@@ -11,7 +12,8 @@ const sciprt = ({ tools, options, widget, el, __S_ }) => {
       widget,
       __S_,
       el,
-      $selector
+      $selector,
+      util: util({ el, __S_, $selector })
     })
   })
 }

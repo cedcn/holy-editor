@@ -1,14 +1,5 @@
-import {
-  isSelectionInArea,
-  hasTagInRange,
-  getRange
-} from 'utils/selection'
-
-import {
-  toEnable,
-  toDisable,
-  computedFontSize
-} from 'utils/common'
+import { hasTagsOrInRange } from 'utils/selection'
+import { computedFontSize } from 'utils/common'
 
 import style from './font_size.scss'
 
@@ -16,7 +7,7 @@ const defaults = {
   tooltip: '文本尺寸'
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
   const menu = new widget.SelectMenu($selector, {
     options: [{
@@ -45,17 +36,16 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
-  el.$document.on('selectionchange', () => {
-    if (isSelectionInArea(el.$area)) {
-      toEnable($selector, __S_, () => {
-        menu.enable()
-      })
+  util.addSelectionChangeEvent((isInArea, range) => {
+    if (isInArea) {
+      util.toEnable(() => menu.enable())
+    } else {
+      util.toDisable(() => menu.disable())
+    }
 
-      const range = getRange()
-      if (hasTagInRange(range, 'PRE')) {
-        toDisable($selector, __S_, () => {
-          menu.disable()
-        })
+    if (isInArea) {
+      if (hasTagsOrInRange(range, ['PRE'])) {
+        util.toDisable(() => menu.disable())
       }
       const snode = range.startContainer
       const size = computedFontSize(snode.parentNode)
@@ -82,10 +72,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         menu.turnOff()
         menu.setChecked({ value: '', label: '' })
       }
-    } else {
-      toDisable($selector, __S_, () => {
-        menu.disable()
-      })
     }
   })
 }

@@ -1,7 +1,6 @@
 import {
-  isSelectionInArea,
   getRange,
-  hasTagInRange,
+  hasTagsOrInRange,
   isFullRangeInTag,
   isSelectionCaret,
   isSelectionRange,
@@ -10,18 +9,13 @@ import {
   // initSelection
 } from 'utils/selection'
 
-import {
-  toEnable,
-  toDisable
-} from 'utils/common'
-
 import style from './link.scss'
 
 const defaults = {
   tooltip: '链接'
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
   const panel = new widget.Modal($selector, {
     panel: (
@@ -118,15 +112,18 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   })
 
   let cacheNode = null
-  el.$document.on('selectionchange', () => {
-    if (isSelectionInArea(el.$area)) {
-      toEnable($selector, __S_, () => menu.enable())
+  util.addSelectionChangeEvent((isInArea, range) => {
+    if (isInArea) {
+      util.toEnable(() => menu.enable())
+    } else {
+      util.toDisable(() => menu.disable())
+    }
 
-      const range = getRange()
+    if (isInArea) {
       if (range === null) return
 
-      if (hasTagInRange(range, 'PRE')) {
-        toDisable($selector, __S_, () => menu.disable())
+      if (hasTagsOrInRange(range, ['PRE'])) {
+        util.toDisable(() => menu.disable())
       }
 
       if (isFullRangeInTag(range, 'A')) {
@@ -141,8 +138,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         menu.turnOff()
         $(cacheNode).css({ 'background-color': 'transparent' })
       }
-    } else {
-      toDisable($selector, __S_, () => menu.disable())
     }
   })
 }

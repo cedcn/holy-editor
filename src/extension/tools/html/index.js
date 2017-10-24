@@ -2,7 +2,6 @@ import CodeMirror from 'codemirror'
 import { getCss, noScope } from 'csjs'
 import insertCss from 'insert-css'
 
-import { toEnable } from 'utils/common'
 import style from './html.scss'
 
 import codemirrorCss from 'codemirror/lib/codemirror.css'
@@ -19,7 +18,7 @@ const defaults = {
   tooltip: '源代码'
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
   let code = null
   const panel = new widget.Modal($selector, {
@@ -69,7 +68,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     setSelection(vars.cacheRange)
   })
 
-  toEnable($selector, __S_, () => menu.enable())
+  util.toEnable(() => menu.enable())
 }
 
 const html = {

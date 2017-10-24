@@ -78,40 +78,6 @@ export const addTooltip = ($el, __S_, text) => {
   $el.data('tooltip', text)
 }
 
-// to enable selector
-export const toEnable = ($selector, __S_, cb) => {
-  $selector.addClass(__S_['is-available'].className)
-
-  if (typeof cb === 'function') cb()
-}
-// to disable selector
-export const toDisable = ($selector, __S_, cb) => {
-  $selector.removeClass(__S_['is-available'].className)
-
-  if (typeof cb === 'function') cb()
-}
-export const isAvailable = ($selector, __S_) => {
-  return $selector.hasClass(__S_['is-available'].className)
-}
-
-
-// to active selector
-export const toActive = ($selector, __S_, cb) => {
-  $selector.addClass(__S_['is-active'].className)
-
-  if (typeof cb === 'function') cb()
-}
-// to deactive selector
-export const toDeactive = ($selector, __S_, cb) => {
-  $selector.removeClass(__S_['is-active'].className)
-
-  if (typeof cb === 'function') cb()
-}
-export const isActive = ($selector, __S_) => {
-  return $selector.hasClass(__S_['is-active'].className)
-}
-
-
 // image file to base64
 export const readImageFile = event => {
   event.preventDefault()
@@ -134,4 +100,9 @@ export const readImageFile = event => {
       }
     }
   })
+}
+
+
+export const selectionchange = $area => {
+
 }

@@ -1,13 +1,12 @@
-import { toEnable, toDisable } from 'utils/common'
 import style from './iframe.scss'
 
-import { getRange, setSelection, isSelectionInArea, hasTagInRange } from 'utils/selection'
+import { getRange, setSelection, hasTagsOrInRange } from 'utils/selection'
 
 const defaults = {
   tooltip: 'Iframe'
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
   const modal = new widget.Modal($selector, {
     panel: (
@@ -68,16 +67,17 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     modal.$container.find('input').val('')
   })
 
-  el.$document.on('selectionchange', () => {
-    if (isSelectionInArea(el.$area)) {
-      toEnable($selector, __S_, () => menu.enable())
-      const range = getRange()
-
-      if (hasTagInRange(range, 'PRE') || hasTagInRange(range, 'BLOCKQUOTE')) {
-        toDisable($selector, __S_, () => menu.disable())
-      }
+  util.addSelectionChangeEvent((isInArea, range) => {
+    if (isInArea) {
+      util.toEnable(() => menu.enable())
     } else {
-      toDisable($selector, __S_, () => menu.disable())
+      util.toDisable(() => menu.disable())
+    }
+
+    if (isInArea) {
+      if (hasTagsOrInRange(range, ['PRE', 'BLOCKQUOTE'])) {
+        util.toDisable(() => menu.disable())
+      }
     }
   })
 }

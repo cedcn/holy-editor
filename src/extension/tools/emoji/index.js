@@ -2,16 +2,7 @@ import emojilib from 'emojilib/emojis.json'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
 
-import {
-  isSelectionInArea,
-  getRange,
-  hasTagInRange
-} from 'utils/selection'
-
-import {
-  toEnable,
-  toDisable
-} from 'utils/common'
+import { hasTagsOrInRange } from 'utils/selection'
 
 import style from './emoji.scss'
 
@@ -27,7 +18,7 @@ const defaults = {
   tooltip: '表情'
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
 
   const emojiList = map(opts.categories, key => {
@@ -71,16 +62,17 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     panel.close()
   })
 
-  el.$document.on('selectionchange', () => {
-    if (isSelectionInArea(el.$area)) {
-      toEnable($selector, __S_, () => menu.enable())
-
-      const range = getRange()
-      if (hasTagInRange(range, 'PRE')) {
-        toDisable($selector, __S_, () => menu.disable())
-      }
+  util.addSelectionChangeEvent((isInArea, range) => {
+    if (isInArea) {
+      util.toEnable(() => menu.enable())
     } else {
-      toDisable($selector, __S_, () => menu.disable())
+      util.toDisable(() => menu.disable())
+    }
+
+    if (isInArea) {
+      if (hasTagsOrInRange(range, ['PRE'])) {
+        util.toDisable(() => menu.disable())
+      }
     }
   })
 }

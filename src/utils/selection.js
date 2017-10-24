@@ -1,4 +1,4 @@
-import { flowRight } from 'lodash'
+import { flowRight, some } from 'lodash'
 
 const $document = $(document)
 
@@ -141,7 +141,7 @@ export const hasTagInNode = (node, tagName) => {
   * @param string tagName  标签名(大写)
   * @return node
   */
-export const hasTagInRange = (range, tagName) => {
+export const hasTagInsRangess = (range, tagName) => {
   const snode = nodeInTag(range.startContainer, tagName)
   const enode = nodeInTag(range.endContainer, tagName)
 
@@ -151,6 +151,10 @@ export const hasTagInRange = (range, tagName) => {
     const frag = range.cloneContents()
     return hasTagInNode(frag, tagName)
   }
+}
+
+export const hasTagsOrInRange = (range, tagNames = []) => {
+  return some(tagNames, tagName => hasTagInsRangess(range, tagName))
 }
 
 /**
@@ -170,10 +174,6 @@ export const isFullRangeInTag = (range, tagName) => {
   }
 
   return false
-}
-
-export const getSelectionContainerElem = range => {
-
 }
 
 export const initSelection = $area => {

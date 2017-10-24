@@ -1,7 +1,6 @@
-import { toEnable, toDisable, addTooltip } from 'utils/common'
 import style from './modules.scss'
 
-import { getRange, setSelection, isSelectionInArea } from 'utils/selection'
+import { getRange, setSelection, hasTagsOrInRange } from 'utils/selection'
 import moduleHead from './module_head.html'
 import moduleFoot from './module_foot.html'
 
@@ -9,7 +8,7 @@ const defaults = {
   tooltip: '模块'
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
   let $item
   let $display
@@ -76,11 +75,17 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     setSelection(vars.cacheRange)
   })
 
-  el.$document.on('selectionchange', () => {
-    if (isSelectionInArea(el.$area)) {
-      toEnable($selector, __S_, () => menu.enable())
+  util.addSelectionChangeEvent((isInArea, range) => {
+    if (isInArea) {
+      util.toEnable(() => menu.enable())
     } else {
-      toDisable($selector, __S_, () => menu.disable())
+      util.toDisable(() => menu.disable())
+    }
+
+    if (isInArea) {
+      if (hasTagsOrInRange(range, ['PRE', 'BLOCKQUOTE'])) {
+        util.toDisable(() => menu.disable())
+      }
     }
   })
 }

@@ -1,5 +1,3 @@
-import { toEnable } from 'utils/common'
-
 import finder from 'findandreplacedomtext'
 import style from './convert.scss'
 
@@ -7,7 +5,7 @@ const defaults = {
   tooltip: '文档处理'
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
 
   const panel = new widget.Popover($selector, {
@@ -58,7 +56,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     panel.close()
   })
 
-  toEnable($selector, __S_, () => menu.enable())
+  util.toEnable(() => menu.enable())
 }
 
 const convert = {

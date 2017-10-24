@@ -1,5 +1,3 @@
-import { toActive, toDeactive } from 'utils/common'
-
 const tooltip = (className, __S_) => {
   const $tooltip = $(__S_[className].selector)
   const $body = $('body')
@@ -15,9 +13,9 @@ const tooltip = (className, __S_) => {
     $tooltipText.css({ top: top + $this.innerHeight(), left: left + $this.innerWidth() / 2 })
     $tooltipText.text(text)
 
-    toActive($tooltipText, __S_)
+    $tooltipText.addClass(__S_['is-active'].className)
   }, function () {
-    toDeactive($tooltipText, __S_)
+    $tooltipText.removeClass(__S_['is-active'].className)
   })
 }
 

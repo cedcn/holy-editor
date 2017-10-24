@@ -1,15 +1,10 @@
 import {
-  isSelectionInArea,
-  hasTagInRange,
+  hasTagsOrInRange,
   getRange,
   setSelection
 } from 'utils/selection'
 
-import {
-  readImageFile,
-  toEnable,
-  toDisable
-} from 'utils/common'
+import { readImageFile } from 'utils/common'
 
 import style from './image.scss'
 
@@ -19,7 +14,7 @@ const defaults = {
   uploadInit: () => {}
 }
 
-const sciprt = options => ({ el, widget, __S_, $selector }) => {
+const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
 
   const panel = (
@@ -157,16 +152,17 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
     }
   })
 
-  el.$document.on('selectionchange', () => {
-    if (isSelectionInArea(el.$area)) {
-      toEnable($selector, __S_, () => menu.enable())
-
-      const range = getRange()
-      if (hasTagInRange(range, 'PRE')) {
-        toDisable($selector, __S_, () => menu.disable())
-      }
+  util.addSelectionChangeEvent((isInArea, range) => {
+    if (isInArea) {
+      util.toEnable(() => menu.enable())
     } else {
-      toDisable($selector, __S_, () => menu.disable())
+      util.toDisable(() => menu.disable())
+    }
+
+    if (isInArea) {
+      if (hasTagsOrInRange(range, ['PRE'])) {
+        util.toDisable(() => menu.disable())
+      }
     }
   })
 }

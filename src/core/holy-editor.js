@@ -9,6 +9,7 @@ import store from './store'
 import { toCamelCase, chunkBy } from 'utils/common'
 
 import tooltip from './tooltip'
+
 // controls
 import widget from '../widget'
 
@@ -100,7 +101,6 @@ class HolyEditor {
     const $root = $editor.children().first()
 
     this.el = {
-      $document: $(document),
       $root,
       $area: $root.find(__S_.area.selector),
       $toolbars: $root.find(__S_.toolbars.selector)
