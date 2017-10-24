@@ -10,6 +10,7 @@ import italic from './extension/tools/italic'
 import underline from './extension/tools/underline'
 import strikeThrough from './extension/tools/strike_through'
 import foreColor from './extension/tools/fore_color'
+import backColor from './extension/tools/back_color'
 import modules from './extension/tools/modules'
 import orderList from './extension/tools/order_list'
 import unorderList from './extension/tools/unorder_list'
@@ -36,6 +37,7 @@ HolyEditor.register('tools', italic)
 HolyEditor.register('tools', underline)
 HolyEditor.register('tools', strikeThrough)
 HolyEditor.register('tools', foreColor)
+HolyEditor.register('tools', backColor)
 HolyEditor.register('tools', modules)
 HolyEditor.register('tools', orderList)
 HolyEditor.register('tools', unorderList)

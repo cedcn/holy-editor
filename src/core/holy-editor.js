@@ -29,6 +29,8 @@ const defaults = {
     '|',
     'fore-color',
     '|',
+    'back-color',
+    '|',
     'order-list',
     'unorder-list',
     '|',

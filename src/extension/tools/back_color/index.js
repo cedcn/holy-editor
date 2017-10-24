@@ -1,7 +1,7 @@
 import { hasTagsOrInRange } from 'utils/selection'
 
 const defaults = {
-  tooltip: '文本颜色',
+  tooltip: '背景颜色',
   customColors: [ '#C25', '#E62', '#EA0', '#19F', '#333' ]
 }
 
@@ -9,11 +9,11 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
 
   const menu = new widget.ColorMenu($selector, {
-    icon: 'fore-color',
+    icon: 'back-color',
     tooltip: opts.tooltip,
     customColors: opts.customColors,
     onPick: color => {
-      document.execCommand('foreColor', false, color)
+      document.execCommand('backColor', false, color)
       el.$document.trigger('selectionchange')
     }
   })
@@ -33,10 +33,10 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   })
 }
 
-const foreColor = {
-  name: 'fore-color',
+const backColor = {
+  name: 'back-color',
   run: sciprt,
   style: ''
 }
 
-export default foreColor
+export default backColor
