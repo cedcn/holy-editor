@@ -1,8 +1,10 @@
 import find from 'lodash/find'
 
-import { clickAtOrigin, mount } from 'utils/common'
+import { clickAtOrigin, mount, addTooltip } from 'utils/common'
 
 const defaults = {
+  icon: '',
+  tooltip: '',
   onSelect: () => {},
   options: [],
   checked: { label: '', value: '' }
@@ -15,7 +17,7 @@ class SelectMenu {
 
     const labels = this.options.options.map(item => {
       return (
-        <a class={this.__S_['select-label']} href="javascript:;" data-value={item.value} >{item.label}</a>
+        <a class={this.__S_['select-menu__label']} href="javascript:;" data-value={item.value} >{item.label}</a>
       )
     })
 
@@ -27,51 +29,66 @@ class SelectMenu {
 
     const dom = (
       <div class={this.__S_['select-menu']} data-widget="select-menu">
-        <a class={this.__S_['select-checked']} href="javascript:;">
-          <span class={this.__S_['select-checked-label']}>{checked.label}</span>
+        <a class={this.__S_['select-menu__checked']} href="javascript:;">
+          <span class={this.__S_['select-menu__checked-label']}>{checked.label}</span>
           <i class={`${this.__S_.iconfont} ${this.__S_['icon-triangle']}`} />
         </a>
-        <div class={this.__S_['select-list']} onMouseDown={e => e.preventDefault()}>
+        <div class={this.__S_['select-menu__list']} onMouseDown={e => e.preventDefault()}>
           {labels}
         </div>
       </div>
     )
 
     this.$container = mount($selector, dom)
+    this.$checked = this.$container.find(this.__S_['select-menu__checked'].selector)
+    this.$list = this.$container.find(this.__S_['select-menu__list'].selector)
+    this.$label = this.$container.find(this.__S_['select-menu__label'].selector)
+    this.$checkedLabel = this.$container.find(this.__S_['select-menu__checked-label'].selector)
 
-    this.$container.find(this.__S_['select-checked'].selector).on('mousedown', e => {
+    if (this.options.tooltip.length > 0) {
+      addTooltip(this.$checked, this.__S_, this.options.tooltip)
+    }
+
+    this.$checked.on('mousedown', e => {
       e.preventDefault()
       if (!this.$container.hasClass(this.__S_['is-disabled'].className)) {
         this.togglePanel()
       }
     })
 
-    this.$container.find(this.__S_['select-label'].selector).on('mousedown', e => {
+    this.$label.on('mousedown', e => {
       e.preventDefault()
       const label = $(e.target).text()
       const value = $(e.target).data('value')
-      this.$container.find(this.__S_['select-checked-label'].selector).text(label)
+      this.$checkedLabel.text(label)
       this.closePanel()
       this.options.onSelect({ value, label })
     })
 
-    clickAtOrigin(this.$container, () => this.$container.removeClass(this.__S_['is-active'].className))
+    this.closePanel()
+    clickAtOrigin(this.$container, () => this.closePanel())
   }
 
   togglePanel = () => {
-    this.$container.toggleClass(this.__S_['is-active'].className)
+    if (this.$container.hasClass(this.__S_['is-active'].className)) {
+      this.closePanel()
+    } else {
+      this.openPanel()
+    }
   }
 
   setChecked = checked => {
-    this.$container.find(this.__S_['select-checked-label'].selector).text(checked.label)
-    this.$container.find(this.__S_['select-checked-label'].selector).data('data', checked.value)
+    this.$checkedLabel.text(checked.label)
+    this.$checkedLabel.data('data', checked.value)
   }
 
   openPanel = () => {
+    this.$list.css('display', 'block')
     this.$container.addClass(this.__S_['is-active'].className)
   }
 
   closePanel = () => {
+    this.$list.css('display', 'none')
     this.$container.removeClass(this.__S_['is-active'].className)
   }
 
@@ -81,6 +98,14 @@ class SelectMenu {
 
   enable = () => {
     this.$container.removeClass(this.__S_['is-disabled'].className)
+  }
+
+  turnOn = () => {
+    this.$container.addClass(this.__S_['is-light'].className)
+  }
+
+  turnOff = () => {
+    this.$container.removeClass(this.__S_['is-light'].className)
   }
 }
 

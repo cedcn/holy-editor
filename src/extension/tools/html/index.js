@@ -2,7 +2,7 @@ import CodeMirror from 'codemirror'
 import { getCss, noScope } from 'csjs'
 import insertCss from 'insert-css'
 
-import { toEnable, addTooltip } from 'utils/common'
+import { toEnable } from 'utils/common'
 import style from './html.scss'
 
 import codemirrorCss from 'codemirror/lib/codemirror.css'
@@ -40,14 +40,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   const menu = new widget.Menu($selector, {
     icon: 'html',
+    tooltip: opts.tooltip,
     onMouseDown: e => {
       panel.open()
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container, __S_, opts.tooltip)
-  }
 
   const vars = {
     cacheRange: null

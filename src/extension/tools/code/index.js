@@ -35,6 +35,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       label: 'python',
       value: 'python'
     }],
+    tooltip: opts.tooltip,
     onSelect: checked => {
       const range = getRange()
       const snode = nodeInTag(range.startContainer, 'PRE')
@@ -62,10 +63,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       }
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container.find(__S_['select-checked'].selector), __S_, opts.tooltip)
-  }
 
   el.$area.on('keydown', e => {
     if (e.which === 13) {
@@ -136,11 +133,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         const snode = nodeInTag(range.startContainer, 'PRE')
 
         if (snode !== null) {
-          $selector.addClass(__S_['is-active'].className)
+          menu.turnOn()
           menu.setChecked({ value: snode.dataset.value, label: snode.dataset.label })
         } else {
           menu.setChecked({ value: '', label: 'code' })
-          $selector.removeClass(__S_['is-active'].className)
+          menu.turnOff()
         }
       }
     } else {

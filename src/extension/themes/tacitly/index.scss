@@ -66,7 +66,7 @@ $border-color: #CFCFCF;
   color: #fff;
   padding: 3px 8px;
   transform: translateX(-50%);
-  z-index: 60;
+  z-index: 99;
 
   &.is-active {
     display: block;
@@ -106,27 +106,6 @@ $border-color: #CFCFCF;
   height: 30px;
   background-color: #f5f5f5;
   box-shadow: 4px 2px 20px rgba(255, 255, 255, 0.7) inset;
-
-  .menu,
-  .select-menu a.select-checked,
-  .drop-menu {
-    color: #ddd;
-  }
-
-  &.is-available {
-    .menu,
-    .select-menu a.select-checked,
-    .drop-menu {
-      color: #000;
-    }
-
-    &.is-active {
-      .menu, .select-menu a.select-checked,
-      .drop-menu {
-        color: #1d8cff;
-      }
-    }
-  }
 
   &--title {
     display: inline-block;
@@ -222,8 +201,26 @@ $border-color: #CFCFCF;
   }
 }
 
+.tool {
+  .select-menu__checked,
+  .menu,
+  .color-menu__button,
+  .color-menu__wrapper {
+    opacity: 0.4;
+  }
+
+  &.is-available {
+    .select-menu__checked,
+    .menu,
+    .color-menu__button,
+    .color-menu__wrapper {
+      opacity: 1;
+    }
+  }
+}
+
 @import './widget/popover.scss';
 @import './widget/menu.scss';
-@import './widget/drop-down-menu.scss';
+@import './widget/color-menu.scss';
 @import './widget/select-menu.scss';
 @import './widget/modal.scss';

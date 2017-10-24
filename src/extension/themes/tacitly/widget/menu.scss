@@ -7,12 +7,9 @@
   text-align: center;
   padding: 5px;
   transition: all 0.2s;
+  color: #000;
 
-  &.is-disabled {
-    color: $gray;
-  }
-
-  &.is-active:not(.is-disabled) {
+  &.is-light:not(.is-disabled) {
     color: red;
   }
 

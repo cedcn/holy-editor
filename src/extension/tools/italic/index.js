@@ -7,8 +7,7 @@ import {
 import {
   isAvailable,
   toEnable,
-  toDisable,
-  addTooltip
+  toDisable
 } from 'utils/common'
 
 const defaults = {
@@ -19,6 +18,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const opts = Object.assign({}, defaults, options)
   const menu = new widget.Menu($selector, {
     icon: 'italic',
+    tooltip: opts.tooltip,
     onMouseDown: e => {
       e.preventDefault()
 
@@ -27,10 +27,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       $(document).trigger('selectionchange')
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container, __S_, opts.tooltip)
-  }
 
   el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
@@ -42,9 +38,9 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       }
 
       if (document.queryCommandState('italic')) {
-        $selector.addClass(__S_['is-active'].className)
+        menu.turnOn()
       } else {
-        $selector.removeClass(__S_['is-active'].className)
+        menu.turnOff()
       }
     } else {
       toDisable($selector, __S_, () => menu.disable())

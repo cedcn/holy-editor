@@ -12,8 +12,7 @@ import {
 
 import {
   toEnable,
-  toDisable,
-  addTooltip
+  toDisable
 } from 'utils/common'
 
 import style from './link.scss'
@@ -63,15 +62,12 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   const menu = new widget.Menu($selector, {
     icon: 'link',
+    tooltip: opts.tooltip,
     onMouseDown: () => {
       panel.open()
       $url.focus()
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container, __S_, opts.tooltip)
-  }
 
   panel.on('open:before', () => {
     const range = getRange()
@@ -134,7 +130,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       }
 
       if (isFullRangeInTag(range, 'A')) {
-        $selector.addClass(__S_['is-active'].className)
+        menu.turnOn()
         const snode = nodeInTag(range.startContainer, 'A')
         if (snode !== cacheNode) {
           $(cacheNode).css({ 'background-color': 'transparent' })
@@ -142,7 +138,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         cacheNode = snode
         $(cacheNode).css({ 'background-color': 'rgba(186, 188, 255, 0.5)' })
       } else {
-        $selector.removeClass(__S_['is-active'].className)
+        menu.turnOff()
         $(cacheNode).css({ 'background-color': 'transparent' })
       }
     } else {

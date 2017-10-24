@@ -8,10 +8,7 @@ import {
 
 import {
   toEnable,
-  toActive,
-  toDeactive,
-  toDisable,
-  addTooltip
+  toDisable
 } from 'utils/common'
 
 const defaults = {
@@ -23,15 +20,12 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   const menu = new widget.Menu($selector, {
     icon: 'bold',
+    tooltip: opts.tooltip,
     onMouseDown: e => {
       document.execCommand('bold')
       el.$document.trigger('selectionchange')
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container, __S_, opts.tooltip)
-  }
 
   el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
@@ -43,9 +37,9 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       }
 
       if (document.queryCommandState('bold')) {
-        toActive($selector, __S_)
+        menu.turnOn()
       } else {
-        toDeactive($selector, __S_)
+        menu.turnOff()
       }
     } else {
       toDisable($selector, __S_, () => menu.disable())

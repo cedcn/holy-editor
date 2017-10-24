@@ -51,7 +51,6 @@ const defaults = {
 }
 
 const $document = $(document)
-document.execCommand('styleWithCSS', false, null)
 
 class HolyEditor {
   static register = (type, extension) => {
@@ -60,8 +59,9 @@ class HolyEditor {
 
   constructor (selector = '#editor', options) {
     this.options = Object.assign({}, defaults, options)
-    const $editor = $(selector).first()
+    document.execCommand('styleWithCSS', false, null)
 
+    const $editor = $(selector).first()
     const theme = find(store.themes, ['name', this.options.theme])
     invariant(typeof theme !== 'undefined', `Don't discover this theme that name is '${this.options.theme}'!`)
 
@@ -130,10 +130,6 @@ class HolyEditor {
   }
 
   append () {
-
-  }
-
-  render () {
 
   }
 

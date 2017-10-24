@@ -8,8 +8,7 @@ import {
 
 import {
   toEnable,
-  toDisable,
-  addTooltip
+  toDisable
 } from 'utils/common'
 
 const defaults = {
@@ -20,6 +19,7 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
   const opts = Object.assign({}, defaults, options)
   const menu = new widget.Menu($selector, {
     icon: 'quote',
+    tooltip: opts.tooltip,
     onMouseDown: e => {
       const range = getRange()
       const snode = nodeInTag(range.startContainer, 'BLOCKQUOTE')
@@ -37,10 +37,6 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       }
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container, __S_, opts.tooltip)
-  }
 
   el.$area.on('mousedown', e => {
     const $pre = el.$area.find('blockquote')
@@ -84,9 +80,9 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
         const snode = nodeInTag(range.startContainer, 'BLOCKQUOTE')
 
         if (snode !== null) {
-          $selector.addClass(__S_['is-active'].className)
+          menu.turnOn()
         } else {
-          $selector.removeClass(__S_['is-active'].className)
+          menu.turnOff()
         }
       }
     } else {

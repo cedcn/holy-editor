@@ -1,11 +1,11 @@
-.drop-down-menu {
+.color-menu {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 
-  .drop-menu {
+  &__button {
     position: relative;
     display: inline-block;
     text-decoration: none;
@@ -14,6 +14,7 @@
     text-align: center;
     padding: 5px;
     transition: all 0.2s;
+    color: #000;
 
     &::after {
       content: '';
@@ -25,58 +26,67 @@
     }
   }
 
-  &.is-disabled {
-    .drop-menu {
-      color: $gray;
-    }
+  &__box {
+    position: absolute;
+    display: inline-block;
+    width: 60%;
+    left: 20%;
+    bottom: 6px;
+    height: 3px;
   }
 
-  &.is-active:not(.is-disabled) {
-    .drop-menu {
+  &__input {
+    display: block;
+  }
+
+  &.is-light:not(.is-disabled) {
+    .color-menu__button {
       color: red;
     }
   }
 
-  &:not(.is-disabled):hover {
-    .drop-menu {
+  &:not(.is-disabled) {
+    .color-menu__button:hover {
+      background-color: #eee;
+    }
+
+    .color-menu__triangle:hover {
       background-color: #eee;
     }
   }
 
-  .drop-triangle {
+  &__triangle {
     text-decoration: none;
     height: 100%;
     display: flex;
     align-items: center;
     padding: 3px;
-    color: #a5a5a5;
+    color: #000;
 
     .iconfont {
       font-size: 10px;
     }
   }
 
-  .drop-down-container {
+  &__wrapper {
     position: relative;
-    display: inline-block;
     height: 100%;
 
     &.is-active {
-      .drop-down-panel {
-        display: inline-block;
+      .color-menu__panel {
         visibility: visible;
       }
     }
   }
 
-  .drop-down-panel {
+  &__panel {
     position: absolute;
+    visibility: hidden;
     top: 100%;
     left: 0;
     min-width: 30px;
     min-height: 20px;
-    transform: translateY(3px);
-    visibility: hidden;
+    transform: translateY(5px);
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     background-color: #fff;
     border-radius: 5px;

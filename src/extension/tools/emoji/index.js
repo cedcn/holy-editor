@@ -10,8 +10,7 @@ import {
 
 import {
   toEnable,
-  toDisable,
-  addTooltip
+  toDisable
 } from 'utils/common'
 
 import style from './emoji.scss'
@@ -57,14 +56,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   const menu = new widget.Menu($selector, {
     icon: 'emoji',
+    tooltip: opts.tooltip,
     onMouseDown: e => {
       panel.toggle()
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container, __S_, opts.tooltip)
-  }
 
   const $emojiPanel = $selector.find(__S_['emoji-panel'].selector)
 

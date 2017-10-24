@@ -8,8 +8,7 @@ import {
 import {
   readImageFile,
   toEnable,
-  toDisable,
-  addTooltip
+  toDisable
 } from 'utils/common'
 
 import style from './image.scss'
@@ -140,14 +139,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   const menu = new widget.Menu($selector, {
     icon: 'image',
+    tooltip: opts.tooltip,
     onMouseDown: e => {
       modal.open()
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container, __S_, opts.tooltip)
-  }
 
   el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {

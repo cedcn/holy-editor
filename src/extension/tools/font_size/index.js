@@ -7,7 +7,6 @@ import {
 import {
   toEnable,
   toDisable,
-  addTooltip,
   computedFontSize
 } from 'utils/common'
 
@@ -39,15 +38,12 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       label: '32',
       value: '6'
     }],
+    tooltip: opts.tooltip,
     onSelect: checked => {
       document.execCommand('fontSize', false, checked.value)
       // $(document).trigger('selectionchange')
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container.find(__S_['select-checked'].selector), __S_, opts.tooltip)
-  }
 
   el.$document.on('selectionchange', () => {
     if (isSelectionInArea(el.$area)) {
@@ -65,25 +61,25 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
       const size = computedFontSize(snode.parentNode)
 
       if (size === 10) {
-        $selector.addClass(__S_['is-active'].className)
+        menu.turnOn()
         menu.setChecked({ value: '1', label: '10' })
       } else if (size === 13) {
-        $selector.addClass(__S_['is-active'].className)
+        menu.turnOn()
         menu.setChecked({ value: '2', label: '13' })
       } else if (size === 16) {
-        $selector.addClass(__S_['is-active'].className)
+        menu.turnOn()
         menu.setChecked({ value: '3', label: '16' })
       } else if (size === 18) {
-        $selector.addClass(__S_['is-active'].className)
+        menu.turnOn()
         menu.setChecked({ value: '4', label: '18' })
       } else if (size === 24) {
-        $selector.addClass(__S_['is-active'].className)
+        menu.turnOn()
         menu.setChecked({ value: '5', label: '24' })
       } else if (size === 32) {
-        $selector.addClass(__S_['is-active'].className)
+        menu.turnOn()
         menu.setChecked({ value: '6', label: '32' })
       } else {
-        $selector.removeClass(__S_['is-active'].className)
+        menu.turnOff()
         menu.setChecked({ value: '', label: '' })
       }
     } else {

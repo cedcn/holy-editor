@@ -1,8 +1,9 @@
-import { mount } from 'utils/common'
+import { mount, addTooltip } from 'utils/common'
 
 const defaults = {
-  onMouseDown: () => {},
-  menuChildren: ''
+  icon: '',
+  tooltip: '',
+  onMouseDown: () => {}
 }
 
 class Menu {
@@ -15,10 +16,13 @@ class Menu {
     const dom = (
       <a class={this.__S_['menu']} href="javascript:;" data-widget="menu">
         <i class={`${this.__S_.iconfont} ${this.__S_[iconName]}`} />
-        {this.options.menuChildren}
       </a>
     )
     this.$container = mount($selector, dom)
+
+    if (this.options.tooltip.length > 0) {
+      addTooltip(this.$container, this.__S_, this.options.tooltip)
+    }
 
     this.$container.on('mousedown', e => {
       e.preventDefault()
@@ -34,6 +38,14 @@ class Menu {
 
   enable = () => {
     this.$container.removeClass(this.__S_['is-disabled'].className)
+  }
+
+  turnOn = () => {
+    this.$container.addClass(this.__S_['is-light'].className)
+  }
+
+  turnOff = () => {
+    this.$container.removeClass(this.__S_['is-light'].className)
   }
 }
 

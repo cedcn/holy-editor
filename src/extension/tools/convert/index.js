@@ -1,4 +1,4 @@
-import { toEnable, addTooltip } from 'utils/common'
+import { toEnable } from 'utils/common'
 
 import finder from 'findandreplacedomtext'
 import style from './convert.scss'
@@ -23,14 +23,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   const menu = new widget.Menu($selector, {
     icon: 'convert',
+    tooltip: opts.tooltip,
     onMouseDown: e => {
       panel.toggle()
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container, __S_, opts.tooltip)
-  }
 
   const $submit = panel.$container.find(__S_['convert-panel__submit'].selector)
 

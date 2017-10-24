@@ -56,14 +56,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   const menu = new widget.Menu($selector, {
     icon: 'modules',
+    tooltip: opts.tooltip,
     onMouseDown: e => {
       panel.open()
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container, __S_, opts.tooltip)
-  }
 
   const vars = {
     cacheRange: null

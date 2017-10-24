@@ -1,4 +1,4 @@
-import { toEnable, toDisable, addTooltip } from 'utils/common'
+import { toEnable, toDisable } from 'utils/common'
 import style from './iframe.scss'
 
 import { getRange, setSelection, isSelectionInArea, hasTagInRange } from 'utils/selection'
@@ -33,14 +33,11 @@ const sciprt = options => ({ el, widget, __S_, $selector }) => {
 
   const menu = new widget.Menu($selector, {
     icon: 'iframe',
+    tooltip: opts.tooltip,
     onMouseDown: e => {
       modal.open()
     }
   })
-
-  if (opts.tooltip.length > 0) {
-    addTooltip(menu.$container, __S_, opts.tooltip)
-  }
 
   const $submit = modal.$container.find(__S_['u-submit'].selector)
 
