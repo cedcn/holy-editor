@@ -10,7 +10,7 @@ import 'codemirror-formatting'
 
 import { getRange, setSelection } from 'utils/selection'
 
-const huebeeStyles = noScope`${codemirrorCss}`
+const huebeeStyles = noScope`${codemirrorCss} .CodeMirror { height: 100% }`
 
 insertCss(getCss(huebeeStyles))
 

@@ -6,7 +6,6 @@ import {
   isSelectionRange,
   nodeInTag,
   setSelection
-  // initSelection
 } from 'utils/selection'
 
 import style from './link.scss'
@@ -65,33 +64,34 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
 
   panel.on('open:before', () => {
     const range = getRange()
-    if (range === null) return
-
     vars.cacheRange = range
-    const snode = nodeInTag(range.startContainer, 'A')
 
-    $contentWrap.hide()
-    vars.isEdit = false
-    vars.linkNode = null
-    $url.val('')
-    $content.val('')
-    $target.val('_self')
+    if (isFullRangeInTag(range, 'A')) {
+      const node = nodeInTag(range.startContainer, 'A')
+      const $node = $(node)
 
-    if ((isSelectionRange() && isFullRangeInTag(range, 'A')) || (isSelectionCaret() && snode !== null)) {
+      $contentWrap.hide()
       vars.isEdit = true
-      vars.linkNode = snode
-      $url.val($(snode).attr('href'))
-      $target.val($(snode).attr('target'))
-      $content.val($(snode).html())
-    }
+      vars.linkNode = node
+      $url.val($node.attr('href'))
+      $target.val($node.attr('target'))
+      $content.val($node.html())
+    } else {
+      vars.isEdit = false
+      vars.linkNode = null
+      $url.val('')
+      $target.val('_self')
 
-    if (isSelectionRange() && !isFullRangeInTag(range, 'A')) {
-      const $a = $('<div />').append(range.cloneContents())
-      $content.val($a.html())
-    }
+      if (isSelectionRange()) {
+        const $a = $('<div />').append(range.cloneContents())
+        $contentWrap.hide()
+        $content.val($a.html())
+      }
 
-    if (isSelectionCaret() && snode === null) {
-      $contentWrap.show()
+      if (isSelectionCaret()) {
+        $contentWrap.show()
+        $content.val('')
+      }
     }
   })
 
@@ -128,15 +128,17 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
 
       if (isFullRangeInTag(range, 'A')) {
         menu.turnOn()
-        const snode = nodeInTag(range.startContainer, 'A')
-        if (snode !== cacheNode) {
-          $(cacheNode).css({ 'background-color': 'transparent' })
+
+        const node = nodeInTag(range.startContainer, 'A')
+        if (node !== cacheNode) {
+          $(cacheNode).attr('data-heditor-selected', '0')
         }
-        cacheNode = snode
-        $(cacheNode).css({ 'background-color': 'rgba(186, 188, 255, 0.5)' })
+
+        cacheNode = node
+        $(cacheNode).attr('data-heditor-selected', '1')
       } else {
         menu.turnOff()
-        $(cacheNode).css({ 'background-color': 'transparent' })
+        $(cacheNode).attr('data-heditor-selected', '0')
       }
     }
   })

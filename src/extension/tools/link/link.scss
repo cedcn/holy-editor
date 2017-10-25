@@ -41,3 +41,10 @@
     display: block;
   }
 }
+
+
+.area {
+  a[data-heditor-selected="1"]{
+    background-color: rgba(186, 188, 255, 0.5)
+  }
+}

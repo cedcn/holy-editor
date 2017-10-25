@@ -1,4 +1,6 @@
 import find from 'lodash/find'
+import forEach from 'lodash/forEach'
+
 import csjs, { getCss } from 'csjs'
 import insertCss from 'insert-css'
 import invariant from 'invariant'
@@ -6,6 +8,7 @@ import toolbars from './toolbars'
 import area from './area'
 
 import store from './store'
+import { initSelection } from 'utils/selection'
 import { toCamelCase, chunkBy } from 'utils/common'
 
 import tooltip from './tooltip'
@@ -132,12 +135,39 @@ class HolyEditor {
     })
   }
 
-  append () {
+  append (domStr) {
+    this.el.$area.append(domStr)
+    initSelection(this.el.$area)
+  }
 
+  getValue () {
+    const $html = this.el.$area
+
+    const func = $selector => {
+      $selector.each((index, item) => {
+        const $item = $(item)
+        const $children = $item.children()
+        const maps = $item.get(0).attributes
+
+        forEach(maps, attr => {
+          if (/^data-heditor/.test(attr.name)) {
+            $item.removeAttr('data-heditor-selected')
+          }
+        })
+
+        if ($children.length > 0) {
+          func($children)
+        }
+      })
+    }
+
+    func($html)
+    return $html.html()
   }
 
   clear () {
-
+    this.el.$area.html('<div><br /></div>')
+    initSelection(this.el.$area)
   }
 }
 

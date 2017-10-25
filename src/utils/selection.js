@@ -3,24 +3,19 @@ import some from 'lodash/some'
 
 const $document = $(document)
 
-// Gain selection type
-export const getSelectionType = selection => {
-  return selection.type
-}
-
 export const isSelectionNone = () => {
   const selection = window.getSelection()
-  return getSelectionType(selection) === 'None'
+  return selection.type === 'None'
 }
 
 export const isSelectionCaret = () => {
   const selection = window.getSelection()
-  return getSelectionType(selection) === 'Caret'
+  return selection.type === 'Caret'
 }
 
 export const isSelectionRange = () => {
   const selection = window.getSelection()
-  return getSelectionType(selection) === 'Range'
+  return selection.type === 'Range'
 }
 
 export const isContainsSelection = (selection, $area) => {
@@ -84,7 +79,7 @@ export const getLastNode = node => {
 }
 
 /**
-  * 该节点是否包含在指定"Tag"的"元素节点"内 返回该"元素节点"
+  * 该节点是否包含在指定"Tag"的"元素节点"内 返回该"元素节点" 没有则返回"null"
   *
   * @param node node
   * @param string tagName  标签名(大写)
@@ -142,7 +137,7 @@ export const hasTagInNode = (node, tagName) => {
   * @param string tagName  标签名(大写)
   * @return node
   */
-export const hasTagInsRangess = (range, tagName) => {
+export const hasTagInRange = (range, tagName) => {
   const snode = nodeInTag(range.startContainer, tagName)
   const enode = nodeInTag(range.endContainer, tagName)
 
@@ -155,7 +150,7 @@ export const hasTagInsRangess = (range, tagName) => {
 }
 
 export const hasTagsOrInRange = (range, tagNames = []) => {
-  return some(tagNames, tagName => hasTagInsRangess(range, tagName))
+  return some(tagNames, tagName => hasTagInRange(range, tagName))
 }
 
 /**

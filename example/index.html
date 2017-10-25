@@ -26,6 +26,9 @@
 </head>
 <body>
   <div id="editor"></div>
+  <button id="get-value-button">获取Editor的值</button>
+  <button id="clear-button">追加内容</button>
+  <button id="append-button">清空内容</button>
   <div contenteditable="true">name is accesskey</div>
   <div>kiss is accesskey</div>
   <div id="editor2"></div>
@@ -34,6 +37,18 @@
     var editor = new HolyEditor();
     var editor2 = new HolyEditor('#editor2');
     console.log(editor);
+
+    $('#get-value-button').on('click', () => {
+      alert(editor.getValue())
+    })
+
+    $('#clear-button').on('click', () => {
+      editor.append('<div>追加的内容</div>')
+    })
+
+    $('#append-button').on('click', () => {
+      editor.clear()
+    })
   </script>
 </body>
 </html>
