@@ -1,8 +1,7 @@
 import style from './modules.scss'
 
 import { getRange, setSelection, hasTagsOrInRange } from 'utils/selection'
-import moduleHead from './module_head.html'
-import moduleFoot from './module_foot.html'
+import moduleStandard from './module_standard.html'
 
 const defaults = {
   tooltip: '模块'
@@ -16,23 +15,22 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
     panel: (
       <div class={__S_['modules-panel']}>
         <div class={__S_['modules-panel__list']}>
-          <a href="javascript:;" data-code={moduleHead}>头部模块</a>
-          <a href="javascript:;" data-code={moduleFoot}>底部模块</a>
-          <a href="javascript:;" data-code={moduleHead}>头部模块</a>
-          <a href="javascript:;" data-code={moduleFoot}>底部模块</a>
-          <a href="javascript:;" data-code={moduleHead}>头部模块</a>
-          <a href="javascript:;" data-code={moduleFoot}>底部模块</a>
+          <a href="javascript:;" data-code={moduleStandard}>标准文档格式</a>
         </div>
         <div class={__S_['modules-panel__right']}>
           <div class={__S_['modules-panel__display']}>
+            <div class={__S_['modules-panel__display-content']}>
+            </div>
           </div>
-          <a class={__S_['u-submit']} href="javascript:;">插入</a>
+          <div class={__S_['modules-panel__submit-wrap']}>
+            <a class={__S_['u-submit']} href="javascript:;">插入</a>
+          </div>
         </div>
       </div>
     ),
     onMount () {
       $item = this.$container.find(__S_['modules-panel__list'].selector).find('a')
-      $display = this.$container.find(__S_['modules-panel__display'].selector)
+      $display = this.$container.find(__S_['modules-panel__display-content'].selector)
 
       $item.eq(0).addClass(__S_['is-active'].className)
       $display.html($item.eq(0).data('code'))
