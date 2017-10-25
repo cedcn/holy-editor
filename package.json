@@ -1,8 +1,8 @@
 {
   "name": "holy-editor",
-  "version": "1.0.0",
+  "version": "1.0.1-rc0",
   "description": "Holy editor for synced",
-  "main": "index.js",
+  "main": "./static/holy-editor.js",
   "scripts": {
     "start": "npm run dev",
     "dev": "webpack-dev-server --inline",
