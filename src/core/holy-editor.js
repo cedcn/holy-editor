@@ -133,6 +133,7 @@ class HolyEditor {
         }, 100)
       }
     })
+    initSelection(this.el.$area)
   }
 
   append (domStr) {
@@ -151,7 +152,7 @@ class HolyEditor {
 
         forEach(maps, attr => {
           if (/^data-heditor/.test(attr.name)) {
-            $item.removeAttr('data-heditor-selected')
+            $item.removeAttr(attr.name)
           }
         })
 
@@ -163,6 +164,11 @@ class HolyEditor {
 
     func($html)
     return $html.html()
+  }
+
+  setValue (value) {
+    this.el.$area.html(value)
+    initSelection(this.el.$area)
   }
 
   clear () {

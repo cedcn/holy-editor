@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="cache-control" content="no-cache" />
   <meta http-equiv="pragma" content="no-cache" />
-  <title>Holy editor demo</title>
+  <title>HolyEditor demo - A simple rich text editor ...</title>
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.css" rel="stylesheet">
   <style type="text/css">
@@ -13,31 +13,39 @@
     }
 
     blockquote {
-      background-color: #eee;
+      background-color: #f2f2f2;
       margin: 0;
       padding: 20px;
       border-left: 3px solid red;
     }
 
+    .operation {
+      padding-left: 50px;
+    }
+
     #editor {
       padding: 50px;
+    }
+
+    #editor2 {
+      width: 40%;
+      margin: 0 auto;
     }
   </style>
 </head>
 <body>
   <div id="editor"></div>
-  <button id="get-value-button">获取Editor的值</button>
-  <button id="clear-button">追加内容</button>
-  <button id="append-button">清空内容</button>
-  <div contenteditable="true">name is accesskey</div>
-  <div>kiss is accesskey</div>
-  <div id="editor2"></div>
+  <div class="operation">
+    <button id="get-value-button">获取Editor的值</button>
+    <button id="clear-button">追加内容</button>
+    <button id="append-button">清空内容</button>
+  </div>
   <script src="../static/holy-editor.js"></script>
   <script type="text/javascript">
     var editor = new HolyEditor();
-    var editor2 = new HolyEditor('#editor2');
     console.log(editor);
 
+    editor.setValue('<div><br/><a href="//github.com/Cedcn/holy-editor">HolyEditor</a> - A simple rich text editor ... ✍</div>')
     $('#get-value-button').on('click', () => {
       alert(editor.getValue())
     })

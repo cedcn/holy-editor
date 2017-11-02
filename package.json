@@ -1,7 +1,7 @@
 {
   "name": "holy-editor",
-  "version": "1.0.1-rc0",
-  "description": "Holy editor for synced",
+  "version": "1.0.1-rc1",
+  "description": "Holy editor",
   "main": "./static/holy-editor.js",
   "scripts": {
     "start": "npm run dev",
