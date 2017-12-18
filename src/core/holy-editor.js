@@ -17,6 +17,10 @@ import tooltip from './tooltip'
 import widget from '../widget'
 
 const defaults = {
+  namespace: {
+    area: 'editor-area',
+    toolbars: 'editor-toolbars'
+  },
   toolbars: [
     'html',
     'convert',
@@ -83,6 +87,7 @@ class HolyEditor {
           styles += extension.style
         }
         this.options.tools[toCamelCase(extension.name)] = {}
+
         return extension
       })
     })
@@ -97,8 +102,12 @@ class HolyEditor {
         <toolbars.Tpl
           __S_={__S_}
           tools={tools}
+          namespace={this.options.namespace}
         />
-        <area.Tpl __S_={__S_} />
+        <area.Tpl
+          __S_={__S_}
+          namespace={this.options.namespace}
+        />
       </div>
     )
     const render = dekuApp.create($editor.get(0))

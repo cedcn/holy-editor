@@ -1,6 +1,6 @@
 const Toolbars = {
   render: ({ props }) => {
-    const { tools, __S_ } = props
+    const { tools, __S_, namespace } = props
 
     const viewer = tools.map((group, index) => {
       const groupList = group.map(item => {
@@ -14,7 +14,7 @@ const Toolbars = {
       )
     })
     return (
-      <div class={__S_.toolbars}>{viewer}</div>
+      <div class={`${__S_.toolbars} ${namespace.toolbars}`}>{viewer}</div>
     )
   }
 }
