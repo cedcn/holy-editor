@@ -1,7 +1,8 @@
 import {
   hasTagsOrInRange,
   getRange,
-  setSelection
+  setSelection,
+  createSelectionBaseNode
 } from 'utils/selection'
 
 import { readImageFile } from 'utils/common'
@@ -33,15 +34,21 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
                   <i class={`${__S_['iconfont']} ${__S_['icon-upload']}`} />
                 </div>
               </div>
-              <input class={__S_['upload-input']} type="file" />
+              <input class={__S_['upload-input']} type="file" accept="image/jpg,image/jpeg,image/png,image/gif,image/bmp" />
+            </div>
+            <div class={__S_['o-wrapper']}>
+              <div class={`${__S_['input-filed']} ${__S_['col-md-half']}`}>
+                <label>宽度 (Unit: px)</label>
+                <input name="width" type="text" placeholder="默认" />
+              </div>
+              <div class={`${__S_['input-filed']} ${__S_['col-md-half']}`}>
+                <label>高度 (Unit: px)</label>
+                <input name="height" type="text" placeholder="默认" />
+              </div>
             </div>
             <div class={__S_['input-filed']}>
-              <label>宽度 (Unit: px)</label>
-              <input name="width" type="text" placeholder="默认" />
-            </div>
-            <div class={__S_['input-filed']}>
-              <label>高度 (Unit: px)</label>
-              <input name="height" type="text" placeholder="默认" />
+              <label>描述</label>
+              <input name="note" type="text" placeholder="" />
             </div>
             <div class={__S_['input-filed']}>
               <a class={__S_['u-submit']} href="javascript:;">插入</a>
@@ -52,13 +59,19 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
               <label>图片地址 (Format: http://...)</label>
               <input name="url" type="text" placeholder="http://..." />
             </div>
-            <div class={__S_['input-filed']}>
-              <label>宽度 (Unit: px)</label>
-              <input name="width" type="text" placeholder="默认" />
+            <div class={__S_['o-wrapper']}>
+              <div class={`${__S_['input-filed']} ${__S_['col-md-half']}`}>
+                <label>宽度 (Unit: px)</label>
+                <input name="width" type="text" placeholder="默认" />
+              </div>
+              <div class={`${__S_['input-filed']} ${__S_['col-md-half']}`}>
+                <label>高度 (Unit: px)</label>
+                <input name="height" type="text" placeholder="默认" />
+              </div>
             </div>
             <div class={__S_['input-filed']}>
-              <label>高度 (Unit: px)</label>
-              <input name="height" type="text" placeholder="默认" />
+              <label>描述</label>
+              <input name="note" type="text" placeholder="" />
             </div>
             <div class={__S_['input-filed']}>
               <a class={__S_['u-submit']} href="javascript:;">插入</a>
@@ -128,6 +141,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
     let imageUrl
     const imageWidth = $content.find('input[name="width"]').val()
     const imageHeight = $content.find('input[name="height"]').val()
+    const imageAlt = $content.find('input[name="note"]').val()
     if ($content.data('content') === 'location') {
       imageUrl = $uploadButton.data('url')
     } else {
@@ -136,7 +150,11 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
 
     if (imageUrl === '') return
     modal.close()
-    document.execCommand('insertHTML', false, `<img src="${imageUrl}" width="${imageWidth}"  height="${imageHeight}"/>`)
+    document.execCommand(
+      'insertHTML',
+      false,
+      `<img style="max-width:100%;" src="${imageUrl}" ${imageAlt && `alt="${imageAlt}"`} ${imageWidth && `width="${imageWidth}"`} ${imageHeight && `height="${imageHeight}"`} />`
+    )
 
     // clear
     $uploadButton.css({ 'background-image': 'none' })
@@ -164,6 +182,10 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
         util.toDisable(() => menu.disable())
       }
     }
+  })
+
+  el.$area.on('click', 'img', function (e) {
+    createSelectionBaseNode(this, true)
   })
 }
 

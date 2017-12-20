@@ -69,7 +69,7 @@ class HolyEditor {
 
   constructor (selector = '#editor', options) {
     this.options = Object.assign({}, defaults, options)
-    document.execCommand('styleWithCSS', false, null)
+    // document.execCommand('styleWithCSS', false, null)
 
     const $editor = $(selector).first()
     const theme = find(store.themes, ['name', this.options.theme])
@@ -181,7 +181,7 @@ class HolyEditor {
   }
 
   clear () {
-    this.el.$area.html('<div><br /></div>')
+    this.el.$area.html('<p><br /></p>')
     initSelection(this.el.$area)
   }
 }

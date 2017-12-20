@@ -21,12 +21,12 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
 
       if (range.collapsed) {
         if (snode === null) {
-          document.execCommand('insertHTML', false, `<blockquote><div><br/></div></blockquote>`)
+          document.execCommand('insertHTML', false, `<blockquote><p><br/></p></blockquote>`)
         }
       } else {
         if (snode === null && enode === null) {
           const text = range.cloneContents().toString()
-          document.execCommand('insertHTML', false, `<blockquote><div>${text}</div></blockquote>`)
+          document.execCommand('insertHTML', false, `<blockquote><p>${text}</p></blockquote>`)
         }
       }
     }
@@ -50,7 +50,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
         func($item, el.$area)
 
         if ($elem.next().length === 0) {
-          el.$area.append('<div><br /></div>')
+          el.$area.append('<p><br /></p>')
         }
       }
     })

@@ -13,22 +13,19 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
   const menu = new widget.SelectMenu($selector, {
     options: [{
-      label: 'P',
+      label: '正文',
       value: 'P'
     }, {
-      label: 'H1',
-      value: 'H1'
-    }, {
-      label: 'H2',
+      label: '标题一',
       value: 'H2'
     }, {
-      label: 'H3',
+      label: '标题二',
       value: 'H3'
     }, {
-      label: 'H4',
+      label: '标题三',
       value: 'H4'
     }, {
-      label: 'H5',
+      label: '备注',
       value: 'H5'
     }],
     tooltip: opts.tooltip,
@@ -49,27 +46,24 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
         util.toDisable(() => menu.disable())
       }
 
-      if (isFullRangeInTag(range, 'H1')) {
+      if (isFullRangeInTag(range, 'H2')) {
         menu.turnOn()
-        menu.setChecked({ value: 'H1', label: 'H1' })
-      } else if (isFullRangeInTag(range, 'H2')) {
-        menu.turnOn()
-        menu.setChecked({ value: 'H2', label: 'H2' })
+        menu.setChecked({ value: 'H2', label: '标题一' })
       } else if (isFullRangeInTag(range, 'H3')) {
         menu.turnOn()
-        menu.setChecked({ value: 'H3', label: 'H3' })
+        menu.setChecked({ value: 'H3', label: '标题二' })
       } else if (isFullRangeInTag(range, 'H4')) {
         menu.turnOn()
-        menu.setChecked({ value: 'H4', label: 'H4' })
+        menu.setChecked({ value: 'H4', label: '标题三' })
       } else if (isFullRangeInTag(range, 'H5')) {
         menu.turnOn()
-        menu.setChecked({ value: 'H5', label: 'H5' })
+        menu.setChecked({ value: 'H5', label: '备注' })
       } else if (isFullRangeInTag(range, 'P')) {
         menu.turnOn()
-        menu.setChecked({ value: 'P', label: 'P' })
+        menu.setChecked({ value: 'P', label: '正文' })
       } else {
         menu.turnOff()
-        menu.setChecked({ value: 'P', label: 'P' })
+        menu.setChecked({ value: 'P', label: '正文' })
       }
     }
   })

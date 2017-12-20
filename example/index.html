@@ -8,6 +8,12 @@
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.css" rel="stylesheet">
   <style type="text/css">
+    html {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+                 SimSun, sans-serif;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -42,10 +48,47 @@
   </div>
   <script src="../static/holy-editor.js"></script>
   <script type="text/javascript">
-    var editor = new HolyEditor();
+    var editor = new HolyEditor('#editor', {
+      toolbars: [
+        'html',
+        'convert',
+        '|',
+        'title',
+        '|',
+        'font-size',
+        '|',
+        'bold',
+        'italic',
+        'strike-through',
+        'underline',
+        '|',
+        'fore-color',
+        '|',
+        'back-color',
+        '|',
+        'order-list',
+        'unorder-list',
+        '|',
+        'justify-full',
+        'justify-center',
+        'justify-left',
+        'justify-right',
+        '|',
+        'code',
+        '|',
+        'image',
+        'quote',
+        'emoji',
+        '|',
+        'link',
+        'iframe',
+        'modules'
+      ],
+      tools: []
+    });
     console.log(editor);
 
-    editor.setValue('<div><br/><a href="//github.com/Cedcn/holy-editor">HolyEditor</a> - A simple rich text editor ... ✍</div>')
+    editor.setValue('<p><a href="//github.com/Cedcn/holy-editor">HolyEditor</a> - A simple rich text editor ... ✍</p>')
     $('#get-value-button').on('click', () => {
       alert(editor.getValue())
     })

@@ -41,6 +41,23 @@ export const createRange = (startNode, startOffset, endNode, endOffset) => {
   return range
 }
 
+
+/**
+  * 创建一个range 基于指定node
+  *
+  */
+export const createRangeBaseNode = (node, containContent = false) => {
+  const range = document.createRange()
+
+  if (containContent) {
+    range.selectNode(node)
+  } else {
+    range.selectNodeContents(node)
+  }
+
+  return range
+}
+
 /**
   * 将range添加到selection
   * @param range
@@ -55,6 +72,9 @@ export const setSelection = range => {
 
 // 创建一个selection
 export const createSelection = flowRight([setSelection, createRange])
+
+// 创建一个selction base node
+export const createSelectionBaseNode = flowRight([setSelection, createRangeBaseNode])
 
 // 获取当前range
 export const getRange = () => {

@@ -95,7 +95,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
         func($item, el.$area)
 
         if ($elem.next().length === 0) {
-          el.$area.append('<div><br /></div>')
+          el.$area.append('<p><br /></p>')
         }
       }
     })
