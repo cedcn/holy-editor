@@ -1,8 +1,6 @@
 import flowRight from 'lodash/flowRight'
 import some from 'lodash/some'
 
-const $document = $(document)
-
 export const isSelectionNone = () => {
   const selection = window.getSelection()
   return selection.type === 'None'
@@ -83,6 +81,16 @@ export const getRange = () => {
   if (selection.rangeCount > 0) {
     const range = selection.getRangeAt(0)
     return range
+  } else {
+    return null
+  }
+}
+
+// 获取 range Ancestor Elem
+export const getRangeAncestorElem = range => {
+  if (range) {
+    const elem = range.commonAncestorContainer
+    return elem.nodeType === 1 ? elem : elem.parentNode
   } else {
     return null
   }
@@ -192,18 +200,9 @@ export const isFullRangeInTag = (range, tagName) => {
   return false
 }
 
+
 export const initSelection = $area => {
   const node = $area.get(0)
   const lastNode = getLastNode(node)
   createSelection(lastNode, lastNode.length, lastNode, lastNode.length)
-}
-
-export const listenArea = ($selector, $area, __S_) => {
-  $document.on('selectionchange', () => {
-    if (isSelectionInArea($area)) {
-      $selector.addClass(__S_['is-available'].className)
-    } else {
-      $selector.removeClass(__S_['is-available'].className)
-    }
-  })
 }

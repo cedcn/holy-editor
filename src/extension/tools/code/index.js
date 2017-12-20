@@ -38,7 +38,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
       } else {
         if (snode === null && enode === null) {
           const text = range.toString()
-          document.execCommand('insertHTML', false, `<pre class="${checked.value} hljs" data-value="${checked.value}" data-label="${checked.label}"}>${text}</pre>`)
+          document.execCommand('insertHTML', false, `<pre class="${checked.value} hljs" data-value="${checked.value}" data-label="${checked.label}">${text}</pre>`)
         }
 
         if (snode !== null && enode !== null && snode === enode) {

@@ -150,6 +150,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
 
     if (imageUrl === '') return
     modal.close()
+
     document.execCommand(
       'insertHTML',
       false,
