@@ -12,9 +12,9 @@ const sciprt = ({ options, widget, el, __S_ }) => {
     const isInArea = isSelectionInArea(el.$area)
 
     if (isInArea && el.$area.html() === '') {
-      const p = '<p><br /></p>'
-      el.$area.append(p)
-      createRange(p, 0, p, 0)
+      const $p = $('<p><br /></p>')
+      el.$area.append($p)
+      createRange($p.get(0), 0, $p.get(0), 0)
     }
   })
 
