@@ -34,7 +34,7 @@ default: '#editor'
 
   - theme: String
 
-  - tools: Array
+  - tools: Object
 
     > Each tools can be configure. key value is the tool's name of camel format.
 

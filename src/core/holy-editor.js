@@ -57,7 +57,7 @@ const defaults = {
     'modules'
   ],
   theme: 'tacitly',
-  tools: []
+  tools: {}
 }
 
 const $document = $(document)
@@ -86,7 +86,11 @@ class HolyEditor {
         if (typeof extension.style !== 'undefined') {
           styles += extension.style
         }
-        this.options.tools[toCamelCase(extension.name)] = {}
+
+        const toolKey = toCamelCase(extension.name)
+        if (typeof this.options.tools[toolKey] === 'undefined') {
+          this.options.tools[toolKey] = {}
+        }
 
         return extension
       })
