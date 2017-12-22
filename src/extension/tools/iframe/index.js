@@ -61,7 +61,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
 
     if (iframeUrl === '') return
     modal.close()
-    document.execCommand('insertHTML', false, `<iframe src="${iframeUrl}" width="${iframeWidth}"  height="${iframeHeight}"/>`)
+    document.execCommand('insertHTML', false, `<iframe frameborder="0" src="${iframeUrl}" width="${iframeWidth}"  height="${iframeHeight}"/>`)
 
     //
     modal.$container.find('input').val('')
