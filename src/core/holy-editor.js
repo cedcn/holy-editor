@@ -22,6 +22,7 @@ const defaults = {
     toolbars: 'editor-toolbars'
   },
   toolbars: [
+    'fullscreen',
     'html',
     'convert',
     '|',

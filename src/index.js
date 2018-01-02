@@ -27,6 +27,7 @@ import html from './extension/tools/html'
 import iframe from './extension/tools/iframe'
 import convert from './extension/tools/convert'
 import fontSize from './extension/tools/font_size'
+import fullscreen from './extension/tools/fullscreen'
 
 // theme
 import tacitly from './extension/themes/tacitly'
@@ -54,6 +55,7 @@ HolyEditor.register('tools', html)
 HolyEditor.register('tools', iframe)
 HolyEditor.register('tools', convert)
 HolyEditor.register('tools', fontSize)
+HolyEditor.register('tools', fullscreen)
 
 HolyEditor.register('themes', tacitly)
 
