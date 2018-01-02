@@ -26,7 +26,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
       value: 'H4'
     }, {
       label: '备注',
-      value: 'H5'
+      value: 'ASIDE'
     }],
     tooltip: opts.tooltip,
     onSelect: checked => {
@@ -55,9 +55,9 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
       } else if (isFullRangeInTag(range, 'H4')) {
         menu.turnOn()
         menu.setChecked({ value: 'H4', label: '标题三' })
-      } else if (isFullRangeInTag(range, 'H5')) {
+      } else if (isFullRangeInTag(range, 'ASIDE')) {
         menu.turnOn()
-        menu.setChecked({ value: 'H5', label: '备注' })
+        menu.setChecked({ value: 'ASIDE', label: '备注' })
       } else if (isFullRangeInTag(range, 'P')) {
         menu.turnOn()
         menu.setChecked({ value: 'P', label: '正文' })
