@@ -29,7 +29,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
           <div class={`${__S_['tabs-content']} ${__S_['is-active']}`} data-content="location">
             <div class={__S_['input-filed']}>
               <label>选择图片 (Service: {opts.service})</label>
-              <div class={__S_['upload-button']}>
+              <div id="upload-button" class={__S_['upload-button']}>
                 <div class={__S_['upload-button__icon']}>
                   <i class={`${__S_['iconfont']} ${__S_['icon-upload']}`} />
                 </div>
