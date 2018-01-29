@@ -106,3 +106,11 @@ export const readImageFile = event => {
 export const selectionchange = $area => {
 
 }
+
+
+export const replaceHtmlSymbol = html => {
+  if (html == null) {
+    return ''
+  }
+  return html.replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/"/gm, '&quot;')
+}

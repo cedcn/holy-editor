@@ -58,7 +58,8 @@ const defaults = {
     'modules'
   ],
   theme: 'tacitly',
-  tools: {}
+  tools: {},
+  isFilterStyle: true
 }
 
 const $document = $(document)

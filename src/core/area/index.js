@@ -7,6 +7,8 @@ import {
   createRange
 } from 'utils/selection'
 
+import { getPasteHtml } from 'utils/paste-handle'
+
 const sciprt = ({ options, widget, el, __S_ }) => {
   $(document).on('selectionchange', () => {
     const isInArea = isSelectionInArea(el.$area)
@@ -19,7 +21,7 @@ const sciprt = ({ options, widget, el, __S_ }) => {
   })
 
   const insertEmptyP = $elem => {
-    const $p = $('<p><br></p>')
+    const $p = $('<p><br /></p>')
     $p.insertBefore($elem)
     $elem.remove()
     createSelectionBaseNode($p.get(0), true)
@@ -43,6 +45,16 @@ const sciprt = ({ options, widget, el, __S_ }) => {
   el.$area.on('keyup', e => {
     if (e.keyCode !== 13) return
     pHandle(e)
+  })
+
+  el.$area.on('paste', e => {
+    e.preventDefault()
+
+    document.execCommand(
+      'insertHTML',
+      false,
+      getPasteHtml(e, options.isFilterStyle)
+    )
   })
 }
 
