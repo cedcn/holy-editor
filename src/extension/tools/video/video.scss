@@ -1,0 +1,38 @@
+.video-panel {
+  display: block;
+  padding: 20px;
+
+  h5 {
+    margin: 0;
+    font-weight: normal;
+    margin-bottom: 3px;
+  }
+
+  textarea {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    outline: 0;
+    height: 100px;
+    color: #484848;
+  }
+
+  &__submit {
+    display: inline-block;
+    color: #fff;
+    background-color: #000;
+    padding: 7px 15px;
+  }
+
+  &__submit-wrap {
+    display: block;
+  }
+
+  &__url-wrap {
+    display: block;
+  }
+
+  &__filed:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}

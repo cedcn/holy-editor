@@ -34,9 +34,10 @@ $border-color: #CFCFCF;
     margin-bottom: 15px;
   }
 
-  input {
+  input, textarea {
     outline: 0;
     padding: 3px;
+    border: 1px solid #d2d2d2;
   }
 
   input[type="checkbox"] {
@@ -209,6 +210,10 @@ $border-color: #CFCFCF;
   }
 
   &--fullscreen {
+    display: inline-block;
+  }
+
+  &--video {
     display: inline-block;
   }
 }
