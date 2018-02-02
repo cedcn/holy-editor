@@ -72,7 +72,8 @@ const config = {
   resolve: {
     extensions: ['.js', '.json'],
     alias: {
-      'utils': path.resolve(__dirname, 'src/utils/')
+      'utils': path.resolve(__dirname, 'src/utils/'),
+      'middlewares': path.resolve(__dirname, 'src/middlewares')
     }
   },
   cache: false,

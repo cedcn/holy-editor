@@ -7,9 +7,14 @@ import {
   createRange
 } from 'utils/selection'
 
+import applyMiddleware from 'utils/apply-middleware'
+import filterStyle from 'middlewares/filter-style'
+
 import { getPasteHtml } from 'utils/paste-handle'
 
 const sciprt = ({ options, widget, el, __S_ }) => {
+  const htmlHandle = applyMiddleware(filterStyle, ...options.paste.middlewares)
+
   $(document).on('selectionchange', () => {
     const isInArea = isSelectionInArea(el.$area)
 
@@ -49,11 +54,10 @@ const sciprt = ({ options, widget, el, __S_ }) => {
 
   el.$area.on('paste', e => {
     e.preventDefault()
-
     document.execCommand(
       'insertHTML',
       false,
-      getPasteHtml(e, options.isFilterStyle)
+      htmlHandle(options)(getPasteHtml(e))
     )
   })
 }

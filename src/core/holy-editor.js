@@ -60,7 +60,9 @@ const defaults = {
   ],
   theme: 'tacitly',
   tools: {},
-  isFilterStyle: true
+  paste: {
+    middlewares: []
+  }
 }
 
 const $document = $(document)

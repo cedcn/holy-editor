@@ -19,7 +19,7 @@ export const getPasteText = e => {
 }
 
 // get Paste html
-export const getPasteHtml = (e, filterStyle) => {
+export const getPasteHtml = e => {
   const clipboardData = e.clipboardData || (e.originalEvent && e.originalEvent.clipboardData)
   let pasteText, pasteHtml
   if (clipboardData == null) {
@@ -33,25 +33,6 @@ export const getPasteHtml = (e, filterStyle) => {
   }
   if (!pasteHtml) {
     return
-  }
-
-  // 过滤word中状态过来的无用字符
-  const docSplitHtml = pasteHtml.split('</html>')
-  if (docSplitHtml.length === 2) {
-    pasteHtml = docSplitHtml[0]
-  }
-
-  // 过滤无用标签
-  pasteHtml = pasteHtml.replace(/<(meta|script|link).+?>/igm, '')
-  // 去掉注释
-  pasteHtml = pasteHtml.replace(/<!--.*?-->/mg, '')
-
-  if (filterStyle) {
-    // 过滤样式
-    pasteHtml = pasteHtml.replace(/\s?(class|style)=('|").+?('|")/igm, '')
-  } else {
-    // 保留样式
-    pasteHtml = pasteHtml.replace(/\s?class=('|").+?('|")/igm, '')
   }
 
   return pasteHtml
