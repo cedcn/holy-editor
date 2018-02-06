@@ -1,6 +1,6 @@
 {
   "name": "holy-editor",
-  "version": "1.0.1-rc10",
+  "version": "1.0.1-rc11",
   "description": "Holy editor",
   "main": "./static/holy-editor.js",
   "scripts": {

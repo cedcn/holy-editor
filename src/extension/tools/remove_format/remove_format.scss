@@ -1,0 +1,16 @@
+.remove-format-panel {
+  width: 150px;
+  padding: 16px;
+
+  label {
+    display: block;
+  }
+
+  &__submit {
+    display: inline-block;
+  }
+
+  &__box {
+    margin-bottom: 15px;
+  }
+}

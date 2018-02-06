@@ -29,6 +29,7 @@ import convert from './extension/tools/convert'
 import fontSize from './extension/tools/font_size'
 import fullscreen from './extension/tools/fullscreen'
 import video from './extension/tools/video'
+import removeFormat from './extension/tools/remove_format'
 
 // theme
 import tacitly from './extension/themes/tacitly'
@@ -58,6 +59,7 @@ HolyEditor.register('tools', convert)
 HolyEditor.register('tools', fontSize)
 HolyEditor.register('tools', fullscreen)
 HolyEditor.register('tools', video)
+HolyEditor.register('tools', removeFormat)
 
 HolyEditor.register('themes', tacitly)
 

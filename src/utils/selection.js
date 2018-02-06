@@ -200,7 +200,6 @@ export const isFullRangeInTag = (range, tagName) => {
   return false
 }
 
-
 export const initSelection = $area => {
   const node = $area.get(0)
   const lastNode = getLastNode(node)

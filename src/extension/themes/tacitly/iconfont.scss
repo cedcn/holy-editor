@@ -1,11 +1,12 @@
 @font-face {
   font-family: 'iconfont';  /* project id 412370 */
-  src: url('//at.alicdn.com/t/font_412370_br94e6mf6wp14i.eot');
-  src: url('//at.alicdn.com/t/font_412370_br94e6mf6wp14i.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_412370_br94e6mf6wp14i.woff') format('woff'),
-  url('//at.alicdn.com/t/font_412370_br94e6mf6wp14i.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_412370_br94e6mf6wp14i.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_412370_lrd2ad7y5b2ihpvi.eot');
+  src: url('//at.alicdn.com/t/font_412370_lrd2ad7y5b2ihpvi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_412370_lrd2ad7y5b2ihpvi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_412370_lrd2ad7y5b2ihpvi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_412370_lrd2ad7y5b2ihpvi.svg#iconfont') format('svg');
 }
+
 .iconfont {
   font-family:"iconfont" !important;
   font-size:16px;
@@ -42,28 +43,30 @@
 
 .icon-code:before { content: "\e650"; }
 
-.icon-quote:before { content: "\e613"}
+.icon-quote:before { content: "\e613" }
 
-.icon-emoji:before { content: "\e602"}
+.icon-emoji:before { content: "\e602" }
 
-.icon-justify-full:before { content: "\e646"}
+.icon-justify-full:before { content: "\e646" }
 
-.icon-justify-center:before { content: "\e68a"}
+.icon-justify-center:before { content: "\e68a" }
 
-.icon-justify-left:before { content: "\e687"}
+.icon-justify-left:before { content: "\e687" }
 
-.icon-justify-right:before { content: "\e686"}
+.icon-justify-right:before { content: "\e686" }
 
-.icon-link:before { content: "\e6fa"}
+.icon-link:before { content: "\e6fa" }
 
-.icon-html:before { content: "\e650"}
+.icon-html:before { content: "\e650" }
 
-.icon-iframe:before { content: "\e74c"}
+.icon-iframe:before { content: "\e74c" }
 
-.icon-convert:before { content: "\e61d"}
+.icon-convert:before { content: "\e61d" }
 
-.icon-upload:before { content: "\e626"}
+.icon-upload:before { content: "\e626" }
 
-.icon-fullscreen:before { content: "\e606"}
+.icon-fullscreen:before { content: "\e606" }
 
-.icon-video:before { content: "\e653"}
+.icon-video:before { content: "\e653" }
+
+.icon-remove-format:before { content: "\e65b" }

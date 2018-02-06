@@ -56,7 +56,8 @@ const defaults = {
     'link',
     'iframe',
     'video',
-    'modules'
+    'modules',
+    'remove-format'
   ],
   theme: 'tacitly',
   tools: {},
