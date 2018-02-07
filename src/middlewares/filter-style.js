@@ -12,7 +12,7 @@ const filterStyle = options => html => {
   html = html.replace(/<!--.*?-->/mg, '')
 
   // 过滤样式
-  html = html.replace(/\s?(class|style)=('|").+?('|")/igm, '')
+  html = html.replace(/\s?(class|style)=('|").*?('|")/igm, '')
 
   return html
 }
