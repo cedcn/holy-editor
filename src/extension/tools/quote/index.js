@@ -1,8 +1,8 @@
 import {
-  hasTagInNode,
   hasTagsOrInRange,
-  nodeInTag,
-  getRange
+  isFullRangeInTag,
+  getRange,
+  nodeInTag
 } from 'utils/selection'
 
 const defaults = {
@@ -16,26 +16,20 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
     tooltip: opts.tooltip,
     onMouseDown: e => {
       const range = getRange()
-      const snode = nodeInTag(range.startContainer, 'BLOCKQUOTE')
-      const enode = nodeInTag(range.endContainer, 'BLOCKQUOTE')
 
-      if (range.collapsed) {
-        if (snode === null) {
-          document.execCommand('insertHTML', false, `<blockquote><p><br/></p></blockquote>`)
-        }
+      if (isFullRangeInTag(range, 'BLOCKQUOTE')) {
+        document.execCommand('formatBlock', false, 'P')
       } else {
-        if (snode === null && enode === null) {
-          const text = range.cloneContents().toString()
-          document.execCommand('insertHTML', false, `<blockquote><p>${text}</p></blockquote>`)
-        }
+        document.execCommand('formatBlock', false, 'BLOCKQUOTE')
       }
+      el.$document.trigger('selectionchange')
     }
   })
 
   el.$area.on('mousedown', e => {
-    const $pre = el.$area.find('blockquote')
+    const $blockquote = el.$area.find('blockquote')
 
-    $pre.each((index, item) => {
+    $blockquote.each((index, item) => {
       const $item = $(item)
       if (e.pageY > $item.offset().top + $item.innerHeight()) {
         let $elem = null
@@ -68,18 +62,10 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
         util.toDisable(() => menu.disable())
       }
 
-      if (!range.collapsed) {
-        if (hasTagInNode(range.cloneContents(), 'BLOCKQUOTE')) {
-          util.toDisable(() => menu.disable())
-        }
+      if (isFullRangeInTag(range, 'BLOCKQUOTE')) {
+        menu.turnOn()
       } else {
-        const snode = nodeInTag(range.startContainer, 'BLOCKQUOTE')
-
-        if (snode !== null) {
-          menu.turnOn()
-        } else {
-          menu.turnOff()
-        }
+        menu.turnOff()
       }
     }
   })

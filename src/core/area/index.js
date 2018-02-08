@@ -59,6 +59,7 @@ const sciprt = ({ options, widget, el, __S_ }) => {
       false,
       htmlHandle(options)(getPasteHtml(e))
     )
+    options.paste.callback()
   })
 }
 

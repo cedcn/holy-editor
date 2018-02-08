@@ -21,6 +21,8 @@ $border-color: #CFCFCF;
   align-items: center;
   flex-wrap: wrap;
   font-size: 14px;
+  position: relative;
+  z-index: 2;
 
   a {
     text-decoration: none;
@@ -91,6 +93,20 @@ $border-color: #CFCFCF;
     padding: .4em .6em;
     border-radius: 5px;
     background: #f8f8f8;
+  }
+
+  iframe {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: #000;
+    }
   }
 }
 

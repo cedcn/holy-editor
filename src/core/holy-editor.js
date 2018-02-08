@@ -62,7 +62,8 @@ const defaults = {
   theme: 'tacitly',
   tools: {},
   paste: {
-    middlewares: []
+    middlewares: [],
+    callback: () => {}
   }
 }
 
