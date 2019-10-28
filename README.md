@@ -1,7 +1,7 @@
 # HolyEditor
 
-### [Demo](http://demo.cedcn.com/holy-editor/current/example/)  👈👈👈
-![img](http://oopa8bahf.bkt.clouddn.com/holy-editor.jpg)
+### [Demo](https://cedcn.github.io/holy-editor/)  👈👈👈
+![img](./demo.png)
 
 ## Install
 ```
