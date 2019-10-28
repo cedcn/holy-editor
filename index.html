@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <title>HolyEditor demo - A simple rich text editor ...</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link
+      href="https://cdn.bootcss.com/normalize/7.0.0/normalize.css"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      html {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+          "Microsoft YaHei", SimSun, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      blockquote {
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 20px;
+        border-left: 3px solid red;
+      }
+
+      .operation {
+        padding-left: 50px;
+      }
+
+      #editor {
+        padding: 50px;
+      }
+
+      #editor2 {
+        width: 40%;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="editor"></div>
+    <div class="operation">
+      <button id="get-value-button">获取Editor的值</button>
+      <button id="clear-button">追加内容</button>
+      <button id="append-button">清空内容</button>
+    </div>
+    <script src="./holy-editor.js"></script>
+    <script type="text/javascript">
+      var editor = new HolyEditor("#editor", {
+        toolbars: [
+          "fullscreen",
+          "|",
+          "html",
+          "convert",
+          "|",
+          "title",
+          "|",
+          "font-size",
+          "|",
+          "bold",
+          "italic",
+          "strike-through",
+          "underline",
+          "|",
+          "fore-color",
+          "|",
+          "back-color",
+          "|",
+          "order-list",
+          "unorder-list",
+          "|",
+          "justify-full",
+          "justify-center",
+          "justify-left",
+          "justify-right",
+          "|",
+          "code",
+          "|",
+          "image",
+          "quote",
+          "emoji",
+          "|",
+          "link",
+          "video",
+          "iframe",
+          "modules",
+          "remove-format"
+        ],
+        tools: {}
+      });
+      console.log(editor);
+
+      editor.setValue(
+        '<p><a href="//github.com/Cedcn/holy-editor">HolyEditor</a> - A simple rich text editor ... ✍</p>'
+      );
+      $("#get-value-button").on("click", () => {
+        alert(editor.getValue());
+      });
+
+      $("#clear-button").on("click", () => {
+        editor.append("<div>追加的内容</div>");
+      });
+
+      $("#append-button").on("click", () => {
+        editor.clear();
+      });
+    </script>
+  </body>
+</html>
