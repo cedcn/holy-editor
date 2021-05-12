@@ -1437,9 +1437,9 @@ codemirror-formatting@^1.0.0:
   integrity sha1-h5zB/dkBg0PB1VEXac5TYNcF6/I=
 
 codemirror@^5.30.0:
-  version "5.49.2"
-  resolved "https://registry.npm.taobao.org/codemirror/download/codemirror-5.49.2.tgz#c84fdaf11b19803f828b0c67060c7bc6d154ccad"
-  integrity sha1-yE/a8RsZgD+CiwxnBgx7xtFUzK0=
+  version "5.58.2"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.58.2.tgz#ed54a1796de1498688bea1cdd4e9eeb187565d1b"
+  integrity sha512-K/hOh24cCwRutd1Mk3uLtjWzNISOkm4fvXiMO7LucCrqbh6aJDdtqUziim3MZUI6wOY0rvY1SlL1Ork01uMy6w==
 
 collection-visit@^1.0.0:
   version "1.0.0"
